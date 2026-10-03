@@ -11,3 +11,5 @@
 | T7 | Cloudflare Turnstile site key | Spam protection | Site key in `js/config.js`; secret key in Formspree's Turnstile settings |
 | T8 | Redesigns "Related work" | Elements row 06 | A project with a before/after |
 | T9 | Protocol for files 02–06 | Lab pop-up record | Confirm each project's protocol (only Velmont's is in the plan) |
+| T10 | Privacy page review | `/privacy/` | The page is a plain-language draft covering the form (Formspree, Turnstile), GA4 with consent and local preferences. Have it reviewed; adjust if the form or analytics provider changes. |
+| T11 | GA4 measurement ID (or Plausible domain) | Analytics | `js/config.js` → `analytics`. The consent banner appears only once an ID is set. |

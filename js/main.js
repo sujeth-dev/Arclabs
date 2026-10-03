@@ -1,7 +1,7 @@
 /* ==========================================================================
    main.js — every page: theme, reduced motion, nav, menu, cursor, copy, consent.
    ========================================================================== */
-import { reduced, store } from "./arc.js";
+import { reduced, store, ease } from "./arc.js";
 import { initAnalytics } from "./analytics.js";
 
 const root = document.documentElement;
@@ -133,7 +133,38 @@ function initCopy() {
   });
 }
 
+/* ---------- 404: the top node slips off the span and hops back (1200ms) --- */
+function initSlip() {
+  const svg = document.querySelector("[data-slip]");
+  if (!svg || reduced()) return;
+  const node = svg.querySelector("[data-rest]");
+  // Span: half-ellipse centred (160,150), rx 110, ry 90; node r 10, stroke 3.2.
+  const cx = 160, cy = 150, rx = 110, ry = 90, off = 10 + 1.6, home = { x: 160, y: 48.4 };
+  const onSpan = (deg) => {
+    const t = (deg * Math.PI) / 180;
+    const nx = Math.cos(t) / rx, ny = Math.sin(t) / ry, len = Math.hypot(nx, ny);
+    return { x: cx + rx * Math.cos(t) + (nx / len) * off, y: cy - ry * Math.sin(t) - (ny / len) * off };
+  };
+  const frames = [];
+  const push = (p, offset, easing) => frames.push({ transform: `translate(${(p.x - home.x).toFixed(2)}px, ${(p.y - home.y).toFixed(2)}px)`, offset, ...(easing ? { easing } : {}) });
+  // Slip: slide down the right side of the span, gathering speed…
+  for (let i = 0; i <= 8; i++) push(onSpan(90 - (i / 8) ** 2 * 52), 0.06 + (i / 8) * 0.3);
+  // …leave it and drop a little…
+  const last = onSpan(38);
+  push({ x: last.x + 14, y: last.y + 16 }, 0.44);
+  // …then hop back to the apex along an arc (ARC.hop's travel, sampled).
+  const a = { x: last.x + 14, y: last.y + 16 };
+  for (let i = 1; i <= 12; i++) {
+    const t = i / 12, u = 1 - t, c = { x: a.x + 12, y: home.y - 34 };
+    push({ x: u * u * a.x + 2 * u * t * c.x + t * t * home.x, y: u * u * a.y + 2 * u * t * c.y + t * t * home.y }, 0.5 + t * 0.5);
+  }
+  frames.unshift({ transform: "translate(0px, 0px)", offset: 0 });
+  node.animate(frames, { duration: 1200, delay: 500, easing: "linear" });
+  void ease;
+}
+
 initPrefs();
+initSlip();
 initNav();
 initMenu();
 initCursor();

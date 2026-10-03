@@ -1027,6 +1027,21 @@ html:has(dialog[open]) { overflow: hidden; }
 .chip input:focus-visible + span { outline: 2px solid var(--color-text); outline-offset: 3px; }
 
 
+/* 404 */
+.nf { padding-bottom: var(--section-space); }
+.nf__inner { display: grid; justify-items: start; gap: var(--space-7); }
+.nf__fig { inline-size: min(100%, 22rem); block-size: auto; }
+.nf [data-rest] { transform-box: view-box; }
+
+/* Privacy */
+.prose { max-width: 42rem; padding-bottom: var(--section-space); }
+.prose h2 { margin-top: var(--space-7); font-family: var(--font-display); font-weight: 600; font-size: var(--text-h3); letter-spacing: var(--track-snug); }
+.prose p, .prose ul { margin-top: var(--space-3); color: var(--color-muted); }
+.prose ul { padding-left: 1.2em; }
+.prose li + li { margin-top: var(--space-1); }
+.prose a { color: var(--color-text); }
+
+
 /* --------------------------------------------------------------------------
    10 · RESPONSIVE — 390 · 480 · 768 · 1024 · 1200 · 1440
    -------------------------------------------------------------------------- */
