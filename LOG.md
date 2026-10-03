@@ -57,3 +57,13 @@ Screenshots: `qa/02-hero/`.
 - Plan gives a Protocol only for Velmont → the row is omitted for the other five (DECISIONS D9, TODO T9).
 
 Screenshots: `qa/03-lab-dialog/`.
+
+## 2026-10-03 — Step 4: /lab
+
+**Built:** page head (label, H1, intro), client strip, filter (All · Interiors · Fashion · Food · Fitness · B2B as `aria-pressed` buttons, underline on active, FLIP re-order + fade 400ms, live-region count, `filter_used` event), six-file grid (large, tall, two staggered pairs; filtered view becomes an even two-up), closing CTA with margin note, Lab File dialog.
+
+**Tested:** filter suite 8/8 (keyboard filter, pressed state, announcement, event, reset, `/lab/#file-aivora-india` on load, no live link without a URL) · content check 9 blocks · html-validate · shell · pages 5 × 4 widths.
+
+**Failed → fixed:** no space between the grid and the closing band → section bottom padding · files without a URL showed "aivoraindia" in the browser chrome (reads like a domain) → plain name · test selector collided with cards' `data-filter` → scoped.
+
+Screenshots: `qa/04-lab/`.

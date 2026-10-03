@@ -107,9 +107,9 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - [x] **3.4** Home Lab preview: copy, client strip (CSS marquee, pauses on hover, static when reduced), three featured files, annotation on File 01, View all files, margin note.
 
 ### Step 4 — /lab
-- [ ] **4.1** Header, client strip.
-- [ ] **4.2** Filter (All · Interiors · Fashion · Food · Fitness · B2B), active underlined, cards fade and re-order (400ms), result announced, event tracked.
-- [ ] **4.3** Grid: one large, one tall, two staggered pairs; closing CTA; margin note.
+- [x] **4.1** Header, client strip.
+- [x] **4.2** Filter (All · Interiors · Fashion · Food · Fitness · B2B), active underlined, cards fade and re-order (400ms), result announced, event tracked.
+- [x] **4.3** Grid: one large, one tall, two staggered pairs; closing CTA; margin note.
 
 ### Step 5 — Elements
 - [ ] **5.1** Element data (exact plan copy) + combinations.

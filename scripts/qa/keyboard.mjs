@@ -137,6 +137,28 @@ const suites = {
     check("Close button closes", await page.evaluate(() => !document.getElementById("lab-file").open));
     await ctx.close();
   },
+
+  async filter() {
+    console.log("filter");
+    const { page, ctx, errors } = await open("/lab/");
+    await page.evaluate(() => { window.__ev = []; document.addEventListener("arc:track", (e) => window.__ev.push(e.detail)); });
+    const b2b = page.locator('.filter__btn[data-filter="B2B"]');
+    await b2b.focus(); await page.keyboard.press("Enter");
+    await page.waitForTimeout(500);
+    const vis = await page.evaluate(() => [...document.querySelectorAll(".lab-card")].filter((c) => !c.hidden).map((c) => c.dataset.file));
+    check("B2B shows Assetly + Aivora", vis.join() === "assetly,aivora-india", vis.join());
+    check("aria-pressed follows", (await b2b.getAttribute("aria-pressed")) === "true" && (await page.locator('.filter__btn[data-filter="All"]').getAttribute("aria-pressed")) === "false");
+    check("result announced", (await page.locator("[data-filter-status]").textContent()) === "2 files in B2B");
+    check("filter_used tracked", await page.evaluate(() => window.__ev.some((e) => e.name === "filter_used" && e.params.filter === "B2B")));
+    await page.locator('.filter__btn[data-filter="All"]').click();
+    await page.waitForTimeout(500);
+    check("All restores six", (await page.locator(".lab-card:not([hidden])").count()) === 6);
+    await page.goto(base + "/lab/#file-aivora-india", { waitUntil: "networkidle" });
+    check("/lab/#file-aivora-india opens on load", await page.evaluate(() => document.getElementById("lab-file").open && document.getElementById("lab-file-title").textContent === "Aivora India"));
+    check("no live link when URL unknown", (await page.locator('#lab-file a[target="_blank"]').count()) === 0);
+    check("no errors", !errors.length, errors.join(" | "));
+    await ctx.close();
+  },
 };
 
 for (const [name, fn] of Object.entries(suites)) {

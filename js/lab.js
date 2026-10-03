@@ -258,5 +258,38 @@ function initCardVideos() {
   }
 }
 
+/* ---------- /lab filter: cards fade and re-order (400ms) ------------------- */
+function initFilter() {
+  const grid = document.querySelector("[data-lab-grid]");
+  const btns = [...document.querySelectorAll(".filter__btn")];
+  const status = document.querySelector("[data-filter-status]");
+  if (!grid || !btns.length) return;
+  const cards = [...grid.querySelectorAll(".lab-card")];
+  const apply = (value) => {
+    const dur = reduced() ? 0 : ms("--duration-medium", 400);
+    const before = new Map(cards.filter((c) => !c.hidden).map((c) => [c, c.getBoundingClientRect()]));
+    cards.forEach((c) => { c.getAnimations().forEach((a) => a.cancel()); c.hidden = value !== "All" && c.dataset.filter !== value; });
+    grid.classList.toggle("is-filtered", value !== "All");
+    btns.forEach((b) => b.setAttribute("aria-pressed", String(b.dataset.filter === value)));
+    const shown = cards.filter((c) => !c.hidden);
+    if (status) status.textContent = `${shown.length} ${shown.length === 1 ? "file" : "files"}${value === "All" ? "" : ` in ${value}`}`;
+    if (!dur) return;
+    for (const c of shown) {
+      const b = before.get(c), a = c.getBoundingClientRect();
+      if (b) {
+        c.animate([{ transform: `translate(${b.left - a.left}px, ${b.top - a.top}px)` }, { transform: "none" }], { duration: dur, easing: ease.standard() });
+      } else {
+        c.animate([{ opacity: 0 }, { opacity: 1 }], { duration: dur, easing: ease.standard() });
+      }
+    }
+  };
+  btns.forEach((b) => b.addEventListener("click", () => {
+    if (b.getAttribute("aria-pressed") === "true") return;
+    apply(b.dataset.filter);
+    track("filter_used", { filter: b.dataset.filter });
+  }));
+}
+
 initCardVideos();
+initFilter();
 initDialog();
