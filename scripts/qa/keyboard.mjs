@@ -172,6 +172,15 @@ const suites = {
     check("cursor tag → Close", (await ws.getAttribute("data-cursor-tag")) === "Close");
     check("element_opened tracked", await page.evaluate(() => window.__ev.some((e) => e.name === "element_opened" && e.params.element === "websites")));
     check("demo played", await page.evaluate(() => document.querySelector("#websites-panel .demo").classList.contains("is-done")));
+    for (const slug of ["websites", "e-commerce", "lead-booking", "digital-presence", "custom-systems", "redesigns"]) {
+      await page.evaluate((sl) => { const b = document.getElementById(`${sl}-btn`); if (b.getAttribute("aria-expanded") !== "true") b.click(); }, slug);
+      await page.waitForTimeout(2600);
+      const parts = await page.evaluate((sl) => [...document.querySelectorAll(`#${sl}-panel .demo .demo__stage *, #${sl}-panel .demo .demo__layer *`)]
+        .filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 2 && r.height > 2 && cs.opacity !== "0" && cs.visibility !== "hidden"; }).length, slug);
+      check(`demo shows content: ${slug}`, parts >= 2, `${parts} visible parts`);
+    }
+    await page.evaluate(() => { const b = document.getElementById("websites-btn"); if (b.getAttribute("aria-expanded") !== "true") b.click(); });
+    await page.waitForTimeout(600);
     check("Start this project prefills Contact", (await page.locator('#websites-panel a.btn').getAttribute("href")) === "/?need=websites#contact");
     await ec.focus(); await page.keyboard.press("Space");
     await page.waitForTimeout(700);

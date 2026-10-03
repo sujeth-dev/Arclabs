@@ -23,6 +23,14 @@ for (const w of widths) {
     await page.goto(base + p.path, { waitUntil: "networkidle" });
     await page.evaluate(() => document.fonts.ready);
     await page.waitForTimeout(1500);
+    // Scroll through so every once-in-view drawing has played before the shot.
+    await page.evaluate(async () => {
+      for (let y = 0; y < document.documentElement.scrollHeight; y += innerHeight * 0.6) { scrollTo(0, y); await new Promise((r) => setTimeout(r, 250)); }
+      await new Promise((r) => setTimeout(r, 2600));
+      scrollTo(0, 0);
+    });
+    const pending = await page.evaluate(() => [...document.querySelectorAll("[data-plan], [data-process], [data-hero-arc]")].filter((el) => !el.classList.contains("is-live")).map((el) => el.className));
+    if (pending.length) errors.push(`not drawn after scrolling: ${pending.join(", ")}`);
     const of = await overflow(page);
     if (shots) await page.screenshot({ path: `${dir}/${p.name}-${w}${suffix}.jpg`, fullPage: true, type: "jpeg", quality: 55 });
     const ok = !errors.length && !of.overflow;
