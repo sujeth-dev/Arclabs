@@ -1,5 +1,5 @@
 // Keyboard + behaviour tests. Usage: node scripts/qa/keyboard.mjs [suite ...]
-import { start, watch } from "./lib.mjs";
+import { start, watch, forcePrefs } from "./lib.mjs";
 
 const { browser, base, stop } = await start(4398);
 const only = process.argv.slice(2);
@@ -11,7 +11,7 @@ function check(name, cond, info = "") {
 }
 async function open(path, { width = 1440, height = 900, touch = false, reduced = false } = {}) {
   const ctx = await browser.newContext({ viewport: { width, height }, hasTouch: touch });
-  if (reduced) await ctx.addInitScript(() => localStorage.setItem("arc-motion", "reduced"));
+  await forcePrefs(ctx, { motion: reduced ? "reduced" : undefined });
   const page = await ctx.newPage();
   const errors = watch(page, base);
   await page.goto(base + path, { waitUntil: "networkidle" });
@@ -33,19 +33,19 @@ const suites = {
     // Theme toggle
     const theme = page.locator(".nav [data-theme-toggle]");
     await theme.focus(); await page.keyboard.press("Enter");
-    check("theme toggle → Ink", await page.evaluate(() => document.documentElement.dataset.theme === "dark" && localStorage.getItem("arc-theme") === "dark"));
-    check("theme toggle aria-pressed", (await theme.getAttribute("aria-pressed")) === "true");
+    check("theme toggle → Cream", await page.evaluate(() => document.documentElement.dataset.theme === "light"));
+    check("theme toggle aria-pressed off", (await theme.getAttribute("aria-pressed")) === "false");
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
-    check("Ink background", bg === "rgb(23, 24, 26)", bg);
+    check("Cream background", bg === "rgb(241, 238, 229)", bg);
     await page.reload();
-    check("theme restored before paint", await page.evaluate(() => document.documentElement.dataset.theme === "dark"));
-    await page.locator(".nav [data-theme-toggle]").click();
+    check("refresh returns to Ink (nothing saved)", await page.evaluate(() => document.documentElement.dataset.theme === "dark" && localStorage.length === 0));
     // Motion toggle
     const motion = page.locator(".footer [data-motion-toggle]");
     await motion.focus(); await page.keyboard.press("Space");
     check("motion toggle → reduced", await page.evaluate(() => document.documentElement.dataset.motion === "reduced"));
     check("motion toggle aria-pressed", (await motion.getAttribute("aria-pressed")) === "true");
-    await motion.click();
+    await page.reload();
+    check("refresh returns to motion on", await page.evaluate(() => document.documentElement.classList.contains("motion") && !document.documentElement.dataset.motion));
     check("nav: no current link on Home", (await page.locator(".nav__link[aria-current]").count()) === 0);
     check("no errors (desktop)", !errors.length, errors.join(" | "));
     await ctx.close();
@@ -68,7 +68,7 @@ const suites = {
     await ctx.close();
 
     ({ page, ctx, errors } = await open("/elements/"));
-    check("/elements is Ink in Cream theme", (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === "rgb(23, 24, 26)");
+    check("/elements is Ink by default", (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === "rgb(23, 24, 26)");
     await ctx.close();
   },
 

@@ -1,7 +1,7 @@
 // Loads every page at each width; fails on console errors or horizontal overflow.
 // Usage: node scripts/qa/pages.mjs <task> [--all-widths] [--ink] [--reduced] [--no-shots]
 import { mkdir, writeFile } from "node:fs/promises";
-import { PAGES, WIDTHS, ALL_WIDTHS, start, watch, overflow } from "./lib.mjs";
+import { PAGES, WIDTHS, ALL_WIDTHS, start, watch, overflow, forcePrefs } from "./lib.mjs";
 
 const args = process.argv.slice(2);
 const task = args.find((a) => !a.startsWith("--")) || "adhoc";
@@ -16,8 +16,8 @@ const results = [];
 let failed = 0;
 for (const w of widths) {
   const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 844 : 900 }, hasTouch: w < 768, isMobile: false });
-  if (ink) await ctx.addInitScript(() => { try { localStorage.setItem("arc-theme", "dark"); } catch {} });
-  if (reducedMotion) await ctx.addInitScript(() => { try { localStorage.setItem("arc-motion", "reduced"); } catch {} });
+  // Ink is the site default; the plain run checks Cream.
+  await forcePrefs(ctx, { theme: ink ? "dark" : "light", motion: reducedMotion ? "reduced" : undefined });
   for (const p of PAGES) {
     const page = await ctx.newPage();
     const errors = watch(page, base);

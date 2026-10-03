@@ -56,3 +56,29 @@ export async function overflow(page) {
     return { overflow: sw > w + 1, sw, w, culprits: culprits.slice(0, 8) };
   });
 }
+
+// The site saves no settings: every load is Ink with motion on. To test Cream
+// or reduced motion, re-apply the wanted state right after the head script
+// runs (before first paint), then stop watching so the page's switches work.
+export async function forcePrefs(ctx, { theme, motion } = {}) {
+  if (!theme && !motion) return;
+  await ctx.addInitScript(({ theme, motion }) => {
+    if (window !== window.top) return;
+    let html = null;
+    const fix = () => {
+      if (theme && html.dataset.theme !== theme) html.dataset.theme = theme;
+      if (motion === "reduced") {
+        if (html.dataset.motion !== "reduced") html.dataset.motion = "reduced";
+        if (html.classList.contains("motion")) html.classList.remove("motion");
+      }
+    };
+    const watchHtml = () => {
+      html = document.documentElement;
+      const mo = new MutationObserver(fix);
+      mo.observe(html, { attributes: true, attributeFilter: ["data-theme", "data-motion", "class"] });
+      document.addEventListener("DOMContentLoaded", () => { fix(); mo.disconnect(); }, { once: true });
+    };
+    if (document.documentElement) watchHtml();
+    else new MutationObserver((_, o) => { if (document.documentElement) { o.disconnect(); watchHtml(); } }).observe(document, { childList: true });
+  }, { theme, motion });
+}

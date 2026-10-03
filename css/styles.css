@@ -924,7 +924,7 @@ html:has(dialog[open]) { overflow: hidden; }
 .approach__sub { margin-top: var(--space-6); font-weight: 600; }
 /* Approach: a website plan; each callout names what that part of the page carries. */
 .plan__svg { inline-size: 100%; block-size: auto; overflow: visible; color: var(--color-text); }
-.plan__line, .plan__leader { fill: none; stroke: var(--color-text); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.plan__line, .plan__leader { fill: none; stroke: var(--color-text); stroke-width: 1; }   /* no non-scaling-stroke: it breaks the dash draw-in */
 .plan__guide { fill: none; stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
 .plan__dot { fill: var(--color-faint); }
 .plan__strong { fill: var(--color-text); }

@@ -1,13 +1,14 @@
 /* ==========================================================================
    main.js — every page: theme, reduced motion, nav, menu, cursor, copy, consent.
    ========================================================================== */
-import { reduced, store, ease } from "./arc.js";
+import { reduced, ease } from "./arc.js";
 import { initAnalytics } from "./analytics.js";
 
 const root = document.documentElement;
 
 /* ---------- theme + motion preferences ----------------------------------- */
-// Cream is the default; Ink only when chosen (restored before paint in <head>).
+// Every load starts in Ink with motion on. The switches change the current
+// page only; nothing is saved, so a refresh returns to the defaults.
 function initPrefs() {
   const themeBtns = document.querySelectorAll("[data-theme-toggle]");
   const syncTheme = () => {
@@ -21,7 +22,6 @@ function initPrefs() {
   themeBtns.forEach((b) => b.addEventListener("click", () => {
     const next = root.dataset.theme === "dark" ? "light" : "dark";
     root.dataset.theme = next;
-    store.set("arc-theme", next);
     syncTheme();
   }));
   syncTheme();
@@ -31,7 +31,6 @@ function initPrefs() {
   motionBtns.forEach((b) => b.addEventListener("click", () => {
     const next = reduced() ? "full" : "reduced";
     root.dataset.motion = next;
-    store.set("arc-motion", next);
     root.classList.toggle("motion", next === "full");
     syncMotion();
     document.dispatchEvent(new CustomEvent("arc:motion"));

@@ -2,7 +2,7 @@
    home.js — Home only: hero ARC (draw once + draggable Grow node),
    Approach website plan and Process line (each draws once in view).
    ========================================================================== */
-import { signature, spanPath, spanPathTo, restCenter, reduced, draw, ms, ease, onceInView, store } from "./arc.js";
+import { signature, spanPath, spanPathTo, restCenter, reduced, draw, ms, ease, onceInView } from "./arc.js";
 
 /* ---------- 01 · Hero ARC ------------------------------------------------- */
 // Geometry matches the prototype: anchors at x 32 / 608 on y 272, node r 8,
@@ -153,10 +153,10 @@ function intro(fig, svg) {
   return flights;
 }
 
-/* "Drag me" until the first drag (remembered per browser). */
+/* "Drag me" until the first drag on this page load. */
 function initHint(fig) {
   const hint = fig.querySelector("[data-drag-hint]");
-  if (!hint || store.get("arc-dragged") === "1") return;
+  if (!hint) return;
   hint.hidden = false;
   if (!reduced()) hint.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 2600, easing: ease.standard(), fill: "backwards" });
 }
@@ -164,7 +164,6 @@ function hideHint(fig) {
   const hint = fig.querySelector("[data-drag-hint]");
   if (!hint || hint.hidden) return;
   hint.classList.add("is-gone");
-  store.set("arc-dragged", "1");
 }
 
 /* ---------- 04 · Approach: the website plan draws once in view ---------- */

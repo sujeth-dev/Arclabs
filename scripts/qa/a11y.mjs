@@ -2,7 +2,7 @@
 // plus the interactive states: menu open, Lab File open, Element row open, form errors.
 import { mkdir, writeFile } from "node:fs/promises";
 import AxeBuilder from "@axe-core/playwright";
-import { PAGES, start } from "./lib.mjs";
+import { PAGES, start, forcePrefs } from "./lib.mjs";
 
 const { browser, base, stop } = await start(4390);
 const states = [
@@ -16,8 +16,8 @@ const results = []; let total = 0;
 for (const theme of ["cream", "ink"]) {
   for (const s of states) {
     const ctx = await browser.newContext({ viewport: { width: s.width || 1280, height: 900 }, });
-    // Motion off so axe sees settled pages; Cream/Ink set explicitly (phones default to Ink).
-    await ctx.addInitScript((t) => { localStorage.setItem("arc-motion", "reduced"); localStorage.setItem("arc-theme", t); }, theme === "ink" ? "dark" : "light");
+    // Motion off so axe sees settled pages; Cream/Ink set explicitly (Ink is the default).
+    await forcePrefs(ctx, { theme: theme === "ink" ? "dark" : "light", motion: "reduced" });
     const page = await ctx.newPage();
     await page.goto(base + s.path, { waitUntil: "networkidle" });
     if (s.act) await s.act(page);
