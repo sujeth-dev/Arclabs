@@ -29,7 +29,7 @@ for (const w of widths) {
       await new Promise((r) => setTimeout(r, 2600));
       scrollTo(0, 0);
     });
-    const pending = await page.evaluate(() => [...document.querySelectorAll("[data-plan], [data-process], [data-hero-arc]")].filter((el) => !el.classList.contains("is-live")).map((el) => el.className));
+    const pending = await page.evaluate(() => [...document.querySelectorAll("[data-tech], [data-process], [data-hero-arc]")].filter((el) => !el.classList.contains("is-live")).map((el) => el.className));
     if (pending.length) errors.push(`not drawn after scrolling: ${pending.join(", ")}`);
     const of = await overflow(page);
     if (shots) await page.screenshot({ path: `${dir}/${p.name}-${w}${suffix}.jpg`, fullPage: true, type: "jpeg", quality: 55 });

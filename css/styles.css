@@ -206,6 +206,7 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 .grid > * { grid-column: 1 / -1; min-width: 0; }
 .section { position: relative; padding-block: var(--section-space); }
+.lab-preview { padding-top: clamp(var(--space-8), 7vw, var(--space-9)); }
 .stack > * + * { margin-top: var(--flow, var(--space-5)); }
 
 
@@ -538,7 +539,7 @@ html:has(dialog[open]) { overflow: hidden; }
    -------------------------------------------------------------------------- */
 
 /* 01 Hero */
-.hero { padding-block: clamp(var(--space-6), 6vw, var(--space-9)) var(--section-space); }
+.hero { padding-block: clamp(var(--space-6), 6vw, var(--space-9)) var(--space-6); }
 .hero__title .line { display: block; white-space: nowrap; }
 .hero__body { margin-top: clamp(var(--space-6), 4vw, var(--space-7)); row-gap: var(--space-8); align-items: end; }
 .hero__lead { max-width: 34rem; }
@@ -922,25 +923,14 @@ html:has(dialog[open]) { overflow: hidden; }
 .approach__lines .label { margin-bottom: var(--space-2); }
 .approach__list { color: var(--color-muted); }
 .approach__sub { margin-top: var(--space-6); font-weight: 600; }
-/* Approach: a website plan; each callout names what that part of the page carries. */
-.plan__svg { inline-size: 100%; block-size: auto; overflow: visible; color: var(--color-text); }
-.plan__line, .plan__leader { fill: none; stroke: var(--color-text); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.plan__guide { fill: none; stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
-.plan__dot { fill: var(--color-faint); }
-.plan__strong { fill: var(--color-text); }
-.plan__soft { fill: var(--color-border-strong); }
-.plan__fill { fill: var(--color-surface); stroke: var(--color-border-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.plan__box { fill: none; stroke: var(--color-border-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.plan__node { fill: var(--color-node); }
-.plan__call text { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; fill: var(--color-text); }
-.plan__num { fill: var(--color-muted); font-variant-numeric: tabular-nums; }
-/* Draws once in view: the frame, then the page parts, then the callouts in order. */
-.plan__line { stroke-dasharray: 1 1; transition: stroke-dashoffset var(--duration-draw) var(--ease-span); }
-.plan__blocks { transition: opacity var(--duration-slow) var(--ease-standard) var(--duration-slow); }
-.plan__leader { stroke-dasharray: 1 1; transition: stroke-dashoffset var(--duration-medium) var(--ease-span) calc(1300ms + var(--i) * 180ms); }
-.plan__call :is(text, .plan__node) { transition: opacity var(--duration-medium) var(--ease-standard) calc(1300ms + var(--i) * 180ms); }
-.motion .plan:not(.is-live) :is(.plan__line, .plan__leader) { stroke-dashoffset: 1; }
-.motion .plan:not(.is-live) :is(.plan__blocks, .plan__call text, .plan__node) { opacity: 0; }
+.tech__svg { inline-size: 100%; block-size: auto; overflow: visible; color: var(--color-text); }
+.tech__dim path { fill: none; stroke: var(--color-muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.tech__dim .tech__guide { stroke: var(--color-border); stroke-dasharray: 3 4; }
+.tech__text text { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; fill: var(--color-muted); }
+.tech__text .tech__unit { text-transform: none; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
+.motion .tech:not(.is-live) [data-draw] { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.motion .tech:not(.is-live) :is([data-pop], .tech__text, .tech__dim) { opacity: 0; }
+.tech__text, .tech__dim { transition: opacity var(--duration-slow) var(--ease-standard) var(--duration-medium); }
 .approach__studio { margin-top: var(--section-space); row-gap: var(--space-7); }
 .approach__studio-intro { display: grid; gap: var(--space-3); max-width: 36rem; }
 .approach__studio-intro strong { font-weight: 500; }
