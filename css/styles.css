@@ -449,12 +449,21 @@ input, textarea, select { font: inherit; color: inherit; }
 }
 .cursor-tag.is-on { opacity: 1; }
 
-/* Custom cursor — fine pointers only (set on <html> by cursor.ts). */
-html.has-cursor, html.has-cursor body { cursor: url("/assets/cursors/arrow.svg") 4 3, auto; }
-html.has-cursor :is(a[href], button:not([disabled]), summary, label[for], [role="button"], [role="tab"], select, input[type="checkbox"], input[type="radio"], input[type="range"]) { cursor: url("/assets/cursors/link.svg") 4 3, pointer; }
+/* Cursor — standard shapes in brand colours, fine pointers only (set on <html> by main.js).
+   Ink fill with a Cream edge; on Ink surfaces the colours swap. */
+html.has-cursor {
+  --cur-arrow: url("/assets/cursors/arrow.svg") 4 3; --cur-link: url("/assets/cursors/link.svg") 14 2;
+  --cur-grab: url("/assets/cursors/grab.svg") 16 16; --cur-grabbing: url("/assets/cursors/grabbing.svg") 16 16;
+}
+html.has-cursor[data-theme="dark"], html.has-cursor.ink, html.has-cursor .ink {
+  --cur-arrow: url("/assets/cursors/arrow-ink.svg") 4 3; --cur-link: url("/assets/cursors/link-ink.svg") 14 2;
+  --cur-grab: url("/assets/cursors/grab-ink.svg") 16 16; --cur-grabbing: url("/assets/cursors/grabbing-ink.svg") 16 16;
+}
+html.has-cursor body, html.has-cursor .ink { cursor: var(--cur-arrow), auto; }
+html.has-cursor :is(a[href], button:not([disabled]), summary, label[for], [role="button"], [role="tab"], select, input[type="checkbox"], input[type="radio"]) { cursor: var(--cur-link), pointer; }
 html.has-cursor :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="submit"]), textarea) { cursor: text; }
-html.has-cursor [data-cursor="drag"] { cursor: url("/assets/cursors/drag.svg") 15 15, grab; }
-html.has-cursor [data-cursor="drag"]:active, html.has-cursor .is-dragging, html.has-cursor .is-dragging * { cursor: url("/assets/cursors/drag.svg") 15 15, grabbing; }
+html.has-cursor [data-cursor="drag"] { cursor: var(--cur-grab), grab; }
+html.has-cursor [data-cursor="drag"]:active, html.has-cursor .is-dragging, html.has-cursor .is-dragging * { cursor: var(--cur-grabbing), grabbing; }
 
 
 /* --------------------------------------------------------------------------
@@ -916,7 +925,10 @@ html:has(dialog[open]) { overflow: hidden; }
 }
 .types a { display: inline-block; transition: color var(--duration-fast) var(--ease-standard); }
 .types a:hover, .types a:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .1em; }
-.types li > span { color: var(--color-muted); display: inline-block; max-width: 14ch; }
+.types li:last-child a { max-width: 14ch; }
+.types .types__refs { font: 500 var(--text-label) / 1.3 var(--font-body); letter-spacing: var(--track-label); text-transform: uppercase; display: inline-flex; gap: var(--space-4); margin-left: var(--space-4); vertical-align: .9em; }
+.types .types__refs a { font: inherit; letter-spacing: inherit; }
+.intro__title .line { display: block; }
 .approach__studio-outro { max-width: 40rem; color: var(--color-muted); }
 @media (min-width: 1024px) {
   .approach__lines { grid-column: 1 / 6; }
