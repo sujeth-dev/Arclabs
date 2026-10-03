@@ -130,7 +130,7 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - [x] **7.3** SEO: titles/descriptions, canonical, OG + `summary_large_image`, 1200×630 OG images (Ink, "Design. Build. Grow.", mark), JSON-LD, sitemap, robots, favicon set, manifest.
 - [x] **7.4** Analytics: consent banner, GA4 loader (Plausible switch), four events.
 - [x] **7.5** Deploy prep: `vercel.json`, `.vercelignore`, README.
-- [ ] **7.6** Full QA: Lighthouse mobile (/, /lab, /elements), axe, reduced-motion + Ink screenshots, 6 widths, link check, JS budget, html-validate, tokens. Fix and re-run.
+- [x] **7.6** Full QA: Lighthouse mobile (/, /lab, /elements), axe, reduced-motion + Ink screenshots, 6 widths, link check, JS budget, html-validate, tokens. Fix and re-run.
 - [ ] **7.7** Client media capture + processing (blocked: network — TODO T1).
 - [ ] **7.8** Deploy + live verification (blocked: credentials — TODO T4).
 
@@ -157,16 +157,16 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 
 ## 4. Test checklist (quality gates)
 
-- [ ] HTML validates (no errors) on all pages
-- [ ] No JS console errors; no unused CSS tokens
-- [ ] No horizontal overflow at 390, 480, 768, 1024, 1200, 1440
-- [ ] Lighthouse mobile ≥ 90 in all four categories on `/`, `/lab/`, `/elements/`
-- [ ] LCP ≤ 2.5s; CLS < 0.1; page JS < 60KB gzipped
-- [ ] axe zero violations; WCAG AA
-- [ ] Keyboard access; visible focus; skip link; dialog + accordion correct for screen readers
-- [ ] Correct in Cream, Ink and reduced motion
-- [ ] Logo untouched (byte-identical)
-- [ ] Unique title/description per page; OG images; JSON-LD; sitemap
-- [ ] Analytics events fire (after consent)
-- [ ] Link check: internal resolve; client links 200 (needs network)
-- [ ] Media renders at 390/768/1440 without layout shift
+- [x] HTML validates (no errors) on all pages
+- [x] No JS console errors; no unused CSS tokens
+- [x] No horizontal overflow at 390, 480, 768, 1024, 1200, 1440
+- [x] Lighthouse mobile ≥ 90 in all four categories on `/`, `/lab/`, `/elements/`
+- [x] LCP ≤ 2.5s; CLS < 0.1; page JS < 60KB gzipped
+- [x] axe zero violations; WCAG AA
+- [x] Keyboard access; visible focus; skip link; dialog + accordion correct for screen readers
+- [x] Correct in Cream, Ink and reduced motion
+- [x] Logo untouched (byte-identical)
+- [x] Unique title/description per page; OG images; JSON-LD; sitemap
+- [x] Analytics events fire (after consent)
+- [~] Link check: internal 47/47 resolve; client links unverifiable here (proxy 403) — re-run on the live URL
+- [~] Media: pipeline verified on synthetic captures; real captures blocked (TODO T1)

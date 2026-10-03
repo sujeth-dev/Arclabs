@@ -3,6 +3,7 @@
 import { createServer } from "node:http";
 import { readFile, stat } from "node:fs/promises";
 import { extname, join, normalize } from "node:path";
+import { gzipSync } from "node:zlib";
 import { fileURLToPath } from "node:url";
 
 const ROOT = fileURLToPath(new URL("..", import.meta.url));
@@ -36,8 +37,14 @@ export function serve(port = PORT) {
     const r = await resolve(url.pathname);
     if (r?.redirect) { res.writeHead(301, { Location: r.redirect + url.search }); return res.end(); }
     const file = r?.file || join(ROOT, "404.html");
-    const body = await readFile(file);
-    res.writeHead(r ? 200 : 404, { "Content-Type": TYPES[extname(file)] || "application/octet-stream", "Cache-Control": "no-cache" });
+    let body = await readFile(file);
+    const type = TYPES[extname(file)] || "application/octet-stream";
+    const headers = { "Content-Type": type, "Cache-Control": "no-cache" };
+    // Compress text like Vercel does, so local Lighthouse runs are realistic.
+    if (/text|javascript|json|xml|svg|manifest/.test(type) && /gzip/.test(req.headers["accept-encoding"] || "")) {
+      body = gzipSync(body); headers["Content-Encoding"] = "gzip"; headers.Vary = "Accept-Encoding";
+    }
+    res.writeHead(r ? 200 : 404, headers);
     res.end(body);
   });
   return new Promise((ok) => server.listen(port, () => ok(server)));

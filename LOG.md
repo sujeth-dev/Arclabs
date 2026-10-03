@@ -107,3 +107,26 @@ Screenshots: `qa/06-approach-process-contact/`.
 **Failed → fixed:** comment regex stopped at a `>` inside the TODO text · a lazy match crossed into the next card on re-run and replaced its plate → match confined to the card's `<article>`.
 
 **Not done:** real captures — client sites are unreachable from this environment (TODO T1).
+
+## 2026-10-03 — Step 7.6: full QA
+
+| Check | Result |
+|---|---|
+| html-validate (5 pages) | 0 errors |
+| Shared nav/menu/footer identical · logo byte-identical | pass |
+| HTML ↔ `data/content.js` | 21 blocks match |
+| Share previews (titles, descriptions, OG 1200×630, `summary_large_image`, canonical, JSON-LD) | all pages complete |
+| Unused CSS tokens | 0 (95 defined, all used) |
+| Playwright 5 pages × 390/480/768/1024/1200/1440 × Cream / Ink / reduced motion | 90/90 — no console errors, no overflow (`qa/final/`) |
+| Behaviour + keyboard suites (shell, hero, dialog, filter, elements, contact, analytics) | 96/96 |
+| axe (WCAG 2.0/2.1 A+AA + best practice), 9 states × Cream/Ink | 0 violations (`qa/final/axe.json`) |
+| Lighthouse mobile `/` · `/lab/` · `/elements/` | Perf 99 · 100 · 99; A11y, Best Practices, SEO 100; LCP 1.6 / 1.5 / 1.7s; CLS 0 / 0.002 / 0; TBT 0 (`qa/final/lighthouse_*.json`) |
+| JS per page (gzip, all modules + inline) | 7.8–21.3KB (budget 60KB) |
+| Internal links + anchors | 47/47 |
+| External links | 403 from this environment's egress proxy for every host — re-check on the live URL |
+
+**Failed → fixed:**
+- axe: two placeholder plate accents under 4.5:1 → darkened (D17); /lab jumped h1 → h3 → hidden "All files" h2; viewer scroller had `aria-label` without a role → `role="region"`.
+- Lighthouse first run: Perf 96–97, LCP 2.3–2.4s, flagged document latency — the dev server sent uncompressed files. Added gzip (as Vercel does): Perf 99–100, LCP 1.5–1.7s. Remaining hints are "unminified CSS/JS" (no build step, by design) and the single render-blocking stylesheet.
+- Link checker read `theme-color` values as anchors and treated the 404 page's own 404 as broken → fixed in the checker.
+- 8 unused brand tokens removed from the shipped CSS (D16).

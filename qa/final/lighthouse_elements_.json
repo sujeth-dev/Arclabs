@@ -1,0 +1,17 @@
+{
+  "path": "/elements/",
+  "performance": 99,
+  "accessibility": 100,
+  "best-practices": 100,
+  "seo": 100,
+  "agentic-browsing": 100,
+  "LCP": "1.7 s",
+  "CLS": "0",
+  "TBT": "0 ms",
+  "FCP": "1.4 s",
+  "audits": {
+    "unminified-css": "Est savings of 3 KiB",
+    "network-dependency-tree-insight": 0,
+    "render-blocking-insight": "Est savings of 450 ms"
+  }
+}

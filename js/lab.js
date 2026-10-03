@@ -62,10 +62,10 @@ function viewerHTML(p) {
       <button class="viewer__tab" type="button" role="tab" id="vt-mobile" aria-selected="false" aria-controls="vp-mobile" tabindex="-1">Mobile</button>
     </div>
     <div class="viewer__panel" role="tabpanel" id="vp-desktop" aria-labelledby="vt-desktop">
-      <div class="frame">${chrome}<div class="viewer__scroll" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} desktop screens, scrollable">${video}${desk}</div></div>
+      <div class="frame">${chrome}<div class="viewer__scroll" role="region" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} desktop screens, scrollable">${video}${desk}</div></div>
     </div>
     <div class="viewer__panel" role="tabpanel" id="vp-mobile" aria-labelledby="vt-mobile" hidden>
-      <div class="frame viewer__phone">${chrome}<div class="viewer__scroll" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} mobile screens, scrollable">${mob}</div></div>
+      <div class="frame viewer__phone">${chrome}<div class="viewer__scroll" role="region" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} mobile screens, scrollable">${mob}</div></div>
     </div>
   </div>`;
 }
