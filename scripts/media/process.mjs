@@ -76,11 +76,11 @@ if (WIRE && done.length) {
     data = data.replace(block, `$1screens: { desktop: ["${m}/desktop-full"] }, video: ${p.video ? `{ mp4: "${m}/scroll.mp4", webm: "${m}/scroll.webm" }` : "null"}, poster: ${p.video ? `"${m}/video-poster.webp"` : "null"},`);
   }
   await writeFile("data/content.js", data);
-  // Lab cards: swap the placeholder plate for the poster (+ hover recording).
+  // Lab cards: swap the brand panel for the poster (+ hover recording).
   for (const f of ["index.html", "lab/index.html"]) {
     let html = await readFile(f, "utf8");
     for (const p of done) {
-      html = html.replace(new RegExp(`(data-file="${p.slug}"(?:(?!</article>)[\\s\\S])*?<div class="frame__media[^"]*">\\s*)<!-- TODO\\(T1\\)[\\s\\S]*?-->\\s*<div class="plate[\\s\\S]*?</div></div></div>`), `$1${cardMedia(p)}`);
+      html = html.replace(new RegExp(`(data-file="${p.slug}"(?:(?!</article>)[\\s\\S])*?<div class="frame__media[^"]*">\\s*)<div class="brand-panel"[\\s\\S]*?</div>`), `$1${cardMedia(p)}`);
     }
     // Preload only the hero file's poster (File 01 on Home).
     const hero = done.find((p) => p.featured === "large");

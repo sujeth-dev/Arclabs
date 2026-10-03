@@ -9,15 +9,10 @@ import { track } from "./analytics.js";
 const esc = (s) => String(s).replace(/[&<>"']/g, (c) => ({ "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;" })[c]);
 const ordered = [...projects].sort((a, b) => a.order - b.order);
 
-/* ---------- placeholder plate (until real captures exist, TODO T1) -------- */
-function plateHTML(p, extra = "") {
-  const pl = p.plate;
-  const links = (pl.links || []).map((l) => `<span>${esc(l)}</span>`).join("");
-  let body = pl.eyebrow ? `<div class="plate__eyebrow">${esc(pl.eyebrow)}</div>` : "";
-  body += `<div class="plate__title">${esc(pl.title)}</div>`;
-  if (pl.cta) body += `<div class="plate__cta">${esc(pl.cta)}</div>`;
-  if (pl.ticker) body += `<div class="plate__ticker">${pl.ticker.map((t) => `<span>${esc(t)}</span>`).join("")}</div>`;
-  return `<div class="plate plate--${pl.key}${extra}" aria-hidden="true"><div class="plate__nav"><span class="plate__brand">${esc(pl.brand)}</span><span class="plate__links">${links}</span></div><div class="plate__body">${body}</div></div>`;
+/* ---------- brand panel: the client's logo on their colour ---------------- */
+function brandHTML(p) {
+  const b = p.brand;
+  return `<div class="brand-panel" style="--bp-bg:${esc(b.bg)};${esc(b.style)}"><img class="brand-panel__logo" src="${esc(b.logo)}" alt="" width="${b.width}" height="${b.height}" decoding="async"></div>`;
 }
 
 // <picture> with AVIF + WebP at 1x/2x. `src` is a base path without extension,
@@ -61,9 +56,9 @@ function viewerHTML(p) {
     screen = `<div class="frame">${chrome}<div class="viewer__scroll" role="region" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} desktop screens, scrollable">${video}${desk}</div></div>`;
   } else if (p.liveUrl) {
     // The preview itself opens the live site.
-    screen = `<a class="frame viewer__open" href="${esc(p.liveUrl)}" target="_blank" rel="noopener" data-cursor-tag="Visit site" aria-label="${esc(p.name)} live site${" (opens in a new tab)"}"><div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div><div class="viewer__plate">${plateHTML(p)}</div></a>`;
+    screen = `<a class="frame viewer__open" href="${esc(p.liveUrl)}" target="_blank" rel="noopener" data-cursor-tag="Visit site" aria-label="${esc(p.name)} live site${" (opens in a new tab)"}"><div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div><div class="viewer__plate">${brandHTML(p)}</div></a>`;
   } else {
-    screen = `<div class="frame"><div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div><div class="viewer__plate">${plateHTML(p)}</div></div>`;
+    screen = `<div class="frame"><div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div><div class="viewer__plate">${brandHTML(p)}</div></div>`;
   }
   return `<div class="viewer">
     <div class="viewer__head"><span class="label">Desktop</span>${visit}</div>

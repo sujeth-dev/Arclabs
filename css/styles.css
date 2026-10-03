@@ -3,7 +3,7 @@
    Ported from the brand system v1.0 (arc-labs-brand/styles.css). Token names,
    values and primitives are unchanged; prototype-only blocks (system page,
    case study, loader, page transitions) are not shipped.
-   Layers: fonts → tokens → base → layout → type → primitives → plates →
+   Layers: fonts → tokens → base → layout → type → primitives → brand panels →
    shared components → responsive → reduced motion.
    ========================================================================== */
 
@@ -143,7 +143,6 @@
 /* An always-Ink page has nothing for the theme toggle to change (DECISIONS D6). */
 :root.ink .toggle--theme { display: none; }
 /* Client work keeps its own colours whatever the theme. */
-.plate { color-scheme: light; }
 
 
 /* --------------------------------------------------------------------------
@@ -316,37 +315,18 @@ input, textarea, select { font: inherit; color: inherit; }
 
 
 /* --------------------------------------------------------------------------
-   06 · CLIENT PLATES — placeholder compositions until real captures exist
-   (TODO.md T1). Built from each client's live copy and approximate colours,
-   exactly as the brand system's stand-ins. Sized in container units.
+   06 · BRAND PANELS — each client's own logo on their brand colour
+   (logos: assets/clients/, copies of brand-assets/; colours from brand.json)
    -------------------------------------------------------------------------- */
-.plate {
-  --s: 1;
-  position: absolute; inset: 0; container-type: inline-size;
-  display: flex; flex-direction: column;
-  padding: calc(5cqw * var(--s)) 6cqw; overflow: hidden;
-  background: var(--p-bg); color: var(--p-fg);
-  font-family: var(--font-body);
+.brand-panel {
+  position: absolute; inset: 0; display: grid; place-items: center;
+  background: var(--bp-bg); overflow: hidden;
 }
-.plate__nav { display: flex; justify-content: space-between; align-items: center; gap: 2cqw; font-size: calc(2.1cqw * var(--s)); letter-spacing: .12em; text-transform: uppercase; }
-.plate__brand { font-family: var(--font-display); font-weight: 600; font-size: calc(2.8cqw * var(--s)); letter-spacing: .18em; }
-.plate__links { display: flex; gap: 3cqw; opacity: .75; }
-.plate__body { margin-top: auto; }
-.plate__eyebrow { font-size: calc(2cqw * var(--s)); letter-spacing: .2em; text-transform: uppercase; color: var(--p-accent); }
-.plate__title { margin-top: calc(2cqw * var(--s)); font-family: var(--font-display); font-weight: 600; font-size: calc(7.4cqw * var(--s)); line-height: .98; letter-spacing: -.035em; max-width: 13em; }
-.plate__cta { display: inline-block; margin-top: calc(4cqw * var(--s)); padding: calc(1.6cqw * var(--s)) calc(3cqw * var(--s)); border: 1px solid currentColor; font-size: calc(2cqw * var(--s)); letter-spacing: .14em; text-transform: uppercase; }
-.plate__ticker { display: flex; gap: 3cqw; font-size: calc(2.4cqw * var(--s)); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: var(--p-accent); margin-top: 4cqw; }
-.plate--tall { --s: 1.48; }
-.ratio-21x9 .plate { --s: .64; }
-
-.plate--velmont { --p-bg: #F4F0EB; --p-fg: #1A1A18; --p-accent: #6B5F4D; }
-.plate--possah  { --p-bg: #1B1517; --p-fg: #F3E9E4; --p-accent: #D3A194; }
-.plate--zingara { --p-bg: #F2EDE1; --p-fg: #20180F; --p-accent: #7E5626; }
-.plate--fitness { --p-bg: #070707; --p-fg: #F2F2F0; --p-accent: #D6FF4B; }
-/* No captured colours for these two yet: a neutral monochrome stand-in. */
-.plate--neutral { --p-bg: #E8E4D9; --p-fg: #17181A; --p-accent: #5E5C56; }
-.plate--zingara .plate__title { letter-spacing: .06em; text-transform: uppercase; }
-.plate--fitness .plate__title { text-transform: uppercase; letter-spacing: -.02em; }
+.brand-panel__logo {
+  inline-size: var(--bp-w, 56%); block-size: auto; max-block-size: var(--bp-h, 60%); object-fit: contain;
+  transition: transform var(--duration-medium) var(--ease-lift);
+}
+.lab-card__link:hover .brand-panel__logo, .viewer__open:hover .brand-panel__logo { transform: scale(1.04); }
 
 
 /* --------------------------------------------------------------------------
@@ -722,7 +702,6 @@ html:has(dialog[open]) { overflow: hidden; }
 .viewer__scroll { max-block-size: min(62vh, 40rem); overflow-y: auto; overscroll-behavior: contain; background: var(--color-surface); }
 .viewer__scroll img, .viewer__scroll video { inline-size: 100%; block-size: auto; }
 .viewer__plate { position: relative; aspect-ratio: 16 / 10; }
-.viewer__plate .plate { --s: 1; }
 
 .lab-file__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); margin-top: var(--space-8); padding-top: var(--space-5); border-top: var(--line-hair) solid var(--color-border); }
 .lab-file__pager { display: flex; gap: var(--space-3); margin-left: auto; }
@@ -760,7 +739,6 @@ html:has(dialog[open]) { overflow: hidden; }
   .lab-grid--all .lab-card--tall { grid-column: 3 / 7; }
   .lab-grid--all.is-filtered .lab-card { grid-column: span 4; margin-top: 0; }
   .lab-grid--all.is-filtered .lab-card .frame__media { aspect-ratio: 16 / 10; flex: none; }
-  .lab-grid--all.is-filtered .plate--tall { --s: 1; }
 }
 @media (min-width: 1024px) {
   .lab-grid--all .lab-card--large { grid-column: 1 / 9; }

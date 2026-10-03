@@ -3,9 +3,9 @@
    Lab cards, Element names and lines are also written into the HTML (so they
    are indexable without JS); scripts/qa/content.mjs checks the two agree.
 
-   Media: real captures go in /media/<slug>/ (see README → Replacing media).
-   Until then `screens` and `video` are empty and the placeholder `plate`
-   (the brand system's stand-in composition) is shown. TODO.md → T1.
+   Cards and the Lab file show a `brand` panel: the client's own logo
+   (assets/clients/, trimmed copies of brand-assets/) on their brand colour.
+   Optional site captures go in /media/<slug>/ (README → Replacing media).
    ========================================================================== */
 
 export const projects = [
@@ -28,7 +28,7 @@ export const projects = [
     result: "Live at velmontdesign.com.",
     // TODO(T1): /media/velmont/desktop-full.{avif,webp}, poster + recording
     screens: { desktop: [] }, video: null, poster: null,
-    plate: { key: "velmont", brand: "Velmont", links: ["Work", "About", "Contact"], eyebrow: "Defining Environments.", title: "Commercial interiors built to the highest standard.", cta: "View the Portfolio" },
+    brand: { bg: "#F4F0EB", logo: "/assets/clients/velmont.webp", width: 1000, height: 112, style: "--bp-w:58%" },
   },
   {
     file: "02", slug: "the-possah", order: 2,
@@ -48,7 +48,7 @@ export const projects = [
     insideTheLab: "Category navigation, product storytelling, a made-to-measure flow, payments.",
     result: "Ready for launch.",
     screens: { desktop: [] }, video: null, poster: null,
-    plate: { key: "possah", brand: "The Possah", links: ["New in", "Bridal", "Festive"], eyebrow: "Couture, off-duty. Spring ’26", title: "she wants what she wants.", cta: "Shop the Collection" },
+    brand: { bg: "#1F3A2D", logo: "/assets/clients/the-possah.webp", width: 453, height: 77, style: "--bp-w:58%" },
   },
   {
     file: "03", slug: "zingara", order: 3,
@@ -68,7 +68,7 @@ export const projects = [
     insideTheLab: "Heritage-led copy, menu presentation, Swiggy, Zomato and WhatsApp ordering.",
     result: "Live at zingararestaurant.co.in.",
     screens: { desktop: [] }, video: null, poster: null,
-    plate: { key: "zingara", brand: "Zingara", links: ["Menu", "Our Story", "Gallery"], eyebrow: "A rare expression of Mysore’s culinary heritage", title: "The Art of White Biryani", cta: "Order Now" },
+    brand: { bg: "#1C1A18", logo: "/assets/clients/zingara.webp", width: 545, height: 489, style: "--bp-w:30%;--bp-h:52%" },
   },
   {
     file: "04", slug: "assetly", order: 4,
@@ -88,7 +88,7 @@ export const projects = [
     insideTheLab: "Benefit-first structure, plain-language explanations, an enquiry flow.",
     result: "Live website.",
     screens: { desktop: [] }, video: null, poster: null,
-    plate: { key: "neutral", brand: "Assetly", links: [], eyebrow: "", title: "Access assets. Preserve capital. Keep growing.", cta: "" },
+    brand: { bg: "#21241A", logo: "/assets/clients/assetly.webp", width: 263, height: 267, style: "--bp-w:30%;--bp-h:56%" },
   },
   {
     file: "05", slug: "fitness-garage", order: 5,
@@ -108,7 +108,7 @@ export const projects = [
     insideTheLab: "Program grid, membership plans, Google reviews, WhatsApp trial booking.",
     result: "Live at fitness-garage.in.",
     screens: { desktop: [] }, video: null, poster: null,
-    plate: { key: "fitness", brand: "Fitness Garage", links: ["Programs", "Membership", "Contact"], eyebrow: "Kanaka Nagar, Horamavu · Bangalore", title: "Fitness Garage Bengaluru.", ticker: ["Aerobics", "Yoga", "Zumba", "Cross Fitness", "Personal Training"] },
+    brand: { bg: "#070707", logo: "/assets/clients/fitness-garage.webp", width: 1000, height: 287, style: "--bp-w:56%" },
   },
   {
     file: "06", slug: "aivora-india", order: 6,
@@ -128,7 +128,7 @@ export const projects = [
     insideTheLab: "Focused structure, concise messaging, an enquiry path.",
     result: "Live website.",
     screens: { desktop: [] }, video: null, poster: null,
-    plate: { key: "neutral", brand: "Aivora India", links: [], eyebrow: "", title: "Making everyday business workflows simpler.", cta: "" },
+    brand: { bg: "linear-gradient(135deg, #175AA1, #12467D)", logo: "/assets/clients/aivora-india.webp", width: 914, height: 262, style: "--bp-w:58%" },
   },
 ];
 
