@@ -134,3 +134,26 @@ Screenshots: `qa/06-approach-process-contact/`.
 ## 2026-10-03 — Stop point
 
 Steps 1–7.6 complete and pushed. Blocked, with next steps in TODO.md: 7.7 client media capture (network policy blocks the client sites) and 7.8 deploy + live verification (no Vercel credentials).
+
+## 2026-10-03 — Revision (client feedback)
+
+Built (one commit each, pushed):
+- Brand assets saved unchanged in `brand-assets/` (fetch script blocked by the network; logos supplied by hand).
+- Copy: hero "Websites and digital systems for businesses ready to grow online." / "Every page has a purpose."; Lab heading "Each one shaped by how the business works."; Process heading one sentence per line.
+- Cursor: standard shapes in brand colours (D22).
+- "This one's live" note on every live card; Assetly and Aivora India URLs; client strip names link to their files.
+- Elements: Custom Systems demo was blank (bars sized against an auto-height grid row) → rebuilt as an enquiry board; Digital Presence rebuilt as a local search.
+- Lab file: Mobile preview removed everywhere; Visit live site above the preview; preview opens the site (D20).
+- Brand panels replace the placeholder plates (D18).
+- Approach: annotated website plan replaces the measured mark.
+- Hero: full stops fly into the ARC, tighter spacing, stamp removed, "Drag me" hint until the first drag (D19, D23).
+
+Tested:
+- Found while reviewing: earlier full-page screenshots were taken before once-in-view drawings ran, which hid the blank demo. `pages.mjs` now scrolls each page first and fails if a drawing has not played; `keyboard.mjs` checks every demo shows content.
+- html-validate 0 errors · shell identical, mark untouched · content 21/21 · tokens all used.
+- Pages: 5 × 6 widths × Cream / Ink / reduced = 90/90, no console errors, no overflow.
+- Keyboard + behaviour: 104/104. axe: 0 violations.
+- Lighthouse mobile: Performance 99 / 99 / 99, A11y/BP/SEO 100; LCP 1.8 / 1.8 / 1.7s; CLS 0 / 0.002 / 0; TBT 0.
+- JS: 7.8–22.2KB gz per page. Internal links pass; external links 403 from this environment's proxy.
+- "Elements row numbers flush left" turned out to be a screenshot crop; no change needed.
+

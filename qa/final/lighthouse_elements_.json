@@ -11,6 +11,7 @@
   "FCP": "1.4 s",
   "audits": {
     "unminified-css": "Est savings of 3 KiB",
+    "unused-css-rules": "Est savings of 11 KiB",
     "network-dependency-tree-insight": 0,
     "render-blocking-insight": "Est savings of 450 ms"
   }
