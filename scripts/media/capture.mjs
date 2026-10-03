@@ -1,6 +1,6 @@
 // Captures each client site (dev only; needs network access to the sites).
 // Usage: node scripts/media/capture.mjs [slug ...]
-// Writes media/_raw/<slug>/{desktop,desktop-full,mobile,mobile-full}.png + scroll.webm
+// Writes media/_raw/<slug>/{desktop,desktop-full}.png + scroll.webm
 // then run: node scripts/media/process.mjs
 import { mkdir, rename, readdir, rm } from "node:fs/promises";
 import { chromium } from "playwright";
@@ -48,8 +48,8 @@ for (const p of targets) {
     await probe.context().close();
     if (entry.status !== 200) throw new Error(`status ${entry.status}`);
 
-    // 2. Desktop + mobile stills
-    for (const [name, vp, mobile] of [["desktop", { width: 1440, height: 900 }, false], ["mobile", { width: 390, height: 844 }, true]]) {
+    // 2. Desktop stills
+    for (const [name, vp, mobile] of [["desktop", { width: 1440, height: 900 }, false]]) {
       const ctx = await browser.newContext({ viewport: vp, deviceScaleFactor: 2, isMobile: mobile, hasTouch: mobile });
       const page = await ctx.newPage();
       await page.goto(p.liveUrl, { waitUntil: "load", timeout: 60000 });

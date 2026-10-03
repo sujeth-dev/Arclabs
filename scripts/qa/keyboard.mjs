@@ -114,9 +114,9 @@ const suites = {
     check("focus starts on Close", await page.evaluate(() => document.activeElement?.hasAttribute("data-file-close")));
     check("file_opened tracked", await page.evaluate(() => window.__ev.includes("file_opened")));
     check("dialog is Ink", (await page.evaluate(() => getComputedStyle(document.getElementById("lab-file")).backgroundColor)) === "rgb(23, 24, 26)");
-    const tab = page.locator("#vt-desktop");
-    await tab.focus(); await page.keyboard.press("ArrowRight");
-    check("arrow key moves to Mobile tab", await page.evaluate(() => document.activeElement.id === "vt-mobile" && !document.getElementById("vp-mobile").hidden && document.getElementById("vp-desktop").hidden));
+    check("no Mobile preview", await page.evaluate(() => !document.querySelector('#lab-file [role="tab"], #vp-mobile')));
+    check("Visit live site sits above the preview", await page.evaluate(() => { const v = document.querySelector("#lab-file .viewer__visit"), f = document.querySelector("#lab-file .viewer .frame"); return !!v && !!f && v.getBoundingClientRect().bottom <= f.getBoundingClientRect().top && v.getBoundingClientRect().right >= f.getBoundingClientRect().right - 2; }));
+    check("preview opens the live site", await page.evaluate(() => { const a = document.querySelector("#lab-file a.viewer__open"); return !!a && a.href.startsWith("https://www.velmontdesign.com") && a.target === "_blank" && a.rel.includes("noopener"); }));
     await page.locator('[data-file-go]', { hasText: "Next file" }).click();
     check("Next file → The Possah", (await page.locator("#lab-file-title").textContent()) === "The Possah" && await page.evaluate(() => location.hash === "#file-the-possah"));
     check("Visit live site opens a new tab safely", await page.evaluate(() => { const a = document.querySelector('#lab-file a[target="_blank"]'); return !!a && a.rel.includes("noopener") && /opens in a new tab/.test(a.textContent); }));
@@ -155,7 +155,7 @@ const suites = {
     check("All restores six", (await page.locator(".lab-card:not([hidden])").count()) === 6);
     await page.goto(base + "/lab/#file-aivora-india", { waitUntil: "networkidle" });
     check("/lab/#file-aivora-india opens on load", await page.evaluate(() => document.getElementById("lab-file").open && document.getElementById("lab-file-title").textContent === "Aivora India"));
-    check("no live link when URL unknown", (await page.locator('#lab-file a[target="_blank"]').count()) === 0);
+    check("Aivora India links to its live site", (await page.locator('#lab-file a.viewer__visit[href^="https://www.aivoraindia.com"]').count()) === 1);
     check("no errors", !errors.length, errors.join(" | "));
     await ctx.close();
   },

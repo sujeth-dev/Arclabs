@@ -62,7 +62,6 @@ for (const p of projects) {
   console.log(p.slug);
   await image(`${raw}/desktop.png`, `${dir}/poster`, 960, { ratio: 16 / 10 });
   await image(`${raw}/desktop-full.png`, `${dir}/desktop-full`, 720, { maxHeight: 9000 });
-  await image(`${raw}/mobile-full.png`, `${dir}/mobile-full`, 390, { maxHeight: 9000 });
   const hasVideo = await exists(`${raw}/scroll.webm`);
   if (hasVideo) video(`${raw}/scroll.webm`, dir);
   done.push({ ...p, video: hasVideo });
@@ -73,8 +72,8 @@ if (WIRE && done.length) {
   let data = await readFile("data/content.js", "utf8");
   for (const p of done) {
     const m = `/media/${p.slug}`;
-    const block = new RegExp(`(slug: "${p.slug}"[\\s\\S]*?)screens: \\{ desktop: \\[[^\\]]*\\], mobile: \\[[^\\]]*\\] \\}, video: (?:null|\\{[^}]*\\}), poster: (?:null|"[^"]*"),`);
-    data = data.replace(block, `$1screens: { desktop: ["${m}/desktop-full"], mobile: ["${m}/mobile-full"] }, video: ${p.video ? `{ mp4: "${m}/scroll.mp4", webm: "${m}/scroll.webm" }` : "null"}, poster: ${p.video ? `"${m}/video-poster.webp"` : "null"},`);
+    const block = new RegExp(`(slug: "${p.slug}"[\\s\\S]*?)screens: \\{ desktop: \\[[^\\]]*\\](?:, mobile: \\[[^\\]]*\\])? \\}, video: (?:null|\\{[^}]*\\}), poster: (?:null|"[^"]*"),`);
+    data = data.replace(block, `$1screens: { desktop: ["${m}/desktop-full"] }, video: ${p.video ? `{ mp4: "${m}/scroll.mp4", webm: "${m}/scroll.webm" }` : "null"}, poster: ${p.video ? `"${m}/video-poster.webp"` : "null"},`);
   }
   await writeFile("data/content.js", data);
   // Lab cards: swap the placeholder plate for the poster (+ hover recording).

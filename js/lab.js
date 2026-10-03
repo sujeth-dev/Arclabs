@@ -45,28 +45,29 @@ function formulaHTML(f) {
 
 /* ---------- Viewer: Desktop / Mobile tabs ----------------------------------- */
 function viewerHTML(p) {
-  const desk = p.screens.desktop.length
-    ? p.screens.desktop.map((src, i) => pictureHTML(src, `${p.name} homepage, desktop`, { lazy: i > 0 })).join("")
-    : `<div class="viewer__plate">${plateHTML(p)}</div>`;
-  const video = p.video
-    ? `<video class="viewer__video" muted loop playsinline preload="none" poster="${esc(p.poster || "")}" aria-label="${esc(p.name)} homepage recording, desktop"><source src="${esc(p.video.webm)}" type="video/webm"><source src="${esc(p.video.mp4)}" type="video/mp4"></video>`
-    : "";
-  const mob = p.screens.mobile.length
-    ? p.screens.mobile.map((src) => pictureHTML(src, `${p.name} homepage, mobile`)).join("")
-    : `<div class="viewer__plate">${plateHTML(p, " plate--mobile")}</div>`;
   const url = domain(p.liveUrl) || p.name;
-  const chrome = `<div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div>`;
+  const nt = `<span class="visually-hidden"> (opens in a new tab)</span>`;
+  const visit = p.liveUrl
+    ? `<a class="btn btn--sm viewer__visit" href="${esc(p.liveUrl)}" target="_blank" rel="noopener">Visit live site<span aria-hidden="true"> ↗</span>${nt}</a>`
+    : "";
+  const urlText = p.liveUrl ? `<a class="frame__url" href="${esc(p.liveUrl)}" target="_blank" rel="noopener" tabindex="-1">${esc(url)}</a>` : `<span class="frame__url">${esc(url)}</span>`;
+  const chrome = `<div class="frame__chrome"><span class="frame__dots" aria-hidden="true"><i></i><i></i><i></i></span>${urlText}</div>`;
+  let screen;
+  if (p.screens.desktop.length) {
+    const video = p.video
+      ? `<video class="viewer__video" muted loop playsinline preload="none" poster="${esc(p.poster || "")}" aria-label="${esc(p.name)} homepage recording, desktop"><source src="${esc(p.video.webm)}" type="video/webm"><source src="${esc(p.video.mp4)}" type="video/mp4"></video>`
+      : "";
+    const desk = p.screens.desktop.map((src, i) => pictureHTML(src, `${p.name} homepage, desktop`, { lazy: i > 0 })).join("");
+    screen = `<div class="frame">${chrome}<div class="viewer__scroll" role="region" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} desktop screens, scrollable">${video}${desk}</div></div>`;
+  } else if (p.liveUrl) {
+    // The preview itself opens the live site.
+    screen = `<a class="frame viewer__open" href="${esc(p.liveUrl)}" target="_blank" rel="noopener" data-cursor-tag="Visit site" aria-label="${esc(p.name)} live site${" (opens in a new tab)"}"><div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div><div class="viewer__plate">${plateHTML(p)}</div></a>`;
+  } else {
+    screen = `<div class="frame"><div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">${esc(url)}</span></div><div class="viewer__plate">${plateHTML(p)}</div></div>`;
+  }
   return `<div class="viewer">
-    <div class="viewer__tabs" role="tablist" aria-label="Screens">
-      <button class="viewer__tab" type="button" role="tab" id="vt-desktop" aria-selected="true" aria-controls="vp-desktop">Desktop</button>
-      <button class="viewer__tab" type="button" role="tab" id="vt-mobile" aria-selected="false" aria-controls="vp-mobile" tabindex="-1">Mobile</button>
-    </div>
-    <div class="viewer__panel" role="tabpanel" id="vp-desktop" aria-labelledby="vt-desktop">
-      <div class="frame">${chrome}<div class="viewer__scroll" role="region" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} desktop screens, scrollable">${video}${desk}</div></div>
-    </div>
-    <div class="viewer__panel" role="tabpanel" id="vp-mobile" aria-labelledby="vt-mobile" hidden>
-      <div class="frame viewer__phone">${chrome}<div class="viewer__scroll" role="region" data-drag-scroll data-cursor="drag" tabindex="0" aria-label="${esc(p.name)} mobile screens, scrollable">${mob}</div></div>
-    </div>
+    <div class="viewer__head"><span class="label">Desktop</span>${visit}</div>
+    ${screen}
   </div>`;
 }
 
@@ -81,16 +82,12 @@ function bodyHTML(p) {
     ["Inside the Lab", `<p>${esc(p.insideTheLab)}</p>`],
     ["Result", `<p>${esc(p.result)}</p>`],
   ].filter(Boolean);
-  const live = p.liveUrl
-    ? `<a class="btn" href="${esc(p.liveUrl)}" target="_blank" rel="noopener">Visit live site: ${esc(domain(p.liveUrl))}<span class="visually-hidden"> (opens in a new tab)</span></a>`
-    : "";
   return `<p class="lab-file__line t-lead">${esc(p.line)}</p>
     <div class="lab-file__body grid">
       <dl class="lab-file__record record">${rows.map(([k, v]) => `<div class="record__row"><dt class="label">${k}</dt><dd>${v}</dd></div>`).join("")}</dl>
       <div class="lab-file__viewer">${viewerHTML(p)}</div>
     </div>
     <div class="lab-file__foot">
-      ${live}
       <div class="lab-file__pager">
         <button class="btn btn--ghost" type="button" data-file-go="${prev.slug}" aria-label="Previous file: ${esc(prev.name)}">Previous file</button>
         <button class="btn btn--ghost" type="button" data-file-go="${next.slug}" aria-label="Next file: ${esc(next.name)}">Next file</button>
@@ -202,23 +199,6 @@ function initDialog() {
 
 /* ---------- viewer: tabs + drag to scroll ---------------------------------- */
 function initViewer(scope) {
-  const tabs = [...scope.querySelectorAll('[role="tab"]')];
-  const select = (t, focus) => {
-    tabs.forEach((x) => {
-      const on = x === t;
-      x.setAttribute("aria-selected", String(on));
-      x.tabIndex = on ? 0 : -1;
-      scope.querySelector(`#${x.getAttribute("aria-controls")}`).hidden = !on;
-    });
-    if (focus) t.focus();
-  };
-  tabs.forEach((t, i) => {
-    t.addEventListener("click", () => select(t));
-    t.addEventListener("keydown", (e) => {
-      const d = { ArrowRight: 1, ArrowLeft: -1 }[e.key];
-      if (d) { e.preventDefault(); select(tabs[(i + d + tabs.length) % tabs.length], true); }
-    });
-  });
   scope.querySelectorAll("[data-drag-scroll]").forEach((el) => {
     let y0 = 0, s0 = 0, on = false;
     el.addEventListener("pointerdown", (e) => {

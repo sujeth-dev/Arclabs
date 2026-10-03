@@ -26,8 +26,8 @@ export const projects = [
     protocol: ["Understand", "Structure", "Design", "Build", "Launch"],
     insideTheLab: "A quiet stone-and-charcoal palette, large type, and photography doing the talking. An enquiry path ends every page.",
     result: "Live at velmontdesign.com.",
-    // TODO(T1): /media/velmont/desktop-full.{avif,webp}, mobile-full.{avif,webp}, poster + recording
-    screens: { desktop: [], mobile: [] }, video: null, poster: null,
+    // TODO(T1): /media/velmont/desktop-full.{avif,webp}, poster + recording
+    screens: { desktop: [] }, video: null, poster: null,
     plate: { key: "velmont", brand: "Velmont", links: ["Work", "About", "Contact"], eyebrow: "Defining Environments.", title: "Commercial interiors built to the highest standard.", cta: "View the Portfolio" },
   },
   {
@@ -47,7 +47,7 @@ export const projects = [
     protocol: [],
     insideTheLab: "Category navigation, product storytelling, a made-to-measure flow, payments.",
     result: "Ready for launch.",
-    screens: { desktop: [], mobile: [] }, video: null, poster: null,
+    screens: { desktop: [] }, video: null, poster: null,
     plate: { key: "possah", brand: "The Possah", links: ["New in", "Bridal", "Festive"], eyebrow: "Couture, off-duty. Spring ’26", title: "she wants what she wants.", cta: "Shop the Collection" },
   },
   {
@@ -67,7 +67,7 @@ export const projects = [
     protocol: [],
     insideTheLab: "Heritage-led copy, menu presentation, Swiggy, Zomato and WhatsApp ordering.",
     result: "Live at zingararestaurant.co.in.",
-    screens: { desktop: [], mobile: [] }, video: null, poster: null,
+    screens: { desktop: [] }, video: null, poster: null,
     plate: { key: "zingara", brand: "Zingara", links: ["Menu", "Our Story", "Gallery"], eyebrow: "A rare expression of Mysore’s culinary heritage", title: "The Art of White Biryani", cta: "Order Now" },
   },
   {
@@ -87,7 +87,7 @@ export const projects = [
     protocol: [],
     insideTheLab: "Benefit-first structure, plain-language explanations, an enquiry flow.",
     result: "Live website.",
-    screens: { desktop: [], mobile: [] }, video: null, poster: null,
+    screens: { desktop: [] }, video: null, poster: null,
     plate: { key: "neutral", brand: "Assetly", links: [], eyebrow: "", title: "Access assets. Preserve capital. Keep growing.", cta: "" },
   },
   {
@@ -107,7 +107,7 @@ export const projects = [
     protocol: [],
     insideTheLab: "Program grid, membership plans, Google reviews, WhatsApp trial booking.",
     result: "Live at fitness-garage.in.",
-    screens: { desktop: [], mobile: [] }, video: null, poster: null,
+    screens: { desktop: [] }, video: null, poster: null,
     plate: { key: "fitness", brand: "Fitness Garage", links: ["Programs", "Membership", "Contact"], eyebrow: "Kanaka Nagar, Horamavu · Bangalore", title: "Fitness Garage Bengaluru.", ticker: ["Aerobics", "Yoga", "Zumba", "Cross Fitness", "Personal Training"] },
   },
   {
@@ -127,7 +127,7 @@ export const projects = [
     protocol: [],
     insideTheLab: "Focused structure, concise messaging, an enquiry path.",
     result: "Live website.",
-    screens: { desktop: [], mobile: [] }, video: null, poster: null,
+    screens: { desktop: [] }, video: null, poster: null,
     plate: { key: "neutral", brand: "Aivora India", links: [], eyebrow: "", title: "Making everyday business workflows simpler.", cta: "" },
   },
 ];

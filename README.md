@@ -95,7 +95,7 @@ node scripts/media/process.mjs              # → media/<slug>/ and wires everyt
 ```
 
 `capture.mjs` checks each site returns 200, waits for fonts and images, dismisses cookie and
-newsletter pop-ups, and saves desktop (1440×900 + full page), mobile (390×844 + full page)
+newsletter pop-ups, and saves desktop stills (1440×900 + full page)
 and a ~11s smooth-scroll recording to `media/_raw/<slug>/`.
 
 `process.mjs` makes AVIF + WebP at 1x and 2x (top of the page kept in frame), MP4 (H.264) +
@@ -105,11 +105,11 @@ swaps the card's placeholder for `<picture>` + a hover `<video>`, and adds a pre
 File 01's poster on Home. It is safe to re-run. `media/_raw/` can be deleted afterwards.
 
 To add screenshots by hand instead: put `poster.{avif,webp}`, `poster@2x.{avif,webp}`,
-`desktop-full…`, `mobile-full…` in `media/<slug>/`, then set
-`screens: { desktop: ["/media/<slug>/desktop-full"], mobile: ["/media/<slug>/mobile-full"] }`
+`desktop-full…` in `media/<slug>/`, then set
+`screens: { desktop: ["/media/<slug>/desktop-full"] }`
 (paths without extension).
 
-Alt text is generated as "<Project> homepage, desktop" / "<Project> homepage, mobile".
+Alt text is generated as "<Project> homepage, desktop". The Lab file shows desktop only.
 
 ## Share images and icons
 
