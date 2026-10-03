@@ -1,0 +1,494 @@
+/* ==========================================================================
+   ARC LABS — SITE STYLES
+   Ported from the brand system v1.0 (arc-labs-brand/styles.css). Token names,
+   values and primitives are unchanged; prototype-only blocks (system page,
+   case study, loader, page transitions) are not shipped.
+   Layers: fonts → tokens → base → layout → type → primitives → plates →
+   shared components → responsive → reduced motion.
+   ========================================================================== */
+
+
+/* --------------------------------------------------------------------------
+   00 · FONTS — Inter Display (headlines, numerals) + Inter (body, interface)
+   -------------------------------------------------------------------------- */
+@font-face { font-family: "ARC Inter"; font-weight: 400; font-style: normal; font-display: swap; src: url("/assets/fonts/inter-400.woff2") format("woff2"); }
+@font-face { font-family: "ARC Inter"; font-weight: 500; font-style: normal; font-display: swap; src: url("/assets/fonts/inter-500.woff2") format("woff2"); }
+@font-face { font-family: "ARC Inter"; font-weight: 600; font-style: normal; font-display: swap; src: url("/assets/fonts/inter-600.woff2") format("woff2"); }
+@font-face { font-family: "ARC Inter Display"; font-weight: 300; font-style: normal; font-display: swap; src: url("/assets/fonts/inter-display-300.woff2") format("woff2"); }
+@font-face { font-family: "ARC Inter Display"; font-weight: 500; font-style: normal; font-display: swap; src: url("/assets/fonts/inter-display-500.woff2") format("woff2"); }
+@font-face { font-family: "ARC Inter Display"; font-weight: 600; font-style: normal; font-display: swap; src: url("/assets/fonts/inter-display-600.woff2") format("woff2"); }
+
+
+/* --------------------------------------------------------------------------
+   01 · TOKENS (unchanged from the brand system)
+   -------------------------------------------------------------------------- */
+:root {
+  color-scheme: light;
+
+  /* Raw palette */
+  --color-ink:          #17181A;
+  --color-ink-raised:   #202124;
+  --color-cream:        #F1EEE5;
+  --color-panel:        #E8E4D9;
+  --color-cream-muted:  #5E5C56;
+  --color-cream-faint:  #9A978E;
+  --color-cream-line:   #D5D1C6;
+  --color-cream-line-2: #A8A396;
+  --color-ink-muted:    #A6A49D;
+  --color-ink-faint:    #5B5C61;
+  --color-ink-line:     #33343A;
+  --color-ink-line-2:   #55565C;
+
+  /* Semantic */
+  --color-bg:            light-dark(var(--color-cream),      var(--color-ink));
+  --color-surface:       light-dark(var(--color-panel),      var(--color-ink-raised));
+  --color-text:          light-dark(var(--color-ink),        var(--color-cream));
+  --color-muted:         light-dark(var(--color-cream-muted),var(--color-ink-muted));
+  --color-faint:         light-dark(var(--color-cream-faint),var(--color-ink-faint));
+  --color-border:        light-dark(var(--color-cream-line), var(--color-ink-line));
+  --color-border-strong: light-dark(var(--color-cream-line-2),var(--color-ink-line-2));
+  --color-node:          var(--color-text);
+  --color-node-pending:  var(--color-faint);
+  --color-action-bg:     light-dark(var(--color-ink),        var(--color-cream));
+  --color-action-text:   light-dark(var(--color-cream),      var(--color-ink));
+  --color-selection:     light-dark(var(--color-ink),        var(--color-cream));
+  --color-selection-text:light-dark(var(--color-cream),      var(--color-ink));
+
+  /* Type */
+  --font-display: "ARC Inter Display", "Inter Display", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+  --font-body:    "ARC Inter", "Inter", ui-sans-serif, system-ui, -apple-system, "Segoe UI", sans-serif;
+
+  --text-hero:    clamp(3.25rem, calc((100vw - 2 * var(--margin)) / 3.35), 7rem);
+  --text-display: clamp(2.5rem, 6.4vw, 6.75rem);
+  --text-h2:      clamp(2rem, 4.1vw, 4rem);
+  --text-h3:      clamp(1.375rem, 1.6vw + .5rem, 1.875rem);
+  --text-lead:    clamp(1.125rem, .9vw + .7rem, 1.4375rem);
+  --text-body:    1rem;
+  --text-small:   .875rem;
+  --text-meta:    .75rem;
+  --text-label:   .6875rem;
+  --text-num:     clamp(2.5rem, 4.4vw, 4.5rem);
+
+  --leading-display: .92;
+  --leading-heading: 1.02;
+  --leading-snug:    1.25;
+  --leading-body:    1.6;
+
+  --track-display: -.045em;
+  --track-heading: -.032em;
+  --track-snug:    -.015em;
+  --track-label:   .14em;
+
+  /* Space (4px base) */
+  --space-1: .25rem;
+  --space-2: .5rem;
+  --space-3: .75rem;
+  --space-4: 1rem;
+  --space-5: 1.5rem;
+  --space-6: 2rem;
+  --space-7: 3rem;
+  --space-8: 4rem;
+  --space-9: 6rem;
+  --space-10: 8rem;
+  --space-11: 12rem;
+  --section-space: clamp(var(--space-9), 10vw, var(--space-11));
+
+  /* Layout */
+  --page-max: 1440px;
+  --margin:   clamp(1rem, 4.5vw, 4rem);
+  --gutter:   clamp(1rem, 1.6vw, 1.5rem);
+  --cols:     4;
+  --nav-h:    4rem;
+  --measure:  65ch;
+
+  /* Shape */
+  --radius-none: 0;
+  --radius-sm:   2px;
+  --radius-md:   4px;
+  --radius-node: 50%;
+
+  /* Geometry of the mark (unit = node Ø) */
+  --mark-stroke-ratio: .32;
+  --mark-span-ratio:   3.3;
+  --mark-lift-ratio:   2;
+
+  --node-xs: 6px;
+  --node-sm: 8px;
+  --node-md: 12px;
+  --node-lg: 24px;
+  --node-xl: 48px;
+  --line-hair: 1px;
+  --line-rule: 1.5px;
+
+  /* Motion */
+  --duration-instant:   120ms;
+  --duration-fast:      200ms;
+  --duration-medium:    400ms;
+  --duration-open:      600ms;   /* added: Lab pop-up arch (plan motion table) */
+  --duration-slow:      700ms;
+  --duration-draw:      900ms;
+  --duration-signature: 1400ms;
+  --stagger:            70ms;
+
+  --ease-standard: cubic-bezier(.45, 0, .25, 1);
+  --ease-enter:    cubic-bezier(.16, 1, .3, 1);
+  --ease-exit:     cubic-bezier(.7, 0, .84, 0);
+  --ease-span:     cubic-bezier(.65, 0, .35, 1);
+  --ease-lift:     cubic-bezier(.22, 1, .36, 1);
+
+  /* Layers */
+  --z-nav: 50;
+  --z-menu: 60;
+  --z-cursor: 200;
+}
+
+/* Theme: Cream is the default. Ink only when the visitor picks it (DECISIONS D1). */
+:root[data-theme="dark"]  { color-scheme: dark; }
+:root[data-theme="light"] { color-scheme: light; }
+
+/* Always-Ink surfaces: Elements page, Contact, menu, Lab pop-up. */
+.ink { color-scheme: dark; background: var(--color-bg); color: var(--color-text); }
+/* Client work keeps its own colours whatever the theme. */
+.plate { color-scheme: light; }
+
+
+/* --------------------------------------------------------------------------
+   02 · BASE
+   -------------------------------------------------------------------------- */
+*, *::before, *::after { box-sizing: border-box; }
+html {
+  -webkit-text-size-adjust: 100%; text-size-adjust: 100%;
+  scroll-padding-top: calc(var(--nav-h) + var(--space-5));
+  background: var(--color-bg);
+}
+body {
+  margin: 0;
+  background: var(--color-bg);
+  color: var(--color-text);
+  font-family: var(--font-body);
+  font-size: var(--text-body);
+  line-height: var(--leading-body);
+  font-feature-settings: "cv11", "ss01";
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+  overflow-x: clip;
+}
+img, svg, video { display: block; max-width: 100%; }
+img { height: auto; }
+h1, h2, h3, h4, p, figure, blockquote, ul, ol, dl, dd { margin: 0; }
+:where(ul, ol)[role="list"] { list-style: none; padding: 0; }
+h1, h2, h3, h4 { font-weight: 600; text-wrap: balance; }
+p { text-wrap: pretty; }
+a { color: inherit; text-decoration: none; }
+button { font: inherit; color: inherit; background: none; border: 0; padding: 0; cursor: pointer; }
+input, textarea, select { font: inherit; color: inherit; }
+::selection { background: var(--color-selection); color: var(--color-selection-text); }
+
+:focus-visible { outline: 2px solid var(--color-text); outline-offset: 3px; }
+.skip-link {
+  position: fixed; left: var(--margin); top: var(--space-3); z-index: calc(var(--z-cursor) + 1);
+  background: var(--color-action-bg); color: var(--color-action-text);
+  padding: var(--space-2) var(--space-4); font-size: var(--text-small); font-weight: 500;
+  transform: translateY(-200%);
+}
+.skip-link:focus { transform: none; }
+.visually-hidden {
+  position: absolute !important; width: 1px; height: 1px; overflow: hidden;
+  clip: rect(0 0 0 0); clip-path: inset(50%); white-space: nowrap;
+}
+
+
+/* --------------------------------------------------------------------------
+   03 · LAYOUT — 4 / 8 / 12 columns
+   -------------------------------------------------------------------------- */
+.wrap {
+  width: min(100% - 2 * var(--margin), var(--page-max) - 2 * var(--margin));
+  margin-inline: auto;
+}
+.grid {
+  display: grid;
+  grid-template-columns: repeat(var(--cols), minmax(0, 1fr));
+  column-gap: var(--gutter);
+}
+.grid > * { grid-column: 1 / -1; min-width: 0; }
+.section { position: relative; padding-block: var(--section-space); }
+.stack > * + * { margin-top: var(--flow, var(--space-5)); }
+
+
+/* --------------------------------------------------------------------------
+   04 · TYPOGRAPHY
+   -------------------------------------------------------------------------- */
+.t-hero, .t-display, .t-h2, .t-h3 { font-family: var(--font-display); font-weight: 600; }
+.t-hero    { font-size: var(--text-hero); line-height: var(--leading-display); letter-spacing: var(--track-display); }
+.t-display { font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--track-display); }
+.t-h2      { font-size: var(--text-h2); line-height: var(--leading-heading); letter-spacing: var(--track-heading); }
+.t-h3      { font-size: var(--text-h3); line-height: var(--leading-snug); letter-spacing: var(--track-snug); font-weight: 500; }
+.t-lead    { font-size: var(--text-lead); line-height: 1.45; letter-spacing: -.011em; }
+.t-body    { font-size: var(--text-body); line-height: var(--leading-body); }
+.t-small   { font-size: var(--text-small); line-height: 1.5; }
+.t-meta    { font-size: var(--text-meta); line-height: 1.5; font-variant-numeric: tabular-nums; color: var(--color-muted); }
+.t-muted   { color: var(--color-muted); }
+.t-num {
+  font-family: var(--font-display); font-weight: 300;
+  font-size: var(--text-num); line-height: 1; letter-spacing: -.04em;
+  font-variant-numeric: tabular-nums;
+}
+.label {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  font-size: var(--text-label); font-weight: 500; line-height: 1.2;
+  letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--color-muted);
+}
+.label--node::before {
+  content: ""; inline-size: var(--node-xs); block-size: var(--node-xs);
+  border-radius: var(--radius-node); background: var(--color-node); flex: none;
+}
+.label--strong { color: var(--color-text); }
+.measure { max-width: var(--measure); }
+
+/* The node as full stop. The real "." stays in the DOM for screen readers and copy/paste. */
+.stop {
+  display: inline-block; position: relative;
+  inline-size: .26em; color: transparent;
+}
+.stop::after {
+  content: ""; position: absolute; left: .02em; bottom: .015em;
+  inline-size: .19em; block-size: .19em; border-radius: var(--radius-node);
+  background: var(--color-text);
+}
+
+
+/* --------------------------------------------------------------------------
+   05 · PRIMITIVES — node, rest rule, rail, span, frame
+   -------------------------------------------------------------------------- */
+.node {
+  display: inline-block; flex: none;
+  inline-size: var(--node, var(--node-sm)); block-size: var(--node, var(--node-sm));
+  border-radius: var(--radius-node); background: var(--color-node);
+}
+.node--xs { --node: var(--node-xs); }
+.node--md { --node: var(--node-md); }
+.node--lg { --node: var(--node-lg); }
+.node--pending { background: var(--color-node-pending); }
+
+.rest-rule { position: relative; block-size: var(--node-sm); --rest-x: 0%; }
+.rest-rule::before {
+  content: ""; position: absolute; left: 0; right: 0; bottom: 0;
+  block-size: var(--line-hair); background: var(--color-border-strong);
+}
+.rest-rule::after {
+  content: ""; position: absolute; bottom: var(--line-hair); left: var(--rest-x);
+  inline-size: var(--node-sm); block-size: var(--node-sm);
+  border-radius: var(--radius-node); background: var(--color-node);
+}
+
+.span-svg { overflow: visible; color: var(--color-text); }
+.span-path {
+  fill: none; stroke: currentColor; stroke-width: var(--line-hair);
+  stroke-linecap: round;
+}
+.span-path--rule { stroke-width: var(--line-rule); }
+.span-path--faint { stroke: var(--color-border-strong); }
+.span-node { fill: currentColor; }
+.span-node--pending { fill: var(--color-faint); }
+
+/* Frame: hairline rectangle; the chrome's three dots are nodes (grey browser dots). */
+.frame {
+  position: relative; border: var(--line-hair) solid var(--color-border-strong);
+  background: var(--color-surface); overflow: hidden;
+}
+.frame__chrome {
+  position: relative; z-index: 1;
+  display: flex; align-items: center; gap: var(--space-3);
+  block-size: 2rem; padding-inline: var(--space-3);
+  border-bottom: var(--line-hair) solid var(--color-border-strong);
+  background: var(--color-bg);
+}
+.frame__dots { display: flex; gap: 5px; flex: none; }
+.frame__dots i {
+  inline-size: var(--node-xs); block-size: var(--node-xs);
+  border-radius: var(--radius-node); background: var(--color-faint);
+}
+.frame__url {
+  font-size: var(--text-meta); color: var(--color-muted); letter-spacing: .01em;
+  white-space: nowrap; overflow: hidden; text-overflow: ellipsis;
+}
+.frame__media { position: relative; aspect-ratio: var(--ratio, 16 / 10); max-width: 100%; overflow: hidden; background: var(--color-surface); }
+.frame__img, .frame__video { position: absolute; inset: 0; inline-size: 100%; block-size: 100%; object-fit: cover; object-position: top center; }
+.ratio-16x10 { --ratio: 16 / 10; }
+.ratio-4x5   { --ratio: 4 / 5; }
+.ratio-21x9  { --ratio: 21 / 9; }
+
+
+/* --------------------------------------------------------------------------
+   06 · CLIENT PLATES — placeholder compositions until real captures exist
+   (TODO.md T1). Built from each client's live copy and approximate colours,
+   exactly as the brand system's stand-ins. Sized in container units.
+   -------------------------------------------------------------------------- */
+.plate {
+  --s: 1;
+  position: absolute; inset: 0; container-type: inline-size;
+  display: flex; flex-direction: column;
+  padding: calc(5cqw * var(--s)) 6cqw; overflow: hidden;
+  background: var(--p-bg); color: var(--p-fg);
+  font-family: var(--font-body);
+}
+.plate__nav { display: flex; justify-content: space-between; align-items: center; gap: 2cqw; font-size: calc(2.1cqw * var(--s)); letter-spacing: .12em; text-transform: uppercase; }
+.plate__brand { font-family: var(--font-display); font-weight: 600; font-size: calc(2.8cqw * var(--s)); letter-spacing: .18em; }
+.plate__links { display: flex; gap: 3cqw; opacity: .75; }
+.plate__body { margin-top: auto; }
+.plate__eyebrow { font-size: calc(2cqw * var(--s)); letter-spacing: .2em; text-transform: uppercase; color: var(--p-accent); }
+.plate__title { margin-top: calc(2cqw * var(--s)); font-family: var(--font-display); font-weight: 600; font-size: calc(7.4cqw * var(--s)); line-height: .98; letter-spacing: -.035em; max-width: 13em; }
+.plate__cta { display: inline-block; margin-top: calc(4cqw * var(--s)); padding: calc(1.6cqw * var(--s)) calc(3cqw * var(--s)); border: 1px solid currentColor; font-size: calc(2cqw * var(--s)); letter-spacing: .14em; text-transform: uppercase; }
+.plate__ticker { display: flex; gap: 3cqw; font-size: calc(2.4cqw * var(--s)); letter-spacing: .14em; text-transform: uppercase; white-space: nowrap; color: var(--p-accent); margin-top: 4cqw; }
+.plate--tall { --s: 1.48; }
+.ratio-21x9 .plate { --s: .64; }
+.plate--mobile { --s: 2.1; }
+
+.plate--velmont { --p-bg: #F4F0EB; --p-fg: #1A1A18; --p-accent: #7A6C58; }
+.plate--possah  { --p-bg: #1B1517; --p-fg: #F3E9E4; --p-accent: #D3A194; }
+.plate--zingara { --p-bg: #F2EDE1; --p-fg: #20180F; --p-accent: #93652F; }
+.plate--fitness { --p-bg: #070707; --p-fg: #F2F2F0; --p-accent: #D6FF4B; }
+/* No captured colours for these two yet: a neutral monochrome stand-in. */
+.plate--neutral { --p-bg: #E8E4D9; --p-fg: #17181A; --p-accent: #5E5C56; }
+.plate--zingara .plate__title { letter-spacing: .06em; text-transform: uppercase; }
+.plate--fitness .plate__title { text-transform: uppercase; letter-spacing: -.02em; }
+
+
+/* --------------------------------------------------------------------------
+   07 · SHARED COMPONENTS
+   -------------------------------------------------------------------------- */
+
+/* Buttons — a node leads the label. Hover changes fill (static state change). */
+.btn {
+  --btn-node: var(--node-xs);
+  position: relative; display: inline-flex; align-items: center; gap: var(--space-3);
+  min-block-size: 3rem; padding: 0 var(--space-5);
+  font-size: var(--text-small); font-weight: 500; letter-spacing: .01em; line-height: 1;
+  border: var(--line-hair) solid var(--color-text);
+  background: var(--color-action-bg); color: var(--color-action-text);
+  transition: background var(--duration-fast) var(--ease-standard), color var(--duration-fast) var(--ease-standard), border-color var(--duration-fast) var(--ease-standard);
+  white-space: nowrap;
+}
+.btn::before {
+  content: ""; inline-size: var(--btn-node); block-size: var(--btn-node); flex: none;
+  border-radius: var(--radius-node); background: currentColor;
+}
+.btn:hover { background: transparent; color: var(--color-text); }
+.btn--ghost { background: transparent; color: var(--color-text); border-color: var(--color-border-strong); }
+.btn--ghost:hover { border-color: var(--color-text); background: var(--color-action-bg); color: var(--color-action-text); }
+.btn--sm { min-block-size: 2.25rem; padding-inline: var(--space-3); font-size: var(--text-meta); }
+.btn[disabled], .btn[aria-disabled="true"] { opacity: .45; cursor: not-allowed; }
+
+/* Links — a faint rail at rest, solid on hover (colour change only). */
+.link {
+  text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .28em;
+  text-decoration-color: var(--color-border-strong);
+  transition: text-decoration-color var(--duration-fast) var(--ease-standard);
+}
+.link:hover, .link:focus-visible { text-decoration-color: currentColor; }
+
+/* Margin note: a short hairline-boxed phrase at a slight angle. Max one per section. */
+.margin-note {
+  display: inline-block; padding: var(--space-1) var(--space-3);
+  border: var(--line-hair) solid var(--color-border-strong);
+  font-size: var(--text-small); font-weight: 500; line-height: 1.4; letter-spacing: -.005em;
+  color: var(--color-text); background: var(--color-bg);
+  transform: rotate(var(--tilt, -2.5deg)); transform-origin: left center;
+  white-space: nowrap;
+}
+
+/* File stamp: FILE 01 · LIVE */
+.file-stamp {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  padding: 3px var(--space-2); border: var(--line-hair) solid currentColor;
+  outline: var(--line-hair) solid currentColor; outline-offset: 2px;
+  font-size: var(--text-label); font-weight: 500; line-height: 1.3;
+  letter-spacing: var(--track-label); text-transform: uppercase; font-variant-numeric: tabular-nums;
+  color: var(--color-text); background: var(--color-bg); white-space: nowrap;
+}
+.file-stamp .node { --node: var(--node-xs); }
+.file-stamp[data-status="ready"] .node { background: var(--color-node-pending); }
+
+/* Lockup */
+.lockup { display: inline-flex; align-items: center; gap: .7em; font-family: var(--font-display); font-weight: 600; font-size: .9375rem; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
+.lockup__mark { display: block; inline-size: 2.05em; block-size: auto; aspect-ratio: 194 / 136; color: var(--color-text); flex: none; }
+.lockup__mark svg { inline-size: 100%; block-size: 100%; }
+
+/* Toggles (theme, motion) — state changes are instant. */
+.toggle {
+  display: inline-flex; align-items: center; gap: var(--space-2);
+  min-block-size: 2.25rem; padding-inline: var(--space-3);
+  border: var(--line-hair) solid var(--color-border-strong);
+  font-size: var(--text-meta); font-weight: 500; letter-spacing: .04em; color: var(--color-text);
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+.toggle:hover { border-color: var(--color-text); }
+.toggle__swatch { position: relative; inline-size: 1.75rem; block-size: .5rem; }
+.toggle__swatch i { position: absolute; top: 0; inline-size: .5rem; block-size: .5rem; border-radius: var(--radius-node); background: var(--color-text); }
+.toggle__swatch i:first-child { left: 0; }
+.toggle__swatch i:last-child { right: 0; opacity: .25; }
+:root[data-theme="dark"] .toggle--theme .toggle__swatch i:first-child { opacity: .25; }
+:root[data-theme="dark"] .toggle--theme .toggle__swatch i:last-child { opacity: 1; }
+.toggle--plain { border-color: transparent; padding-inline: 0; color: var(--color-muted); }
+.toggle--plain:hover { border-color: transparent; color: var(--color-text); }
+.toggle .node { --node: var(--node-xs); background: var(--color-faint); }
+.toggle[aria-pressed="true"] .node { background: var(--color-text); }
+.toggle[aria-pressed="true"] { color: var(--color-text); }
+
+/* Section intro: label with node, title, intro. */
+.section-intro { display: grid; gap: var(--space-5); }
+.section-intro__title { max-width: 18ch; }
+.section-intro__body { max-width: 36rem; color: var(--color-muted); }
+.section-intro__body p + p { margin-top: var(--space-3); }
+
+/* Cursor tag — follows the pointer with a slight lag; only over tagged targets. */
+.cursor-tag {
+  position: fixed; left: 0; top: 0; z-index: var(--z-cursor); pointer-events: none;
+  padding: 3px var(--space-2);
+  background: var(--color-ink); color: var(--color-cream);
+  outline: var(--line-hair) solid var(--color-cream);
+  font: 500 var(--text-label) / 1.3 var(--font-body); letter-spacing: var(--track-label); text-transform: uppercase;
+  white-space: nowrap; opacity: 0;
+  transition: opacity var(--duration-instant) var(--ease-standard);
+}
+.cursor-tag.is-on { opacity: 1; }
+
+/* Custom cursor — fine pointers only (set on <html> by cursor.ts). */
+html.has-cursor, html.has-cursor body { cursor: url("/assets/cursors/arrow.svg") 4 3, auto; }
+html.has-cursor :is(a[href], button:not([disabled]), summary, label[for], [role="button"], [role="tab"], select, input[type="checkbox"], input[type="radio"], input[type="range"]) { cursor: url("/assets/cursors/link.svg") 4 3, pointer; }
+html.has-cursor :is(input:not([type="checkbox"], [type="radio"], [type="range"], [type="submit"]), textarea) { cursor: text; }
+html.has-cursor [data-cursor="drag"] { cursor: url("/assets/cursors/drag.svg") 15 15, grab; }
+html.has-cursor [data-cursor="drag"]:active, html.has-cursor .is-dragging, html.has-cursor .is-dragging * { cursor: url("/assets/cursors/drag.svg") 15 15, grabbing; }
+
+
+/* --------------------------------------------------------------------------
+   10 · RESPONSIVE — 390 · 480 · 768 · 1024 · 1200 · 1440
+   -------------------------------------------------------------------------- */
+@media (min-width: 640px) {
+  :root { --text-hero: clamp(3.5rem, calc((100vw - 2 * var(--margin)) / 8.35), 10.5rem); }
+}
+@media (min-width: 768px) {
+  :root { --cols: 8; }
+}
+@media (min-width: 1024px) {
+  :root { --cols: 12; --text-body: 1.0625rem; --nav-h: 4.5rem; }
+}
+@media (min-width: 1440px) {
+  :root { --margin: max(4rem, (100vw - 1440px) / 2 + 4rem); }
+  .wrap { width: min(100% - 8rem, var(--page-max) - 8rem); }
+}
+
+
+/* --------------------------------------------------------------------------
+   11 · REDUCED MOTION — OS setting or the on-page toggle.
+   Nothing draws, the strip stops, pop-ups and rows simply appear.
+   -------------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  :root:not([data-motion="full"]) {
+    --duration-medium: 1ms; --duration-open: 1ms; --duration-slow: 1ms; --duration-draw: 1ms; --duration-signature: 1ms; --stagger: 0ms;
+  }
+}
+:root[data-motion="reduced"] {
+  --duration-medium: 1ms; --duration-open: 1ms; --duration-slow: 1ms; --duration-draw: 1ms; --duration-signature: 1ms; --stagger: 0ms;
+}
