@@ -540,7 +540,7 @@ html:has(dialog[open]) { overflow: hidden; }
 /* 01 Hero */
 .hero { padding-block: clamp(var(--space-6), 6vw, var(--space-9)) var(--section-space); }
 .hero__title .line { display: block; white-space: nowrap; }
-.hero__body { margin-top: clamp(var(--space-7), 6vw, var(--space-9)); row-gap: var(--space-9); align-items: end; }
+.hero__body { margin-top: clamp(var(--space-6), 4vw, var(--space-7)); row-gap: var(--space-8); align-items: end; }
 .hero__lead { max-width: 34rem; }
 .hero__sub { margin-top: var(--space-4); max-width: 34rem; color: var(--color-muted); }
 .hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
@@ -563,16 +563,19 @@ html:has(dialog[open]) { overflow: hidden; }
 .motion [data-hero-arc]:not(.is-live) :is([data-anchor], [data-rest], [data-lift-label]) { opacity: 0; }
 .lift.is-dragging .lift__tag--c { color: var(--color-text); }
 
-/* Stamp: a circular seal with the mark at the centre. Static. */
-.stamp {
-  position: absolute; right: 12%; top: calc(100% - 1.25rem);
-  inline-size: clamp(5.5rem, 9vw, 8rem); block-size: auto; overflow: visible;
-  color: var(--color-text); transform: rotate(-12deg);
+/* "Drag me": sits above the Grow node until the first drag. */
+.lift__hint {
+  position: absolute; left: 50%; top: 16.42%; transform: translate(-50%, calc(-100% - 1.1rem));
+  padding: 2px var(--space-2); border: var(--line-hair) solid var(--color-border-strong); background: var(--color-bg);
+  font-size: var(--text-label); font-weight: 500; letter-spacing: var(--track-label); text-transform: uppercase;
+  white-space: nowrap; pointer-events: none;
+  transition: opacity var(--duration-fast) var(--ease-standard);
 }
-.stamp__ring { fill: var(--color-bg); stroke: currentColor; stroke-width: 1; }
-.stamp__ring + .stamp__ring { fill: none; stroke: var(--color-border-strong); }
-.stamp__text { font-family: var(--font-body); font-size: 9.2px; font-weight: 500; letter-spacing: .1em; fill: currentColor; }
-.stamp use { color: var(--color-text); }
+.lift__hint.is-gone { opacity: 0; }
+/* The headline's full stops dim while their copies travel into the ARC. */
+.hero__title .stop::after { transition: opacity var(--duration-medium) var(--ease-standard); }
+.hero__title.is-lifting .stop::after { opacity: .18; }
+.hero__fly { position: fixed; left: 0; top: 0; z-index: 5; border-radius: var(--radius-node); background: var(--color-text); pointer-events: none; will-change: transform; }
 
 
 /* --------------------------------------------------------------------------
