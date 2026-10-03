@@ -87,3 +87,13 @@ Screenshots: `qa/05-elements/`.
 **Failed → fixed:** technical figure's "Build" label collided with the 2.0u dimension → dimension moved out; units no longer uppercased · on phones the chip connector crossed chips on the row between → chips now sit on an opaque ground above the line · html-validate flagged the shared checkbox name and `role="list"` on `<ol>` → both are intended; rules configured.
 
 Screenshots: `qa/06-approach-process-contact/`.
+
+## 2026-10-03 — Step 7.1–7.4: 404, privacy, SEO, analytics
+
+**Built:** 404 ("This page didn't land." + Back to home; the top node slides down the span's right side, leaves it, and hops back over the outside to rest on the apex — 1200ms, once, none when reduced). Privacy page (plain-language draft, TODO T10). `scripts/og.mjs` renders three 1200×630 OG images (Ink, mark + lockup, "Design. Build. Grow." with node stops, page label) and the icon set (favicon.ico 16+32, apple-touch-icon 180, 192/512 + maskable) from the untouched mark path. `sitemap.xml`, `robots.txt`, `site.webmanifest`, `scripts/set-domain.mjs`, `vercel.json` (no install/build, trailing slashes, cache + security headers), `.vercelignore` (dev files never deployed). Analytics consent banner (only when a GA4 ID is set), Cookie settings in the footer, Plausible switch.
+
+**Tested:** `scripts/qa/og.mjs` — every page has unique title/description, canonical, og:title/description/url/image/alt, `summary_large_image`; images are absolute, exist and are 1200×630; JSON-LD parses · analytics suite 11/11 (no tracker without an ID; banner; Allow → GA4 loads and `filter_used` reaches `dataLayer`; choice remembered; decline → nothing loads).
+
+**Failed → fixed:** the 404 hop back cut through the arch (a node crossing the span) → control point moved up and out · OG images rendered in a serif fallback (`setContent` on about:blank made the font requests cross-origin) → render from the dev server's origin · OG footer used my own wording → the plan's services line · OG headline touched the right margin → 122px.
+
+**Not verifiable here:** live preview in WhatsApp / LinkedIn / X debuggers needs a public URL (after deploy).

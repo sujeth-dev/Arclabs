@@ -256,6 +256,39 @@ const suites = {
     check("no errors", !errors.length, errors.join(" | "));
     await ctx.close();
   },
+
+  async analytics() {
+    console.log("analytics");
+    let { page, ctx, errors } = await open("/lab/");
+    check("no banner and no tracker without an ID", (await page.locator(".consent").count()) === 0 && await page.evaluate(() => !window.gtag && !window.plausible));
+    await ctx.close();
+    for (const choice of ["granted", "denied"]) {
+      ctx = await browser.newContext({ viewport: { width: 1280, height: 800 } });
+      page = await ctx.newPage(); errors = watch(page, base);
+      let gtagLoaded = false;
+      await page.route("**/js/config.js", async (route) => {
+        const res = await route.fetch(); const body = (await res.text()).replace('ga4Id: ""', 'ga4Id: "G-TEST123"');
+        route.fulfill({ response: res, body, headers: { ...res.headers(), "content-type": "text/javascript" } });
+      });
+      await page.route("https://www.googletagmanager.com/**", (r) => { gtagLoaded = true; r.fulfill({ status: 200, contentType: "text/javascript", body: "" }); });
+      await page.goto(base + "/lab/", { waitUntil: "networkidle" });
+      check(`banner shown before consent (${choice})`, (await page.locator(".consent").count()) === 1);
+      check("Cookie settings revealed in footer", await page.locator("[data-consent-open]").isVisible());
+      await page.locator(`.consent [data-consent="${choice}"]`).click();
+      await page.waitForTimeout(300);
+      if (choice === "granted") {
+        check("Allow → GA4 loads", gtagLoaded);
+        await page.locator('.filter__btn[data-filter="Food"]').click();
+        check("filter_used reaches dataLayer", await page.evaluate(() => window.dataLayer.some((a) => a[0] === "event" && a[1] === "filter_used")));
+        await page.reload({ waitUntil: "networkidle" });
+        check("choice remembered (no banner)", (await page.locator(".consent").count()) === 0);
+      } else {
+        check("No thanks → GA4 not loaded", !gtagLoaded && await page.evaluate(() => !window.gtag));
+      }
+      check("no errors", !errors.length, errors.join(" | "));
+      await ctx.close();
+    }
+  },
 };
 
 for (const [name, fn] of Object.entries(suites)) {

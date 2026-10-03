@@ -127,8 +127,8 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 ### Step 7 — 404, privacy, SEO, analytics, QA
 - [x] **7.1** 404: "This page didn't land." + Back to home; node slips off and hops back (1200ms).
 - [x] **7.2** Privacy page (draft, flagged for review).
-- [ ] **7.3** SEO: titles/descriptions, canonical, OG + `summary_large_image`, 1200×630 OG images (Ink, "Design. Build. Grow.", mark), JSON-LD, sitemap, robots, favicon set, manifest.
-- [ ] **7.4** Analytics: consent banner, GA4 loader (Plausible switch), four events.
+- [x] **7.3** SEO: titles/descriptions, canonical, OG + `summary_large_image`, 1200×630 OG images (Ink, "Design. Build. Grow.", mark), JSON-LD, sitemap, robots, favicon set, manifest.
+- [x] **7.4** Analytics: consent banner, GA4 loader (Plausible switch), four events.
 - [ ] **7.5** Deploy prep: `vercel.json`, `.vercelignore`, README.
 - [ ] **7.6** Full QA: Lighthouse mobile (/, /lab, /elements), axe, reduced-motion + Ink screenshots, 6 widths, link check, JS budget, html-validate, tokens. Fix and re-run.
 - [ ] **7.7** Client media capture + processing (blocked: network — TODO T1).

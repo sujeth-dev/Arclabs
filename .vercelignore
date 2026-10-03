@@ -1,0 +1,8 @@
+# Dev-only files: never deployed.
+node_modules
+scripts
+qa
+package.json
+package-lock.json
+*.md
+.env*
