@@ -236,11 +236,10 @@ const suites = {
     await page.fill("#f-name", "Test Person"); await page.fill("#f-email", "not-an-email");
     await page.locator('.form button[type="submit"]').click();
     check("bad email: error + focus", await page.evaluate(() => !document.getElementById("f-email-err").hidden && document.activeElement.id === "f-email"));
-    // copy
-    await ctx.grantPermissions(["clipboard-read", "clipboard-write"]);
-    await page.locator('.direct__item[data-copy="arclabs.tech@gmail.com"]').click();
-    check("email copies", (await page.evaluate(() => navigator.clipboard.readText())) === "arclabs.tech@gmail.com");
-    check("copy shows Copied", (await page.locator('.direct__item[data-copy="arclabs.tech@gmail.com"] [data-copy-label]').textContent()) === "Copied");
+    // direct contact: email opens mail with the form so far, phone dials
+    const mail = await page.evaluate(() => { const a = document.querySelector(".direct a[data-mailto]"); a.dispatchEvent(new Event("focus")); return decodeURIComponent(a.href); });
+    check("email opens mail with the form so far", mail.startsWith("mailto:arclabs.tech@gmail.com?subject=Project enquiry: Test Person") && mail.includes("Name: Test Person") && mail.includes("I'd like to talk about a project."));
+    check("phone dials", (await page.locator('.direct a[href="tel:+918088506783"]').count()) === 1);
     check("WhatsApp link", (await page.locator('a[href="https://wa.me/918088506783"]').count()) >= 1);
     check("no errors", !errors.length, errors.join(" | "));
     await ctx.close();

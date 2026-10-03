@@ -32,4 +32,5 @@ Choices not covered by the plan, and why.
 | D26 | Approach uses the annotated website plan (chosen over the measured mark on review). It draws with CSS only once 10% is on screen; callouts finish ~1.5s after. | Requested in the revision, "with good loading". |
 | D27 | Phones (≤767px) default to Ink; desktop defaults to Cream; /elements defaults to Ink everywhere. A stored choice always wins. The Ink switch stays in the phone menu, not the phone header. | Requested in the revision. |
 | D28 | Motion is on by default on every device, including when the OS asks for reduced motion; only the on-page "Reduce motion" switch (footer and menu) turns it off. | Requested in the revision. Note: this no longer follows the OS setting (WCAG 2.3.3, level AAA; AA is still met because nothing flashes and the switch is on every page). |
+| D29 | Contact "Talk to us directly": Email opens the mail app with a ready-to-send enquiry (anything already typed in the form is filled in, blanks for the rest); Phone opens the dialler. They no longer copy to the clipboard. | Requested in the revision. |
 

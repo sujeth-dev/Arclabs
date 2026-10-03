@@ -92,13 +92,30 @@ function done() {
   doneEl.focus();
 }
 
-function mailtoFallback(data) {
+// A ready-to-send email: whatever the form already holds, blanks for the rest.
+function mailtoHref(data) {
+  const v = (k) => String(data.get(k) || "").trim();
+  const needs = data.getAll("need").map((s) => elements.find((e) => e.slug === s)?.name).filter(Boolean).join(", ");
   const lines = [
-    `Name: ${data.get("name")}`, `Business: ${data.get("business") || "-"}`, `Email: ${data.get("email")}`,
-    `Phone: ${data.get("phone") || "-"}`, `What I need: ${data.getAll("need").map((s) => elements.find((e) => e.slug === s)?.name).join(", ") || "-"}`,
-    `Budget: ${data.get("budget") || "-"}`, "", String(data.get("message") || ""),
+    "Hi ARC Labs,", "", "I'd like to talk about a project.", "",
+    `Name: ${v("name")}`, `Business: ${v("business")}`, `Email: ${v("email")}`, `Phone: ${v("phone")}`,
+    `What I need: ${needs}`, `Budget: ${v("budget")}`,
+    ...(v("message") ? ["", v("message")] : []),
+    "", "Thanks,",
   ];
-  location.href = `mailto:${contact.email}?subject=${encodeURIComponent(`Project enquiry: ${data.get("name")}`)}&body=${encodeURIComponent(lines.join("\n"))}`;
+  const subject = v("name") ? `Project enquiry: ${v("name")}` : "Project enquiry";
+  return `mailto:${contact.email}?subject=${encodeURIComponent(subject)}&body=${encodeURIComponent(lines.join("\n"))}`;
+}
+function mailtoFallback(data) { location.href = mailtoHref(data); }
+
+/* ---------- Email in "Talk to us directly": opens mail with the form so far -- */
+function initDirectEmail() {
+  const a = document.querySelector("[data-mailto]");
+  if (!a) return;
+  const refresh = () => { a.href = mailtoHref(new FormData(form)); };
+  a.addEventListener("pointerdown", refresh);
+  a.addEventListener("focus", refresh);
+  a.addEventListener("click", refresh);
 }
 
 function initSubmit() {
@@ -143,4 +160,5 @@ if (form) {
   initChips();
   initTurnstile();
   initSubmit();
+  initDirectEmail();
 }
