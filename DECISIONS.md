@@ -38,4 +38,5 @@ Choices not covered by the plan, and why.
 | D32 | Approach plan lines no longer use non-scaling strokes. | Chrome applies the dash draw-in in screen units with them, so the frame's left side never finished drawing on larger screens. |
 | D33 | "Replies from a real person." removed from Contact. | Requested. |
 | D34 | The phone menu follows the page's colours (Ink by default) instead of always being Ink. | Requested: switching Ink/Cream inside an always-Ink menu showed no change and read as broken. |
+| D35 | The mark is drawn with `overflow: visible` (its `<symbol>`, every `<svg>` that uses it, and the share-image/icon generator). The logo path and `assets/logo-mark.svg` are unchanged. | Its round nodes touch the edge of the 6 6 194 136 viewBox, so browsers shaved them flat, most visibly in the header. |
 

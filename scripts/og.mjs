@@ -7,7 +7,7 @@ import { start } from "./qa/lib.mjs";
 
 const svg = await readFile("assets/logo-mark.svg", "utf8");
 const d = svg.match(/ d="([^"]+)"/)[1];
-const mark = (fill) => `<svg viewBox="6 6 194 136" xmlns="http://www.w3.org/2000/svg"><path fill="${fill}" d="${d}"/></svg>`;
+const mark = (fill) => `<svg viewBox="6 6 194 136" overflow="visible" xmlns="http://www.w3.org/2000/svg"><path fill="${fill}" d="${d}"/></svg>`;
 const INK = "#17181A", CREAM = "#F1EEE5", MUTED = "#A6A49D", LINE = "#33343A";
 
 const { browser, base, stop } = await start(4393);

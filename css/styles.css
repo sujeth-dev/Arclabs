@@ -388,6 +388,8 @@ input, textarea, select { font: inherit; color: inherit; }
 .lockup { display: inline-flex; align-items: center; gap: .7em; font-family: var(--font-display); font-weight: 600; font-size: .9375rem; letter-spacing: .2em; text-transform: uppercase; white-space: nowrap; }
 .lockup__mark { display: block; inline-size: 2.05em; block-size: auto; aspect-ratio: 194 / 136; color: var(--color-text); flex: none; }
 .lockup__mark svg { inline-size: 100%; block-size: 100%; }
+/* The mark's round nodes touch its viewBox edge: never clip them, wherever it is used. */
+svg:has(> use[href="#arc-mark"]) { overflow: visible; }
 
 /* Toggles (theme, motion) — state changes are instant. */
 .toggle {
