@@ -7,3 +7,4 @@ dist/
 !.env.example
 qa/**/*.tmp
 media/_raw/
+scripts/qa/_*.mjs
