@@ -10,7 +10,8 @@ function check(name, cond, info = "") {
   else { fail++; console.log(`  FAIL ${name} ${info}`); }
 }
 async function open(path, { width = 1440, height = 900, touch = false, reduced = false } = {}) {
-  const ctx = await browser.newContext({ viewport: { width, height }, hasTouch: touch, reducedMotion: reduced ? "reduce" : "no-preference" });
+  const ctx = await browser.newContext({ viewport: { width, height }, hasTouch: touch });
+  if (reduced) await ctx.addInitScript(() => localStorage.setItem("arc-motion", "reduced"));
   const page = await ctx.newPage();
   const errors = watch(page, base);
   await page.goto(base + path, { waitUntil: "networkidle" });

@@ -15,8 +15,9 @@ const states = [
 const results = []; let total = 0;
 for (const theme of ["cream", "ink"]) {
   for (const s of states) {
-    const ctx = await browser.newContext({ viewport: { width: s.width || 1280, height: 900 }, reducedMotion: "reduce" });
-    if (theme === "ink") await ctx.addInitScript(() => localStorage.setItem("arc-theme", "dark"));
+    const ctx = await browser.newContext({ viewport: { width: s.width || 1280, height: 900 }, });
+    // Motion off so axe sees settled pages; Cream/Ink set explicitly (phones default to Ink).
+    await ctx.addInitScript((t) => { localStorage.setItem("arc-motion", "reduced"); localStorage.setItem("arc-theme", t); }, theme === "ink" ? "dark" : "light");
     const page = await ctx.newPage();
     await page.goto(base + s.path, { waitUntil: "networkidle" });
     if (s.act) await s.act(page);

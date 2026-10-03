@@ -1,8 +1,8 @@
 /* ==========================================================================
    home.js — Home only: hero ARC (draw once + draggable Grow node),
-   Approach technical ARC and Process line (each draws once in view).
+   Approach website plan and Process line (each draws once in view).
    ========================================================================== */
-import { signature, spanPath, spanPathTo, restCenter, reduced, draw, pop, ms, ease, onceInView, store } from "./arc.js";
+import { signature, spanPath, spanPathTo, restCenter, reduced, draw, ms, ease, onceInView, store } from "./arc.js";
 
 /* ---------- 01 · Hero ARC ------------------------------------------------- */
 // Geometry matches the prototype: anchors at x 32 / 608 on y 272, node r 8,
@@ -167,19 +167,10 @@ function hideHint(fig) {
   store.set("arc-dragged", "1");
 }
 
-/* ---------- 04 · Approach: the measured ARC draws once in view (700ms) ---- */
+/* ---------- 04 · Approach: the website plan draws once in view ---------- */
 function initApproach() {
-  const fig = document.querySelector("[data-tech]");
-  if (!fig) return;
-  onceInView(fig, () => {
-    // Shown first: if an animation cannot run, the drawing is still there.
-    fig.classList.add("is-live");
-    const dur = ms("--duration-slow", 700);
-    try {
-      fig.querySelectorAll("[data-pop]").forEach((n, i) => pop(n, { delay: i === 2 ? dur : i * 90, duration: 380 }));
-      fig.querySelectorAll("[data-draw]").forEach((p) => draw(p, { delay: 120, duration: dur }));
-    } catch { /* drawing already visible */ }
-  });
+  const fig = document.querySelector("[data-plan]");
+  if (fig) onceInView(fig, () => fig.classList.add("is-live"));   // CSS draws it; one class, nothing to fail
 }
 
 /* ---------- 05 · Process: one thin line draws once in view (700ms) -------- */

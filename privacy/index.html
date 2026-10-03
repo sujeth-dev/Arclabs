@@ -27,7 +27,7 @@
 <link rel="preload" href="/assets/fonts/inter-display-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/styles.css">
-<script>(function(d){var m;try{var t=localStorage.getItem("arc-theme")||d.dataset.defaultTheme;if(t==="dark"||t==="light")d.dataset.theme=t;m=localStorage.getItem("arc-motion");if(m==="reduced"||m==="full")d.dataset.motion=m}catch(e){}if(m!=="reduced"&&(m==="full"||!matchMedia("(prefers-reduced-motion: reduce)").matches))d.classList.add("motion")})(document.documentElement)</script>
+<script>(function(d){var m;try{var t=localStorage.getItem("arc-theme")||d.dataset.defaultTheme||(matchMedia("(max-width: 767px)").matches?"dark":"");if(t==="dark"||t==="light")d.dataset.theme=t;m=localStorage.getItem("arc-motion");if(m==="reduced"||m==="full")d.dataset.motion=m}catch(e){}if(m!=="reduced")d.classList.add("motion")})(document.documentElement)</script>
 <script type="module" src="/js/main.js"></script>
 </head>
 <body>

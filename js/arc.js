@@ -16,7 +16,6 @@
    ========================================================================== */
 
 const root = document.documentElement;
-const mqReduce = window.matchMedia("(prefers-reduced-motion: reduce)");
 
 /* ---------- tokens read from CSS so JS and CSS never disagree ------------ */
 export function token(name, fallback = "") {
@@ -36,10 +35,10 @@ export const ease = {
   standard: () => token("--ease-standard", "cubic-bezier(.45,0,.25,1)"),
 };
 
+// Motion is on by default (phones and desktop alike); only the on-page
+// "Reduce motion" switch turns it off.
 export function reduced() {
-  if (root.dataset.motion === "reduced") return true;
-  if (root.dataset.motion === "full") return false;
-  return mqReduce.matches;
+  return root.dataset.motion === "reduced";
 }
 
 /* ---------- geometry ------------------------------------------------------ */

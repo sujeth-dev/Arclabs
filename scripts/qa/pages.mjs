@@ -15,8 +15,9 @@ const { browser, base, stop } = await start();
 const results = [];
 let failed = 0;
 for (const w of widths) {
-  const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 844 : 900 }, reducedMotion: reducedMotion ? "reduce" : "no-preference", hasTouch: w < 768, isMobile: false });
+  const ctx = await browser.newContext({ viewport: { width: w, height: w < 768 ? 844 : 900 }, hasTouch: w < 768, isMobile: false });
   if (ink) await ctx.addInitScript(() => { try { localStorage.setItem("arc-theme", "dark"); } catch {} });
+  if (reducedMotion) await ctx.addInitScript(() => { try { localStorage.setItem("arc-motion", "reduced"); } catch {} });
   for (const p of PAGES) {
     const page = await ctx.newPage();
     const errors = watch(page, base);
@@ -29,7 +30,7 @@ for (const w of widths) {
       await new Promise((r) => setTimeout(r, 2600));
       scrollTo(0, 0);
     });
-    const pending = await page.evaluate(() => [...document.querySelectorAll("[data-tech], [data-process], [data-hero-arc]")].filter((el) => !el.classList.contains("is-live")).map((el) => el.className));
+    const pending = await page.evaluate(() => [...document.querySelectorAll("[data-plan], [data-process], [data-hero-arc]")].filter((el) => !el.classList.contains("is-live")).map((el) => el.className));
     if (pending.length) errors.push(`not drawn after scrolling: ${pending.join(", ")}`);
     const of = await overflow(page);
     if (shots) await page.screenshot({ path: `${dir}/${p.name}-${w}${suffix}.jpg`, fullPage: true, type: "jpeg", quality: 55 });

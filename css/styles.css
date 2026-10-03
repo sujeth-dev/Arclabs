@@ -922,14 +922,25 @@ html:has(dialog[open]) { overflow: hidden; }
 .approach__lines .label { margin-bottom: var(--space-2); }
 .approach__list { color: var(--color-muted); }
 .approach__sub { margin-top: var(--space-6); font-weight: 600; }
-.tech__svg { inline-size: 100%; block-size: auto; overflow: visible; color: var(--color-text); }
-.tech__dim path { fill: none; stroke: var(--color-muted); stroke-width: 1; vector-effect: non-scaling-stroke; }
-.tech__dim .tech__guide { stroke: var(--color-border); stroke-dasharray: 3 4; }
-.tech__text text { font-family: var(--font-body); font-size: 10px; font-weight: 500; letter-spacing: .12em; text-transform: uppercase; fill: var(--color-muted); }
-.tech__text .tech__unit { text-transform: none; letter-spacing: .04em; font-variant-numeric: tabular-nums; }
-.motion .tech:not(.is-live) [data-draw] { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
-.motion .tech:not(.is-live) :is([data-pop], .tech__text, .tech__dim) { opacity: 0; }
-.tech__text, .tech__dim { transition: opacity var(--duration-slow) var(--ease-standard) var(--duration-medium); }
+/* Approach: a website plan; each callout names what that part of the page carries. */
+.plan__svg { inline-size: 100%; block-size: auto; overflow: visible; color: var(--color-text); }
+.plan__line, .plan__leader { fill: none; stroke: var(--color-text); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.plan__guide { fill: none; stroke: var(--color-border-strong); stroke-width: 1; stroke-dasharray: 3 4; vector-effect: non-scaling-stroke; }
+.plan__dot { fill: var(--color-faint); }
+.plan__strong { fill: var(--color-text); }
+.plan__soft { fill: var(--color-border-strong); }
+.plan__fill { fill: var(--color-surface); stroke: var(--color-border-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.plan__box { fill: none; stroke: var(--color-border-strong); stroke-width: 1; vector-effect: non-scaling-stroke; }
+.plan__node { fill: var(--color-node); }
+.plan__call text { font-family: var(--font-body); font-size: 11px; font-weight: 500; letter-spacing: .1em; text-transform: uppercase; fill: var(--color-text); }
+.plan__num { fill: var(--color-muted); font-variant-numeric: tabular-nums; }
+/* Draws once in view: the frame, then the page parts, then the callouts in order. */
+.plan__line { stroke-dasharray: 1 1; transition: stroke-dashoffset var(--duration-draw) var(--ease-span); }
+.plan__blocks { transition: opacity var(--duration-slow) var(--ease-standard) 300ms; }
+.plan__leader { stroke-dasharray: 1 1; transition: stroke-dashoffset var(--duration-medium) var(--ease-span) calc(800ms + var(--i) * 130ms); }
+.plan__call :is(text, .plan__node) { transition: opacity var(--duration-medium) var(--ease-standard) calc(800ms + var(--i) * 130ms); }
+.motion .plan:not(.is-live) :is(.plan__line, .plan__leader) { stroke-dashoffset: 1; }
+.motion .plan:not(.is-live) :is(.plan__blocks, .plan__call text, .plan__node) { opacity: 0; }
 .approach__studio { margin-top: var(--section-space); row-gap: var(--space-7); }
 .approach__studio-intro { display: grid; gap: var(--space-3); max-width: 36rem; }
 .approach__studio-intro strong { font-weight: 500; }
@@ -1096,14 +1107,9 @@ html:has(dialog[open]) { overflow: hidden; }
 
 
 /* --------------------------------------------------------------------------
-   11 · REDUCED MOTION — OS setting or the on-page toggle.
+   11 · REDUCED MOTION — the on-page "Reduce motion" switch.
    Nothing draws, the strip stops, pop-ups and rows simply appear.
    -------------------------------------------------------------------------- */
-@media (prefers-reduced-motion: reduce) {
-  :root:not([data-motion="full"]) {
-    --duration-medium: 1ms; --duration-open: 1ms; --duration-slow: 1ms; --duration-draw: 1ms;
-  }
-}
 :root[data-motion="reduced"] {
   --duration-medium: 1ms; --duration-open: 1ms; --duration-slow: 1ms; --duration-draw: 1ms;
 }

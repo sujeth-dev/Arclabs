@@ -27,7 +27,7 @@
 <link rel="preload" href="/assets/fonts/inter-display-600.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="preload" href="/assets/fonts/inter-400.woff2" as="font" type="font/woff2" crossorigin>
 <link rel="stylesheet" href="/css/styles.css">
-<script>(function(d){var m;try{var t=localStorage.getItem("arc-theme")||d.dataset.defaultTheme;if(t==="dark"||t==="light")d.dataset.theme=t;m=localStorage.getItem("arc-motion");if(m==="reduced"||m==="full")d.dataset.motion=m}catch(e){}if(m!=="reduced"&&(m==="full"||!matchMedia("(prefers-reduced-motion: reduce)").matches))d.classList.add("motion")})(document.documentElement)</script>
+<script>(function(d){var m;try{var t=localStorage.getItem("arc-theme")||d.dataset.defaultTheme||(matchMedia("(max-width: 767px)").matches?"dark":"");if(t==="dark"||t==="light")d.dataset.theme=t;m=localStorage.getItem("arc-motion");if(m==="reduced"||m==="full")d.dataset.motion=m}catch(e){}if(m!=="reduced")d.classList.add("motion")})(document.documentElement)</script>
 <script type="module" src="/js/main.js"></script>
 <script type="module" src="/js/lab.js"></script>
 <script type="module" src="/js/home.js"></script>
@@ -203,27 +203,29 @@
           <p class="t-muted">Design gives the idea its shape. Build makes it real. Grow extends what is already working.</p>
           <p class="t-muted">Connect the right two things properly, and something stronger rises on top.</p>
         </div>
-        <figure class="approach__fig tech" data-tech>
-            <svg class="tech__svg" viewBox="0 0 400 290" aria-hidden="true" focusable="false">
-              <g class="tech__dim">
-                <path d="M134 248 H266"/><path d="M134 241 V255 M266 241 V255"/>
-                <path d="M336 200 V120"/><path d="M329 200 H343 M329 120 H343"/>
-                <path d="M114 234 V244 M154 234 V244"/><path d="M114 239 H154"/>
-                <path class="tech__guide" d="M134 200 H343 M200 120 H343 M134 170 V260 M266 170 V260 M200 80 V220"/>
+        <figure class="approach__fig plan" data-plan>
+            <svg class="plan__svg" viewBox="0 0 424 300" aria-hidden="true" focusable="false">
+              <g class="plan__frame">
+                <path class="plan__line" pathLength="1" d="M20 16 H270 V284 H20 Z"/>
+                <path class="plan__line" pathLength="1" d="M20 30 H270"/>
+                <path class="plan__guide" d="M20 58 H270 M20 130 H270 M20 200 H270 M20 246 H270"/>
+                <circle class="plan__dot" cx="29" cy="23" r="1.8"/><circle class="plan__dot" cx="36" cy="23" r="1.8"/><circle class="plan__dot" cx="43" cy="23" r="1.8"/>
               </g>
-              <path class="span-path tech__span" pathLength="1" data-draw d="M154 200 A 46 53.6 0 0 1 246 200" style="stroke-width:12.8px;stroke-linecap:butt"/>
-              <circle class="span-node" data-pop cx="134" cy="200" r="20"/><circle class="span-node" data-pop cx="266" cy="200" r="20"/>
-              <circle class="span-node" data-pop cx="200" cy="120" r="20"/>
-              <g class="tech__text">
-                <text class="tech__unit" x="200" y="272" text-anchor="middle">3.3u</text>
-                <text class="tech__unit" x="350" y="164">2.0u</text>
-                <text class="tech__unit" x="134" y="262" text-anchor="middle">1u</text>
-                <text x="106" y="204" text-anchor="end">Design</text>
-                <text x="294" y="190">Build</text>
-                <text x="172" y="124" text-anchor="end">Grow</text>
+              <g class="plan__blocks">
+                <rect class="plan__strong" x="32" y="40" width="34" height="8"/><rect class="plan__soft" x="190" y="42" width="18" height="4"/><rect class="plan__soft" x="214" y="42" width="18" height="4"/><rect class="plan__soft" x="238" y="42" width="18" height="4"/>
+                <rect class="plan__strong" x="32" y="72" width="150" height="12"/><rect class="plan__strong" x="32" y="90" width="110" height="12"/><rect class="plan__strong" x="32" y="110" width="40" height="11"/>
+                <rect class="plan__box" x="32" y="142" width="70" height="46"/><rect class="plan__box" x="110" y="142" width="70" height="46"/><rect class="plan__box" x="188" y="142" width="70" height="46"/>
+                <rect class="plan__soft" x="40" y="174" width="40" height="4"/><rect class="plan__soft" x="118" y="174" width="40" height="4"/><rect class="plan__soft" x="196" y="174" width="40" height="4"/>
+                <rect class="plan__fill" x="32" y="210" width="50" height="26"/><rect class="plan__fill" x="90" y="210" width="50" height="26"/><rect class="plan__fill" x="148" y="210" width="50" height="26"/><rect class="plan__fill" x="206" y="210" width="52" height="26"/>
+                <rect class="plan__soft" x="32" y="262" width="120" height="5"/><rect class="plan__strong" x="206" y="256" width="52" height="16"/>
               </g>
+              <g class="plan__call" style="--i:0"><circle class="plan__node" cx="270" cy="44" r="3.2"/><path class="plan__leader" pathLength="1" d="M273 44 H300"/><text x="306" y="47.5"><tspan class="plan__num">01</tspan> Brand</text></g>
+              <g class="plan__call" style="--i:1"><circle class="plan__node" cx="270" cy="94" r="3.2"/><path class="plan__leader" pathLength="1" d="M273 94 H300"/><text x="306" y="97.5"><tspan class="plan__num">02</tspan> Offer</text></g>
+              <g class="plan__call" style="--i:2"><circle class="plan__node" cx="270" cy="165" r="3.2"/><path class="plan__leader" pathLength="1" d="M273 165 H300"/><text x="306" y="168.5"><tspan class="plan__num">03</tspan> Customers</text></g>
+              <g class="plan__call" style="--i:3"><circle class="plan__node" cx="270" cy="223" r="3.2"/><path class="plan__leader" pathLength="1" d="M273 223 H300"/><text x="306" y="226.5"><tspan class="plan__num">04</tspan> Credibility</text></g>
+              <g class="plan__call" style="--i:4"><circle class="plan__node" cx="270" cy="265" r="3.2"/><path class="plan__leader" pathLength="1" d="M273 265 H300"/><text x="306" y="268.5"><tspan class="plan__num">05</tspan> Next sale</text></g>
             </svg>
-          <figcaption class="visually-hidden">The ARC mark as a measured drawing: two anchors, Design and Build, 3.3 node-widths apart, joined by a span; Grow rests on top, 2 node-widths above them.</figcaption>
+          <figcaption class="visually-hidden">A website plan with five callouts: your brand sits in the header, your offer in the opening section, your customers in the content, your credibility in the work, and your next sale in the enquiry button.</figcaption>
         </figure>
       </div>
       <div class="approach__studio grid">
