@@ -157,3 +157,10 @@ Tested:
 - JS: 7.8–22.2KB gz per page. Internal links pass; external links 403 from this environment's proxy.
 - "Elements row numbers flush left" turned out to be a screenshot crop; no change needed.
 
+## 2026-10-03 — Revision follow-ups
+
+- Approach: the measured mark is back (the website plan was reverted on review). It now always appears: 10% in-view threshold, visible before animating, and Home's sections start independently (D25). Checked with wheel scrolling at 1440 and 390.
+- Hero → Lab gap reduced (hero bottom padding 2rem; Lab preview top padding up to 6rem).
+- /elements: Ink switch shown; defaults to Ink, can switch to Cream (D24). axe 0 violations in both.
+- check ✓ · keyboard/behaviour 104/104 · axe 0.
+

@@ -183,14 +183,14 @@ export function loop(svg) {
 /* ---------- once in view -------------------------------------------------- */
 // Runs cb once, the first time el is in view. Content already on screen at load
 // (or anything the reader jumps past) runs immediately, so nothing stays hidden.
-export function onceInView(el, cb, { threshold = 0.25 } = {}) {
+export function onceInView(el, cb, { threshold = 0.1, rootMargin = "0px 0px -8% 0px" } = {}) {
   if (!el) return;
   if (!("IntersectionObserver" in window)) { cb(); return; }
   const io = new IntersectionObserver((entries) => {
     for (const e of entries) {
       if (e.isIntersecting || e.boundingClientRect.bottom < 0) { io.disconnect(); cb(); }
     }
-  }, { threshold });
+  }, { threshold, rootMargin });
   io.observe(el);
 }
 

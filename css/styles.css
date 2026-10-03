@@ -141,7 +141,6 @@
 .ink, :root.ink[data-theme] { color-scheme: dark; }
 .ink { background: var(--color-bg); color: var(--color-text); }
 /* An always-Ink page has nothing for the theme toggle to change (DECISIONS D6). */
-:root.ink .toggle--theme { display: none; }
 /* Client work keeps its own colours whatever the theme. */
 
 

@@ -172,10 +172,13 @@ function initApproach() {
   const fig = document.querySelector("[data-tech]");
   if (!fig) return;
   onceInView(fig, () => {
-    const dur = ms("--duration-slow", 700);
-    fig.querySelectorAll("[data-pop]").forEach((n, i) => pop(n, { delay: i === 2 ? dur : i * 90, duration: 380 }));
-    fig.querySelectorAll("[data-draw]").forEach((p) => draw(p, { delay: 200, duration: dur }));
+    // Shown first: if an animation cannot run, the drawing is still there.
     fig.classList.add("is-live");
+    const dur = ms("--duration-slow", 700);
+    try {
+      fig.querySelectorAll("[data-pop]").forEach((n, i) => pop(n, { delay: i === 2 ? dur : i * 90, duration: 380 }));
+      fig.querySelectorAll("[data-draw]").forEach((p) => draw(p, { delay: 120, duration: dur }));
+    } catch { /* drawing already visible */ }
   });
 }
 
@@ -185,6 +188,7 @@ function initProcess() {
   if (el) onceInView(el, () => el.classList.add("is-live"));
 }
 
-initHero();
-initApproach();
-initProcess();
+// Each part starts on its own, so one failing can never leave another undrawn.
+for (const init of [initApproach, initProcess, initHero]) {
+  try { init(); } catch (err) { console.error(err); }
+}
