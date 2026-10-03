@@ -130,3 +130,7 @@ Screenshots: `qa/06-approach-process-contact/`.
 - Lighthouse first run: Perf 96–97, LCP 2.3–2.4s, flagged document latency — the dev server sent uncompressed files. Added gzip (as Vercel does): Perf 99–100, LCP 1.5–1.7s. Remaining hints are "unminified CSS/JS" (no build step, by design) and the single render-blocking stylesheet.
 - Link checker read `theme-color` values as anchors and treated the 404 page's own 404 as broken → fixed in the checker.
 - 8 unused brand tokens removed from the shipped CSS (D16).
+
+## 2026-10-03 — Stop point
+
+Steps 1–7.6 complete and pushed. Blocked, with next steps in TODO.md: 7.7 client media capture (network policy blocks the client sites) and 7.8 deploy + live verification (no Vercel credentials).
