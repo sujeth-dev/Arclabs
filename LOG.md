@@ -97,3 +97,13 @@ Screenshots: `qa/06-approach-process-contact/`.
 **Failed → fixed:** the 404 hop back cut through the arch (a node crossing the span) → control point moved up and out · OG images rendered in a serif fallback (`setContent` on about:blank made the font requests cross-origin) → render from the dev server's origin · OG footer used my own wording → the plan's services line · OG headline touched the right margin → 122px.
 
 **Not verifiable here:** live preview in WhatsApp / LinkedIn / X debuggers needs a public URL (after deploy).
+
+## 2026-10-03 — Step 7.5: deploy prep + media pipeline
+
+**Built:** README (setup, config, adding a project/element, replacing media, share images, QA, deploying). `scripts/media/capture.mjs` (status check, fonts/images settled, pop-ups dismissed, desktop/mobile viewport + full page, ~11s smooth-scroll recording). `scripts/media/process.mjs` (AVIF + WebP 1x/2x with the top kept in frame; MP4 H.264 + WebM VP9, muted, no audio, ≤ 1.5MB with CRF stepping; poster from 1s; wires `data/content.js`, the Lab cards and File 01's poster preload; idempotent).
+
+**Tested (offline, on synthetic captures of this site in a scratch copy):** outputs created; `ffprobe` shows video streams only; MP4 805KB, WebM 566KB; content.js and both pages wired; html-validate + content check still pass; second run changes nothing; card poster and the dialog's Desktop recording render with no console errors.
+
+**Failed → fixed:** comment regex stopped at a `>` inside the TODO text · a lazy match crossed into the next card on re-run and replaced its plate → match confined to the card's `<article>`.
+
+**Not done:** real captures — client sites are unreachable from this environment (TODO T1).

@@ -129,7 +129,7 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - [x] **7.2** Privacy page (draft, flagged for review).
 - [x] **7.3** SEO: titles/descriptions, canonical, OG + `summary_large_image`, 1200×630 OG images (Ink, "Design. Build. Grow.", mark), JSON-LD, sitemap, robots, favicon set, manifest.
 - [x] **7.4** Analytics: consent banner, GA4 loader (Plausible switch), four events.
-- [ ] **7.5** Deploy prep: `vercel.json`, `.vercelignore`, README.
+- [x] **7.5** Deploy prep: `vercel.json`, `.vercelignore`, README.
 - [ ] **7.6** Full QA: Lighthouse mobile (/, /lab, /elements), axe, reduced-motion + Ink screenshots, 6 widths, link check, JS budget, html-validate, tokens. Fix and re-run.
 - [ ] **7.7** Client media capture + processing (blocked: network — TODO T1).
 - [ ] **7.8** Deploy + live verification (blocked: credentials — TODO T4).
