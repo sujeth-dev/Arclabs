@@ -43,3 +43,17 @@ Screenshots: `qa/01-shell/`.
 - Footer wordmark ignored page margins → aligned to `.wrap`.
 
 Screenshots: `qa/02-hero/`.
+
+## 2026-10-03 — Step 3: Lab File dialog + Home Lab preview
+
+**Built:** `data/content.js` (six files, six elements, combinations, `resultFor()`); Home 02 Lab preview (label, heading, body, client strip marquee, three featured cards — Velmont large, The Possah tall, Zingara wide — annotation "This one's live → velmontdesign.com" joined by an arc ending in a node, margin note, View all files); Lab card (frame + grey dots, placeholder plate with TODO for real media, FILE/STATUS stamp straddling the frame edge, hover recording support for when media exists); `js/lab.js` Lab File dialog (native `<dialog>`, Ink, arch clip-path from the card 600ms and back, record rows with Formula as a small ARC, Desktop/Mobile tabs with arrow keys, drag-to-scroll, Visit live site, Previous/Next, swipe, Esc/close/outside click, focus return, `#file-<slug>` read/written, `file_opened` event). `scripts/qa/content.mjs` checks HTML text against the data file.
+
+**Tested:** dialog suite 17/17 · content check · html-validate · shell · pages 5 × 4 widths. Visual: arch mid-rise from the clicked card; dialog at 390 and 1440.
+
+**Failed → fixed:**
+- Viewer had a fixed height → empty band under short placeholders; now `max-block-size`.
+- Annotation pushed File 01 below File 02 → positioned above the frame.
+- Stamp covered plate text at 390 → moved to straddle the frame's bottom edge.
+- Plan gives a Protocol only for Velmont → the row is omitted for the other five (DECISIONS D9, TODO T9).
+
+Screenshots: `qa/03-lab-dialog/`.

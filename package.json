@@ -5,7 +5,7 @@
   "private": true,
   "scripts": {
     "serve": "node scripts/serve.mjs",
-    "check": "node scripts/qa/validate.mjs && node scripts/qa/tokens.mjs && node scripts/qa/shell.mjs",
+    "check": "node scripts/qa/validate.mjs && node scripts/qa/shell.mjs && node scripts/qa/content.mjs && node scripts/qa/tokens.mjs",
     "qa:pages": "node scripts/qa/pages.mjs",
     "qa:keys": "node scripts/qa/keyboard.mjs",
     "qa:a11y": "node scripts/qa/a11y.mjs",

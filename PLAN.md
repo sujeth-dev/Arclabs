@@ -101,10 +101,10 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - [x] **2.4** Stamp "ARC LABS · DESIGN · BUILD · GROW ·" with the mark at the centre, overlapping the figure's bottom corner.
 
 ### Step 3 — Lab File dialog + Home Lab preview
-- [ ] **3.1** `data/content.js` with the six projects, exact plan copy.
-- [ ] **3.2** Lab card: frame, FILE 0X · STATUS stamp, placeholder plate or `<picture>` poster, lazy muted video on hover / in view on touch, fixed ratio; cursor tag "Open file".
-- [ ] **3.3** Lab File dialog (Ink): arch rises from the card (600ms) and drops back; name large; record rows (Hypothesis · Formula as a small ARC · Protocol · Inside the Lab · Result); viewer with Desktop/Mobile tabs + drag-to-scroll; Visit live site (new tab, bare domain, accessible label); Previous/Next; swipe on mobile; Esc/close/backdrop; focus returns; `#file-<slug>` read and written.
-- [ ] **3.4** Home Lab preview: copy, client strip (CSS marquee, pauses on hover, static when reduced), three featured files, annotation on File 01, View all files, margin note.
+- [x] **3.1** `data/content.js` with the six projects, exact plan copy.
+- [x] **3.2** Lab card: frame, FILE 0X · STATUS stamp, placeholder plate or `<picture>` poster, lazy muted video on hover / in view on touch, fixed ratio; cursor tag "Open file".
+- [x] **3.3** Lab File dialog (Ink): arch rises from the card (600ms) and drops back; name large; record rows (Hypothesis · Formula as a small ARC · Protocol · Inside the Lab · Result); viewer with Desktop/Mobile tabs + drag-to-scroll; Visit live site (new tab, bare domain, accessible label); Previous/Next; swipe on mobile; Esc/close/backdrop; focus returns; `#file-<slug>` read and written.
+- [x] **3.4** Home Lab preview: copy, client strip (CSS marquee, pauses on hover, static when reduced), three featured files, annotation on File 01, View all files, margin note.
 
 ### Step 4 — /lab
 - [ ] **4.1** Header, client strip.

@@ -597,6 +597,142 @@ html:has(dialog[open]) { overflow: hidden; }
 
 
 /* --------------------------------------------------------------------------
+   09b · LAB — section intro, client strip, Lab cards, Lab File dialog
+   -------------------------------------------------------------------------- */
+
+/* Section intro: label / title / body on the grid. */
+.intro { row-gap: var(--space-5); margin-bottom: clamp(var(--space-7), 6vw, var(--space-9)); }
+.intro__title { max-width: 16ch; }
+.intro__body { max-width: 38rem; color: var(--color-muted); }
+.intro__body p + p { margin-top: var(--space-3); }
+.intro__body strong { color: var(--color-text); font-weight: 400; }
+@media (min-width: 1024px) {
+  .intro__label { grid-column: 1 / 4; padding-top: .9em; }
+  .intro__title { grid-column: 4 / 11; }
+  .intro__body  { grid-column: 4 / 10; }
+}
+
+/* Client strip: one proof strip, slow continuous scroll, pauses on hover. */
+.client-strip {
+  overflow: hidden; border-block: var(--line-hair) solid var(--color-border);
+  padding-block: var(--space-5); margin-bottom: clamp(var(--space-7), 6vw, var(--space-9));
+}
+.client-strip__track { display: flex; inline-size: max-content; }
+.client-strip__list { display: flex; flex: none; }
+.client-strip__list li {
+  display: flex; align-items: center; gap: clamp(var(--space-5), 3vw, var(--space-7));
+  padding-right: clamp(var(--space-5), 3vw, var(--space-7));
+  font-family: var(--font-display); font-weight: 300; font-size: clamp(2.25rem, 5.6vw, 5.25rem);
+  line-height: 1.1; letter-spacing: -.035em; white-space: nowrap;
+}
+.client-strip__list li::after {
+  content: ""; inline-size: var(--node-md); block-size: var(--node-md); border-radius: var(--radius-node);
+  background: var(--color-node); flex: none;
+}
+.motion .client-strip__track { animation: strip 48s linear infinite; }
+.client-strip:hover .client-strip__track { animation-play-state: paused; }
+@keyframes strip { to { transform: translateX(-50%); } }
+/* Reduced motion: the strip stops and shows every name. */
+:root:not(.motion) .client-strip__track { inline-size: auto; padding-inline: var(--margin); }
+:root:not(.motion) .client-strip__list { flex-wrap: wrap; row-gap: var(--space-2); }
+:root:not(.motion) .client-strip__list[aria-hidden] { display: none; }
+:root:not(.motion) .client-strip__list li { font-size: clamp(1.75rem, 4vw, 3.5rem); }
+
+/* Lab card */
+.lab-grid--featured { padding-top: var(--space-7); }
+.lab-grid { row-gap: clamp(var(--space-7), 6vw, var(--space-9)); align-items: start; }
+.lab-card { position: relative; display: flex; flex-direction: column; min-width: 0; }
+.lab-card__link { display: flex; flex-direction: column; flex: 1; color: inherit; }
+.lab-card__frame { transition: border-color var(--duration-fast) var(--ease-standard); }
+.lab-card__link:hover .lab-card__frame, .lab-card__link:focus-visible .lab-card__frame { border-color: var(--color-text); }
+.lab-card__link:focus-visible { outline-offset: 6px; }
+.lab-card__stamp { position: relative; z-index: 2; align-self: flex-end; margin: -.85rem var(--space-4) 0 0; transform: rotate(-2deg); }
+.lab-card__meta { display: grid; grid-template-columns: auto minmax(0, 1fr); column-gap: var(--space-4); row-gap: var(--space-1); padding-top: var(--space-3); }
+.lab-card__index { font-family: var(--font-display); font-weight: 300; font-size: var(--text-small); color: var(--color-muted); font-variant-numeric: tabular-nums; padding-top: .3em; }
+.lab-card__name { font-family: var(--font-display); font-weight: 600; font-size: clamp(1.25rem, 1.2vw + .6rem, 1.625rem); letter-spacing: -.02em; line-height: 1.15; }
+.lab-card__link:hover .lab-card__name { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .18em; }
+.lab-card__line, .lab-card__sector { grid-column: 2; }
+.lab-card__line { color: var(--color-muted); }
+.lab-card__sector { font-size: var(--text-meta); color: var(--color-muted); letter-spacing: .02em; }
+.lab-card .frame__video { opacity: 0; transition: opacity var(--duration-fast) var(--ease-standard); }
+.lab-card .frame__video.is-playing { opacity: 1; }
+
+/* The hand annotation on File 01: a phrase joined to the frame by a thin arc. */
+.annotation { position: absolute; right: 0; bottom: calc(100% - .25rem); display: flex; align-items: flex-end; justify-content: flex-end; gap: var(--space-1); font-size: var(--text-small); white-space: nowrap; }
+.annotation a { padding-bottom: 1.6rem; }
+.annotation svg { inline-size: 3.75rem; block-size: 2.5rem; flex: none; overflow: visible; color: var(--color-text); }
+
+.lab-preview__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-6); margin-top: clamp(var(--space-7), 6vw, var(--space-9)); }
+
+@media (min-width: 768px) {
+  .lab-grid--featured .lab-card--tall { grid-column: 2 / 7; }
+}
+@media (min-width: 1024px) {
+  .lab-grid--featured .lab-card--large { grid-column: 1 / 9; }
+  .lab-grid--featured .lab-card--tall  { grid-column: 9 / -1; align-self: stretch; }
+  .lab-grid--featured .lab-card--wide  { grid-column: 4 / -1; }
+  .lab-card--tall .lab-card__frame { flex: 1; display: flex; flex-direction: column; }
+  .lab-card--tall .frame__media { flex: 1; aspect-ratio: auto; min-block-size: 0; }
+}
+
+/* Lab File dialog — always Ink. An arch rises from the card (clip-path, JS). */
+.lab-file {
+  position: fixed; inset: 0; z-index: var(--z-menu);
+  inline-size: 100%; block-size: 100%; max-inline-size: none; max-block-size: none;
+  margin: 0; padding: 0; border: 0; overflow-y: auto; overscroll-behavior: contain;
+}
+.lab-file::backdrop { background: transparent; }
+.lab-file__panel { padding-bottom: var(--space-8); }
+.lab-file__head {
+  position: sticky; top: 0; z-index: 2; display: flex; align-items: center; gap: var(--space-4);
+  min-block-size: var(--nav-h); background: var(--color-bg); border-bottom: var(--line-hair) solid var(--color-border);
+}
+.lab-file__sector { margin-right: auto; }
+.lab-file__title { margin-top: clamp(var(--space-6), 5vw, var(--space-8)); }
+.lab-file__line { margin-top: var(--space-4); color: var(--color-muted); max-width: 40rem; }
+.lab-file__body { margin-top: clamp(var(--space-7), 5vw, var(--space-8)); row-gap: var(--space-7); align-items: start; }
+.lab-file__viewer { order: -1; }
+.record { border-top: var(--line-hair) solid var(--color-border); }
+.record__row { display: grid; gap: var(--space-2); padding-block: var(--space-5); border-bottom: var(--line-hair) solid var(--color-border); }
+.record__row dd { max-width: var(--measure); }
+.record__row dd ol { display: flex; flex-wrap: wrap; gap: var(--space-2); }
+.record__row dd ol li + li::before { content: "→"; margin-right: var(--space-2); color: var(--color-muted); }
+
+/* Formula drawn as a small ARC: two anchors, one span, the solution rises. */
+.formula { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: var(--space-2) var(--space-5); max-width: 34rem; }
+.formula__solution { grid-column: 1 / -1; text-align: center; font-weight: 500; text-wrap: balance; }
+.formula svg { grid-column: 1 / -1; inline-size: 100%; block-size: auto; overflow: visible; color: var(--color-text); }
+.formula__a { color: var(--color-muted); }
+.formula__b { color: var(--color-muted); text-align: right; }
+
+/* Viewer: Desktop / Mobile tabs, drag-to-scroll inside the frame. */
+.viewer__tabs { display: flex; gap: var(--space-5); margin-bottom: var(--space-4); border-bottom: var(--line-hair) solid var(--color-border); }
+.viewer__tab { padding-block: var(--space-2); font-size: var(--text-small); font-weight: 500; color: var(--color-muted); }
+.viewer__tab[aria-selected="true"] { color: var(--color-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .7em; }
+.viewer__scroll { max-block-size: min(62vh, 40rem); overflow-y: auto; overscroll-behavior: contain; background: var(--color-surface); }
+.viewer__scroll img, .viewer__scroll video { inline-size: 100%; block-size: auto; }
+.viewer__phone { margin-inline: auto; inline-size: min(100%, 20rem); }
+.viewer__phone .viewer__scroll { max-block-size: min(62vh, 36rem); }
+.viewer__plate { position: relative; aspect-ratio: 16 / 10; }
+.viewer__phone .viewer__plate { aspect-ratio: 9 / 19.5; }
+.viewer__plate .plate { --s: 1; }
+.viewer__phone .plate { --s: 2.1; }
+
+.lab-file__foot { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-3) var(--space-5); margin-top: var(--space-8); padding-top: var(--space-5); border-top: var(--line-hair) solid var(--color-border); }
+.lab-file__pager { display: flex; gap: var(--space-3); margin-left: auto; }
+.lab-file__pager .btn { max-inline-size: 100%; }
+
+@media (min-width: 1024px) {
+  .lab-file__record { grid-column: 1 / 6; }
+  .lab-file__viewer { grid-column: 7 / -1; order: 0; position: sticky; top: calc(var(--nav-h) + var(--space-5)); }
+}
+@media (max-width: 479px) {
+  .lab-file__pager { margin-left: 0; inline-size: 100%; }
+  .lab-file__pager .btn { flex: 1; justify-content: center; padding-inline: var(--space-3); }
+}
+
+
+/* --------------------------------------------------------------------------
    10 · RESPONSIVE — 390 · 480 · 768 · 1024 · 1200 · 1440
    -------------------------------------------------------------------------- */
 @media (max-width: 479px) {

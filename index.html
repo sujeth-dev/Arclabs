@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/css/styles.css">
 <script>(function(d){var m;try{var t=localStorage.getItem("arc-theme");if(t==="dark"||t==="light")d.dataset.theme=t;m=localStorage.getItem("arc-motion");if(m==="reduced"||m==="full")d.dataset.motion=m}catch(e){}if(m!=="reduced"&&(m==="full"||!matchMedia("(prefers-reduced-motion: reduce)").matches))d.classList.add("motion")})(document.documentElement)</script>
 <script type="module" src="/js/main.js"></script>
+<script type="module" src="/js/lab.js"></script>
 <script type="module" src="/js/home.js"></script>
 <script type="application/ld+json">{"@context":"https://schema.org","@type":"Organization","name":"ARC Labs","url":"https://arclabs.vercel.app/","logo":"https://arclabs.vercel.app/apple-touch-icon.png","email":"arclabs.tech@gmail.com","telephone":"+91 80885 06783","description":"ARC Labs designs and builds websites and digital systems for businesses that are ready to be taken seriously online.","contactPoint":{"@type":"ContactPoint","contactType":"sales","email":"arclabs.tech@gmail.com","telephone":"+91 80885 06783","availableLanguage":["en"]}}</script>
 </head>
@@ -88,7 +89,98 @@
       </figure>
     </div>
   </section>
+
+  <!-- 02 · Lab preview -->
+  <section id="lab" class="section lab-preview" aria-labelledby="lab-title">
+    <div class="wrap">
+      <div class="intro grid">
+        <span class="intro__label label label--node label--strong">Lab</span>
+        <h2 id="lab-title" class="intro__title t-h2">Work built around the business<span class="stop">.</span></h2>
+        <div class="intro__body t-lead">
+          <p><strong>Every business needs something different from the web.</strong></p>
+          <p>Some need to be found. Some need to be trusted. Some need to sell. Some need interest to turn into enquiries.</p>
+          <p>We start by working out which.</p>
+        </div>
+      </div>
+    </div>
+  <div class="client-strip">
+    <div class="client-strip__track">
+      <ul class="client-strip__list" role="list" aria-label="Clients"><li>Velmont Design</li><li>The Possah</li><li>Zingara</li><li>Assetly</li><li>Fitness Garage</li><li>Aivora India</li></ul>
+      <ul class="client-strip__list" role="list" aria-hidden="true"><li>Velmont Design</li><li>The Possah</li><li>Zingara</li><li>Assetly</li><li>Fitness Garage</li><li>Aivora India</li></ul>
+    </div>
+  </div>
+    <div class="wrap">
+      <div class="lab-grid lab-grid--featured grid">
+        <article class="lab-card lab-card--large" data-file="velmont" data-filter="Interiors">
+          <p class="annotation"><a class="link" href="https://www.velmontdesign.com" target="_blank" rel="noopener">This one’s live → velmontdesign.com<span class="visually-hidden"> (opens in a new tab)</span></a><svg viewBox="0 0 60 40" aria-hidden="true" focusable="false"><path class="span-path" d="M3 6 A 52 34 0 0 1 55 34"/><circle class="span-node" cx="55" cy="36.5" r="2.5"/></svg></p>
+          <a class="lab-card__link" href="/lab/#file-velmont" data-open-file="velmont" data-cursor-tag="Open file">
+            <div class="frame lab-card__frame">
+              <div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">velmontdesign.com</span></div>
+              <div class="frame__media ratio-16x10">
+                <!-- TODO(T1): replace the placeholder plate with <picture> poster + hover <video> (README → Replacing media) -->
+                <div class="plate plate--velmont" aria-hidden="true"><div class="plate__nav"><span class="plate__brand">Velmont</span><span class="plate__links"><span>Work</span><span>About</span><span>Contact</span></span></div><div class="plate__body"><div class="plate__eyebrow">Defining Environments.</div><div class="plate__title">Commercial interiors built to the highest standard.</div><div class="plate__cta">View the Portfolio</div></div></div>
+              </div>
+            </div>
+            <span class="file-stamp lab-card__stamp" data-status="live"><span class="node" aria-hidden="true"></span>File 01 · Live</span>
+            <div class="lab-card__meta">
+              <span class="lab-card__index" aria-hidden="true">01</span>
+              <h3 class="lab-card__name">Velmont Design</h3>
+              <p class="lab-card__line">Defining spaces. Delivering everything around them.</p>
+              <p class="lab-card__sector">Commercial interiors</p>
+            </div>
+          </a>
+        </article>
+        <article class="lab-card lab-card--tall" data-file="the-possah" data-filter="Fashion">
+          <a class="lab-card__link" href="/lab/#file-the-possah" data-open-file="the-possah" data-cursor-tag="Open file">
+            <div class="frame lab-card__frame">
+              <div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">thepossah.com</span></div>
+              <div class="frame__media ratio-4x5">
+                <!-- TODO(T1): replace the placeholder plate with <picture> poster + hover <video> (README → Replacing media) -->
+                <div class="plate plate--possah plate--tall" aria-hidden="true"><div class="plate__nav"><span class="plate__brand">The Possah</span><span class="plate__links"><span>New in</span><span>Bridal</span><span>Festive</span></span></div><div class="plate__body"><div class="plate__eyebrow">Couture, off-duty. Spring ’26</div><div class="plate__title">she wants what she wants.</div><div class="plate__cta">Shop the Collection</div></div></div>
+              </div>
+            </div>
+            <span class="file-stamp lab-card__stamp" data-status="ready"><span class="node" aria-hidden="true"></span>File 02 · Ready for launch</span>
+            <div class="lab-card__meta">
+              <span class="lab-card__index" aria-hidden="true">02</span>
+              <h3 class="lab-card__name">The Possah</h3>
+              <p class="lab-card__line">Modern Indian fashion, made to be discovered.</p>
+              <p class="lab-card__sector">Fashion · E-commerce</p>
+            </div>
+          </a>
+        </article>
+        <article class="lab-card lab-card--wide" data-file="zingara" data-filter="Food">
+          <a class="lab-card__link" href="/lab/#file-zingara" data-open-file="zingara" data-cursor-tag="Open file">
+            <div class="frame lab-card__frame">
+              <div class="frame__chrome" aria-hidden="true"><span class="frame__dots"><i></i><i></i><i></i></span><span class="frame__url">zingararestaurant.co.in</span></div>
+              <div class="frame__media ratio-21x9">
+                <!-- TODO(T1): replace the placeholder plate with <picture> poster + hover <video> (README → Replacing media) -->
+                <div class="plate plate--zingara" aria-hidden="true"><div class="plate__nav"><span class="plate__brand">Zingara</span><span class="plate__links"><span>Menu</span><span>Our Story</span><span>Gallery</span></span></div><div class="plate__body"><div class="plate__eyebrow">A rare expression of Mysore’s culinary heritage</div><div class="plate__title">The Art of White Biryani</div><div class="plate__cta">Order Now</div></div></div>
+              </div>
+            </div>
+            <span class="file-stamp lab-card__stamp" data-status="live"><span class="node" aria-hidden="true"></span>File 03 · Live</span>
+            <div class="lab-card__meta">
+              <span class="lab-card__index" aria-hidden="true">03</span>
+              <h3 class="lab-card__name">Zingara</h3>
+              <p class="lab-card__line">The Art of White Biryani.</p>
+              <p class="lab-card__sector">Restaurant</p>
+            </div>
+          </a>
+        </article>
+      </div>
+      <div class="lab-preview__foot">
+        <span class="margin-note">Real sites. No mock-ups.</span>
+        <a class="btn btn--ghost" href="/lab/">View all files</a>
+      </div>
+    </div>
+  </section>
 </main>
+<dialog class="lab-file ink" id="lab-file" aria-labelledby="lab-file-title">
+  <div class="lab-file__panel wrap">
+    <div class="lab-file__head"><span class="file-stamp" data-f="stamp">File</span><span class="label lab-file__sector" data-f="sector"></span><button class="toggle" type="button" data-file-close autofocus><span class="node" aria-hidden="true"></span>Close</button></div>
+    <h2 class="lab-file__title t-display" id="lab-file-title" data-f="name">Lab file</h2>
+    <div data-f="body"></div>
+  </div>
+</dialog>
 <footer class="footer">
   <div class="wrap">
     <p class="footer__sign">Design<span class="stop">.</span> Build<span class="stop">.</span> Grow<span class="stop">.</span></p>

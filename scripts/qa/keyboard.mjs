@@ -99,6 +99,44 @@ const suites = {
     check("no errors", !errors.length, errors.join(" | "));
     await ctx.close();
   },
+
+  async dialog() {
+    console.log("dialog");
+    let { page, ctx, errors } = await open("/");
+    await page.evaluate(() => { window.__ev = []; document.addEventListener("arc:track", (e) => window.__ev.push(e.detail.name)); });
+    const card = page.locator('.lab-card [data-open-file="velmont"]');
+    await card.focus(); await page.keyboard.press("Enter");
+    await page.waitForTimeout(800);
+    const isOpen = () => page.evaluate(() => document.getElementById("lab-file").open);
+    check("Enter on a card opens the file", await isOpen());
+    check("title is the project", (await page.locator("#lab-file-title").textContent()) === "Velmont Design");
+    check("hash written", await page.evaluate(() => location.hash === "#file-velmont"));
+    check("focus starts on Close", await page.evaluate(() => document.activeElement?.hasAttribute("data-file-close")));
+    check("file_opened tracked", await page.evaluate(() => window.__ev.includes("file_opened")));
+    check("dialog is Ink", (await page.evaluate(() => getComputedStyle(document.getElementById("lab-file")).backgroundColor)) === "rgb(23, 24, 26)");
+    const tab = page.locator("#vt-desktop");
+    await tab.focus(); await page.keyboard.press("ArrowRight");
+    check("arrow key moves to Mobile tab", await page.evaluate(() => document.activeElement.id === "vt-mobile" && !document.getElementById("vp-mobile").hidden && document.getElementById("vp-desktop").hidden));
+    await page.locator('[data-file-go]', { hasText: "Next file" }).click();
+    check("Next file → The Possah", (await page.locator("#lab-file-title").textContent()) === "The Possah" && await page.evaluate(() => location.hash === "#file-the-possah"));
+    check("Visit live site opens a new tab safely", await page.evaluate(() => { const a = document.querySelector('#lab-file a[target="_blank"]'); return !!a && a.rel.includes("noopener") && /opens in a new tab/.test(a.textContent); }));
+    for (let i = 0; i < 25; i++) await page.keyboard.press("Tab");
+    check("focus stays in the dialog", await page.evaluate(() => document.getElementById("lab-file").contains(document.activeElement)));
+    await page.keyboard.press("Escape");
+    await page.waitForTimeout(900);
+    check("Esc closes", !(await isOpen()));
+    check("hash cleared", await page.evaluate(() => location.hash === ""));
+    check("focus returns to the card", await page.evaluate(() => document.activeElement?.dataset.openFile === "the-possah"));
+    check("no errors", !errors.length, errors.join(" | "));
+    await ctx.close();
+
+    ({ page, ctx, errors } = await open("/#file-zingara", { reduced: true }));
+    check("#file-zingara opens on load", await page.evaluate(() => document.getElementById("lab-file").open && document.getElementById("lab-file-title").textContent === "Zingara"));
+    check("reduced: no arch animation", await page.evaluate(() => document.getElementById("lab-file").getAnimations().length === 0));
+    await page.locator("[data-file-close]").click();
+    check("Close button closes", await page.evaluate(() => !document.getElementById("lab-file").open));
+    await ctx.close();
+  },
 };
 
 for (const [name, fn] of Object.entries(suites)) {
