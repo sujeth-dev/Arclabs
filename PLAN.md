@@ -112,12 +112,12 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - [x] **4.3** Grid: one large, one tall, two staggered pairs; closing CTA; margin note.
 
 ### Step 5 — Elements
-- [ ] **5.1** Element data (exact plan copy) + combinations.
-- [ ] **5.2** Element row: accordion (button + region), one open, `+` → close mark, 400ms, large faint symbol on hover, tag Expand/Close, `#<slug>` opens, event tracked.
-- [ ] **5.3** Mini-demos (play once on open, complete when reduced): frame assembles · add to cart · message bubble · map pin · bars · before/after slider (keyboard operable).
-- [ ] **5.4** Panel: What it solves · What's included · Works well with · Related work (opens Lab file) · How it works · Start this project (prefills Contact).
-- [ ] **5.5** /elements (Ink): header, rows, margin note, combinations strip (small ARCs → prefilled Contact), closing CTA.
-- [ ] **5.6** Home Elements preview: six compact rows → `/elements/#<slug>`; symbol grows on hover; tag "Open".
+- [x] **5.1** Element data (exact plan copy) + combinations.
+- [x] **5.2** Element row: accordion (button + region), one open, `+` → close mark, 400ms, large faint symbol on hover, tag Expand/Close, `#<slug>` opens, event tracked.
+- [x] **5.3** Mini-demos (play once on open, complete when reduced): frame assembles · add to cart · message bubble · map pin · bars · before/after slider (keyboard operable).
+- [x] **5.4** Panel: What it solves · What's included · Works well with · Related work (opens Lab file) · How it works · Start this project (prefills Contact).
+- [x] **5.5** /elements (Ink): header, rows, margin note, combinations strip (small ARCs → prefilled Contact), closing CTA.
+- [x] **5.6** Home Elements preview: six compact rows → `/elements/#<slug>`; symbol grows on hover; tag "Open".
 
 ### Step 6 — Approach, Process, Contact
 - [ ] **6.1** Approach: philosophy lines; technical ARC with measurement lines, draws once in view (700ms); studio copy; business types large, each linking to its Lab file.

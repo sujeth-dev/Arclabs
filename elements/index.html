@@ -29,6 +29,7 @@
 <link rel="stylesheet" href="/css/styles.css">
 <script>(function(d){var m;try{var t=localStorage.getItem("arc-theme");if(t==="dark"||t==="light")d.dataset.theme=t;m=localStorage.getItem("arc-motion");if(m==="reduced"||m==="full")d.dataset.motion=m}catch(e){}if(m!=="reduced"&&(m==="full"||!matchMedia("(prefers-reduced-motion: reduce)").matches))d.classList.add("motion")})(document.documentElement)</script>
 <script type="module" src="/js/main.js"></script>
+<script type="module" src="/js/lab.js"></script>
 <script type="module" src="/js/elements.js"></script>
 </head>
 <body>
@@ -51,8 +52,149 @@
   <div class="menu__foot wrap"><a class="link" href="mailto:arclabs.tech@gmail.com">arclabs.tech@gmail.com</a><div class="menu__tools"><button class="toggle toggle--theme" type="button" data-theme-toggle aria-pressed="false"><span class="toggle__swatch" aria-hidden="true"><i></i><i></i></span>Ink</button><button class="toggle toggle--plain" type="button" data-motion-toggle aria-pressed="false"><span class="node" aria-hidden="true"></span>Reduce motion</button></div></div>
 </dialog>
 <main id="main">
-  <section class="wrap section"><h1 class="t-display">What we build<span class="stop">.</span></h1></section>
+  <section class="page-head el-page" aria-labelledby="page-title">
+    <div class="wrap">
+      <div class="intro grid">
+        <span class="intro__label label label--node label--strong">Elements</span>
+        <h1 id="page-title" class="intro__title t-display">What we build<span class="stop">.</span></h1>
+        <div class="intro__body t-lead"><p>A website earns its place when it moves the business forward.</p></div>
+      </div>
+      <div class="el-rows" data-accordion>
+        <span class="margin-note el-rows__note">Mix and match.</span>
+        <article class="el-row" id="websites" data-element="websites">
+          <h2 class="el-row__head">
+            <button class="el-row__btn" type="button" id="websites-btn" aria-expanded="false" aria-controls="websites-panel" data-cursor-tag="Expand">
+              <span class="el-row__num">01</span>
+              <span class="el-sym" aria-hidden="true">Ws</span>
+              <span class="el-row__name">Websites</span>
+              <span class="el-row__line">Sites that explain what you do, earn trust and make the next step obvious.</span>
+              <span class="el-row__plus" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <span class="el-row__ghost" aria-hidden="true">Ws</span>
+          <div class="el-row__panel" id="websites-panel" role="region" aria-labelledby="websites-btn" hidden></div>
+        </article>
+        <article class="el-row" id="e-commerce" data-element="e-commerce">
+          <h2 class="el-row__head">
+            <button class="el-row__btn" type="button" id="e-commerce-btn" aria-expanded="false" aria-controls="e-commerce-panel" data-cursor-tag="Expand">
+              <span class="el-row__num">02</span>
+              <span class="el-sym" aria-hidden="true">Ec</span>
+              <span class="el-row__name">E-commerce</span>
+              <span class="el-row__line">Catalogues, product pages, payments and the systems behind a store that sells.</span>
+              <span class="el-row__plus" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <span class="el-row__ghost" aria-hidden="true">Ec</span>
+          <div class="el-row__panel" id="e-commerce-panel" role="region" aria-labelledby="e-commerce-btn" hidden></div>
+        </article>
+        <article class="el-row" id="lead-booking" data-element="lead-booking">
+          <h2 class="el-row__head">
+            <button class="el-row__btn" type="button" id="lead-booking-btn" aria-expanded="false" aria-controls="lead-booking-panel" data-cursor-tag="Expand">
+              <span class="el-row__num">03</span>
+              <span class="el-sym" aria-hidden="true">Lb</span>
+              <span class="el-row__name">Lead &amp; Booking Systems</span>
+              <span class="el-row__line">Forms, WhatsApp, enquiries and bookings joined into one simple path from interest to action.</span>
+              <span class="el-row__plus" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <span class="el-row__ghost" aria-hidden="true">Lb</span>
+          <div class="el-row__panel" id="lead-booking-panel" role="region" aria-labelledby="lead-booking-btn" hidden></div>
+        </article>
+        <article class="el-row" id="digital-presence" data-element="digital-presence">
+          <h2 class="el-row__head">
+            <button class="el-row__btn" type="button" id="digital-presence-btn" aria-expanded="false" aria-controls="digital-presence-panel" data-cursor-tag="Expand">
+              <span class="el-row__num">04</span>
+              <span class="el-sym" aria-hidden="true">Dp</span>
+              <span class="el-row__name">Digital Presence</span>
+              <span class="el-row__line">Google, Maps, search and social: everything around your website that helps people find you.</span>
+              <span class="el-row__plus" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <span class="el-row__ghost" aria-hidden="true">Dp</span>
+          <div class="el-row__panel" id="digital-presence-panel" role="region" aria-labelledby="digital-presence-btn" hidden></div>
+        </article>
+        <article class="el-row" id="custom-systems" data-element="custom-systems">
+          <h2 class="el-row__head">
+            <button class="el-row__btn" type="button" id="custom-systems-btn" aria-expanded="false" aria-controls="custom-systems-panel" data-cursor-tag="Expand">
+              <span class="el-row__num">05</span>
+              <span class="el-sym" aria-hidden="true">Cs</span>
+              <span class="el-row__name">Custom Systems</span>
+              <span class="el-row__line">Dashboards, portals, internal tools and automation, built around how your business actually runs.</span>
+              <span class="el-row__plus" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <span class="el-row__ghost" aria-hidden="true">Cs</span>
+          <div class="el-row__panel" id="custom-systems-panel" role="region" aria-labelledby="custom-systems-btn" hidden></div>
+        </article>
+        <article class="el-row" id="redesigns" data-element="redesigns">
+          <h2 class="el-row__head">
+            <button class="el-row__btn" type="button" id="redesigns-btn" aria-expanded="false" aria-controls="redesigns-panel" data-cursor-tag="Expand">
+              <span class="el-row__num">06</span>
+              <span class="el-sym" aria-hidden="true">Rd</span>
+              <span class="el-row__name">Redesigns</span>
+              <span class="el-row__line">For when the business has moved on and the website hasn&#x27;t.</span>
+              <span class="el-row__plus" aria-hidden="true"></span>
+            </button>
+          </h2>
+          <span class="el-row__ghost" aria-hidden="true">Rd</span>
+          <div class="el-row__panel" id="redesigns-panel" role="region" aria-labelledby="redesigns-btn" hidden></div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="section combos" aria-labelledby="combos-title">
+    <div class="wrap">
+      <h2 id="combos-title" class="label label--node label--strong">Combinations</h2>
+      <ul class="combos__list" role="list">
+          <li><a class="combo" href="/?need=websites,lead-booking#contact">
+            <span class="combo__result">More enquiries</span>
+            <svg class="combo__arc" viewBox="0 0 120 44" aria-hidden="true" focusable="false"><path class="span-path" d="M10 38 A 50 26 0 0 1 110 38" style="stroke-width:1.5px"/><circle class="span-node" cx="60" cy="7.25" r="4"/></svg>
+            <span class="combo__pair"><span class="el-sym" aria-hidden="true">Ws</span><span class="el-sym" aria-hidden="true">Lb</span></span>
+            <span class="visually-hidden">Websites plus Lead &amp; Booking Systems. Start a project with both selected.</span>
+          </a></li>
+          <li><a class="combo" href="/?need=websites,digital-presence#contact">
+            <span class="combo__result">Getting found</span>
+            <svg class="combo__arc" viewBox="0 0 120 44" aria-hidden="true" focusable="false"><path class="span-path" d="M10 38 A 50 26 0 0 1 110 38" style="stroke-width:1.5px"/><circle class="span-node" cx="60" cy="7.25" r="4"/></svg>
+            <span class="combo__pair"><span class="el-sym" aria-hidden="true">Ws</span><span class="el-sym" aria-hidden="true">Dp</span></span>
+            <span class="visually-hidden">Websites plus Digital Presence. Start a project with both selected.</span>
+          </a></li>
+          <li><a class="combo" href="/?need=e-commerce,digital-presence#contact">
+            <span class="combo__result">Online sales</span>
+            <svg class="combo__arc" viewBox="0 0 120 44" aria-hidden="true" focusable="false"><path class="span-path" d="M10 38 A 50 26 0 0 1 110 38" style="stroke-width:1.5px"/><circle class="span-node" cx="60" cy="7.25" r="4"/></svg>
+            <span class="combo__pair"><span class="el-sym" aria-hidden="true">Ec</span><span class="el-sym" aria-hidden="true">Dp</span></span>
+            <span class="visually-hidden">E-commerce plus Digital Presence. Start a project with both selected.</span>
+          </a></li>
+          <li><a class="combo" href="/?need=redesigns,lead-booking#contact">
+            <span class="combo__result">Better conversion</span>
+            <svg class="combo__arc" viewBox="0 0 120 44" aria-hidden="true" focusable="false"><path class="span-path" d="M10 38 A 50 26 0 0 1 110 38" style="stroke-width:1.5px"/><circle class="span-node" cx="60" cy="7.25" r="4"/></svg>
+            <span class="combo__pair"><span class="el-sym" aria-hidden="true">Rd</span><span class="el-sym" aria-hidden="true">Lb</span></span>
+            <span class="visually-hidden">Redesigns plus Lead &amp; Booking Systems. Start a project with both selected.</span>
+          </a></li>
+          <li><a class="combo" href="/?need=custom-systems,lead-booking#contact">
+            <span class="combo__result">Automated follow-up</span>
+            <svg class="combo__arc" viewBox="0 0 120 44" aria-hidden="true" focusable="false"><path class="span-path" d="M10 38 A 50 26 0 0 1 110 38" style="stroke-width:1.5px"/><circle class="span-node" cx="60" cy="7.25" r="4"/></svg>
+            <span class="combo__pair"><span class="el-sym" aria-hidden="true">Cs</span><span class="el-sym" aria-hidden="true">Lb</span></span>
+            <span class="visually-hidden">Custom Systems plus Lead &amp; Booking Systems. Start a project with both selected.</span>
+          </a></li>
+      </ul>
+    </div>
+  </section>
+
+  <section class="section el-close" aria-labelledby="el-close-title">
+    <div class="wrap lab-close__inner">
+      <h2 id="el-close-title" class="t-h2">Not sure which you need? Tell us the problem.</h2>
+      <a class="btn" href="/#contact">Start a project</a>
+    </div>
+  </section>
 </main>
+<dialog class="lab-file ink" id="lab-file" aria-labelledby="lab-file-title">
+  <div class="lab-file__panel wrap">
+    <div class="lab-file__head"><span class="file-stamp" data-f="stamp">File</span><span class="label lab-file__sector" data-f="sector"></span><button class="toggle" type="button" data-file-close autofocus><span class="node" aria-hidden="true"></span>Close</button></div>
+    <h2 class="lab-file__title t-display" id="lab-file-title" data-f="name">Lab file</h2>
+    <div data-f="body"></div>
+  </div>
+</dialog>
 <footer class="footer">
   <div class="wrap">
     <p class="footer__sign">Design<span class="stop">.</span> Build<span class="stop">.</span> Grow<span class="stop">.</span></p>

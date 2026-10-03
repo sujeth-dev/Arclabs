@@ -14,3 +14,5 @@ Choices not covered by the plan, and why.
 | D8 | The draggable Grow node is pointer-only (mouse, touch, pen) and hidden from assistive tech. | It is a decorative toy; the figure's meaning is in its caption. A focusable control that does nothing on activation would be noise for keyboard and screen-reader users. |
 | D9 | The Protocol row appears only for Velmont. | It is the only file with a Protocol in the plan; repeating the studio process on other files would be stating something not confirmed. TODO T9. |
 | D10 | Possah's "Visit live site" links to thepossah.com although its status is "Ready for launch". | The URL was supplied in the media brief. Remove `liveUrl` in `data/content.js` if the store should not be linked before launch. |
+| D11 | Mini-demos are abstract diagrams (bars, blocks, a pin) with only the plan's words ("Add to cart", "Hi, I'd like to book…") plus "Button"/"Before"/"After" labels. | Demonstrates each service without inventing client content, prices or products. |
+| D12 | Redesigns has no Related work row. | The plan's "any project with a before/after" has no matching project yet (TODO T8). |

@@ -67,3 +67,13 @@ Screenshots: `qa/03-lab-dialog/`.
 **Failed → fixed:** no space between the grid and the closing band → section bottom padding · files without a URL showed "aivoraindia" in the browser chrome (reads like a domain) → plain name · test selector collided with cards' `data-filter` → scoped.
 
 Screenshots: `qa/04-lab/`.
+
+## 2026-10-03 — Step 5: Elements
+
+**Built:** /elements (always Ink): six accordion rows (number · symbol tile · name · line · +; button with `aria-expanded` + `role="region"` panel; one open at a time; + turns into a close mark; 400ms height; large faint symbol behind the row on hover; cursor tag Expand/Close; `#<slug>` opens a row; `element_opened`). Panels rendered from `data/content.js`: mini-demo, What it solves, What's included, Works well with (links open that row), Related work (opens the Lab file in the dialog), How it works, Start this project (`/?need=<slug>#contact`). Mini-demos: frame assembles · Add to cart ticks a live counter · message bubble · map pin drops onto a result · three bars grow · before/after range slider (keyboard operable); each plays once, complete when reduced. Combinations strip (five small ARCs, symbols as anchors, result on top → prefilled Contact). Closing CTA. Home 03 preview rows → `/elements/#<slug>` (symbol grows on hover, tag "Open").
+
+**Tested:** elements suite 18/18 · content check 21 blocks · html-validate · shell · pages 5 × 4 widths.
+
+**Failed → fixed:** Redesigns "after" layer content sat left of the split → spread across the width · "Mix and match." overlapped the lead below 1024px → static there · combinations single-column on phones → two-up.
+
+Screenshots: `qa/05-elements/`.
