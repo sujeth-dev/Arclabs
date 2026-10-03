@@ -37,4 +37,5 @@ Choices not covered by the plan, and why.
 | D31 | CSS, JS, data, images and media are served with `max-age=0, must-revalidate` (browsers re-check on every visit and get a quick 304 if unchanged); only the fonts stay cached for a year. | Requested: no stale cached data after an update. |
 | D32 | Approach plan lines no longer use non-scaling strokes. | Chrome applies the dash draw-in in screen units with them, so the frame's left side never finished drawing on larger screens. |
 | D33 | "Replies from a real person." removed from Contact. | Requested. |
+| D34 | The phone menu follows the page's colours (Ink by default) instead of always being Ink. | Requested: switching Ink/Cream inside an always-Ink menu showed no change and read as broken. |
 

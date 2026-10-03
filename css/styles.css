@@ -468,18 +468,19 @@ html.has-cursor [data-cursor="drag"]:active, html.has-cursor .is-dragging, html.
 /* Current page: a static 1px underline. */
 .nav__link[aria-current="page"] { color: var(--color-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .5em; }
 .nav__tools { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
-.nav__links + .nav__tools { margin-left: var(--space-6); }
 .nav__cta { display: none; }
+/* Menu and Close share one size and spot, so swapping them never shifts. */
+.menu-btn { min-inline-size: 5.25rem; justify-content: center; }
 
-/* Menu: full-screen Ink dialog with large numbered links. It simply appears. */
+/* Menu: full-screen dialog in the page's colours (Ink by default) with large numbered links. */
 .menu {
   position: fixed; inset: 0; z-index: var(--z-menu);
   inline-size: 100%; block-size: 100%; max-inline-size: none; max-block-size: none;
   margin: 0; padding: 0; border: 0;
-  overflow-y: auto;
+  overflow-y: auto; background: var(--color-bg); color: var(--color-text);
 }
 .menu[open] { display: flex; flex-direction: column; }
-.menu::backdrop { background: var(--color-ink); }
+.menu::backdrop { background: var(--color-bg); }
 .menu__head { display: flex; justify-content: space-between; align-items: center; block-size: var(--nav-h); flex: none; }
 .menu__list { margin-block: auto; padding-block: var(--space-7); display: grid; gap: var(--space-2); }
 .menu__list a {
@@ -1095,6 +1096,7 @@ html:has(dialog[open]) { overflow: hidden; }
   .nav__links { display: flex; }
   .nav__cta { display: inline-flex; }
   .menu-btn { display: none; }
+  .nav__links + .nav__tools { margin-left: var(--space-6); }
   .hero__lead-col { grid-column: 1 / 6; }
   .hero__fig-col  { grid-column: 7 / -1; }
   .footer__services { grid-column: 1 / 4; }

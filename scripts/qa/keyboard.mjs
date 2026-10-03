@@ -54,9 +54,15 @@ const suites = {
     check("nav: Lab is current on /lab", (await page.locator('.nav__link[aria-current="page"]').textContent()) === "Lab");
     check("no custom cursor on touch", await page.evaluate(() => !document.documentElement.classList.contains("has-cursor") && !document.querySelector(".cursor-tag")));
     const menuBtn = page.locator("[data-menu-open]");
+    const openBox = await menuBtn.boundingBox();
     await menuBtn.focus(); await page.keyboard.press("Enter");
+    const closeBox = await page.locator("#menu [data-menu-close]").boundingBox();
+    check("Menu sits at the right edge and Close takes its exact place", Math.abs(openBox.x + openBox.width - 372) <= 1 && Math.abs(openBox.x - closeBox.x) <= 1 && Math.abs(openBox.width - closeBox.width) <= 1 && Math.abs(openBox.y - closeBox.y) <= 1, JSON.stringify({ openBox, closeBox }));
     check("menu opens", await page.evaluate(() => document.getElementById("menu").open));
-    check("menu is Ink", (await page.evaluate(() => getComputedStyle(document.getElementById("menu")).backgroundColor)) === "rgb(23, 24, 26)");
+    check("menu is Ink by default", (await page.evaluate(() => getComputedStyle(document.getElementById("menu")).backgroundColor)) === "rgb(23, 24, 26)");
+    await page.locator("#menu [data-theme-toggle]").click();
+    check("Ink switch in the menu visibly changes it", (await page.evaluate(() => getComputedStyle(document.getElementById("menu")).backgroundColor)) === "rgb(241, 238, 229)");
+    await page.locator("#menu [data-theme-toggle]").click();
     check("menu focus inside", await page.evaluate(() => document.getElementById("menu").contains(document.activeElement)));
     check("menu-open aria-expanded", (await menuBtn.getAttribute("aria-expanded")) === "true");
     for (let i = 0; i < 12; i++) await page.keyboard.press("Tab");
