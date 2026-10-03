@@ -84,15 +84,15 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - keyboard pass on any interactive component built in the task
 
 ### Step 1 — Setup and global elements
-- [ ] **1.1 Setup.** Folder structure, fonts/mark from the zip, dev server, QA scripts (pages, tokens, validate), `.vercelignore`, `package.json` (dev only).
-- [ ] **1.2 Stylesheet.** Tokens/base/layout/type/primitives ported; `.ink` subtree; margin note, stamp, file stamp, label node; cursor CSS. *Accept:* tokens identical to the zip; Cream default, Ink via toggle; `.ink` stays Ink in both themes; no unused tokens.
-- [ ] **1.3 ARC engine.** `js/arc.js`: geometry identical to the prototype (span leaves each anchor from its inner side at centre height; rest node tangent on the apex) + `spanPathTo` for the dragged apex.
-- [ ] **1.4 Page shell.** Head (meta, preloads, pre-paint theme/motion restore), skip link, mark symbol, nav, menu, footer on all five pages. *Accept:* skip link first tab stop; one `h1` per page.
-- [ ] **1.5 Navigation.** Lockup · Lab · Elements · Approach · Process · [Start a project]; static 1px underline on the current page; off-Home section links go to `/#approach` etc.
-- [ ] **1.6 Mobile menu.** "Menu" button → full-screen Ink `<dialog>`, large numbered links; Esc; focus returns.
-- [ ] **1.7 Theme + motion.** Cream/Ink toggle; Reduce-motion toggle; both persisted and restored before paint.
-- [ ] **1.8 Cursor.** SVG arrow (ink fill, cream outline, tail ends in a span curve), link variant (curve filled), drag hand; text native; lagging tag only over tagged targets; off on touch/coarse pointers.
-- [ ] **1.9 Footer.** "Design. Build. Grow." large; services line; contact; links; giant cropped ARC LABS wordmark; no copyright line.
+- [x] **1.1 Setup.** Folder structure, fonts/mark from the zip, dev server, QA scripts (pages, tokens, validate), `.vercelignore`, `package.json` (dev only).
+- [x] **1.2 Stylesheet.** Tokens/base/layout/type/primitives ported; `.ink` subtree; margin note, stamp, file stamp, label node; cursor CSS. *Accept:* tokens identical to the zip; Cream default, Ink via toggle; `.ink` stays Ink in both themes; no unused tokens.
+- [x] **1.3 ARC engine.** `js/arc.js`: geometry identical to the prototype (span leaves each anchor from its inner side at centre height; rest node tangent on the apex) + `spanPathTo` for the dragged apex.
+- [x] **1.4 Page shell.** Head (meta, preloads, pre-paint theme/motion restore), skip link, mark symbol, nav, menu, footer on all five pages. *Accept:* skip link first tab stop; one `h1` per page.
+- [x] **1.5 Navigation.** Lockup · Lab · Elements · Approach · Process · [Start a project]; static 1px underline on the current page; off-Home section links go to `/#approach` etc.
+- [x] **1.6 Mobile menu.** "Menu" button → full-screen Ink `<dialog>`, large numbered links; Esc; focus returns.
+- [x] **1.7 Theme + motion.** Cream/Ink toggle; Reduce-motion toggle; both persisted and restored before paint.
+- [x] **1.8 Cursor.** SVG arrow (ink fill, cream outline, tail ends in a span curve), link variant (curve filled), drag hand; text native; lagging tag only over tagged targets; off on touch/coarse pointers.
+- [x] **1.9 Footer.** "Design. Build. Grow." large; services line; contact; links; giant cropped ARC LABS wordmark; no copyright line.
 
 ### Step 2 — Home hero
 - [ ] **2.1** H1 with node full stops, as large as the screen allows; one word per line on mobile; lead + buttons left, figure right.

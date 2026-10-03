@@ -147,7 +147,10 @@
 :root[data-theme="light"] { color-scheme: light; }
 
 /* Always-Ink surfaces: Elements page, Contact, menu, Lab pop-up. */
-.ink { color-scheme: dark; background: var(--color-bg); color: var(--color-text); }
+.ink, :root.ink[data-theme] { color-scheme: dark; }
+.ink { background: var(--color-bg); color: var(--color-text); }
+/* An always-Ink page has nothing for the theme toggle to change (DECISIONS D6). */
+:root.ink .toggle--theme { display: none; }
 /* Client work keeps its own colours whatever the theme. */
 .plate { color-scheme: light; }
 
@@ -463,16 +466,118 @@ html.has-cursor [data-cursor="drag"]:active, html.has-cursor .is-dragging, html.
 
 
 /* --------------------------------------------------------------------------
+   08 · SHELL — nav, menu, footer, consent
+   -------------------------------------------------------------------------- */
+.defs { position: absolute; width: 0; height: 0; overflow: hidden; }
+
+.nav {
+  position: sticky; top: 0; z-index: var(--z-nav);
+  background: var(--color-bg);
+  border-bottom: var(--line-hair) solid transparent;
+  transition: border-color var(--duration-fast) var(--ease-standard);
+}
+.nav.is-scrolled { border-bottom-color: var(--color-border); }
+.nav__inner { display: flex; align-items: center; gap: var(--space-5); block-size: var(--nav-h); }
+.nav__links { display: none; gap: var(--space-6); margin-left: auto; }
+.nav__link {
+  display: block; padding-block: var(--space-2);
+  font-size: var(--text-small); font-weight: 500; letter-spacing: -.005em; color: var(--color-muted);
+  transition: color var(--duration-fast) var(--ease-standard);
+}
+.nav__link:hover { color: var(--color-text); }
+/* Current page: a static 1px underline. */
+.nav__link[aria-current="page"] { color: var(--color-text); text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .5em; }
+.nav__tools { display: flex; align-items: center; gap: var(--space-3); margin-left: auto; }
+.nav__links + .nav__tools { margin-left: var(--space-6); }
+.nav__cta { display: none; }
+
+/* Menu: full-screen Ink dialog with large numbered links. It simply appears. */
+.menu {
+  position: fixed; inset: 0; z-index: var(--z-menu);
+  inline-size: 100%; block-size: 100%; max-inline-size: none; max-block-size: none;
+  margin: 0; padding: 0; border: 0;
+  overflow-y: auto;
+}
+.menu[open] { display: flex; flex-direction: column; }
+.menu::backdrop { background: var(--color-ink); }
+.menu__head { display: flex; justify-content: space-between; align-items: center; block-size: var(--nav-h); flex: none; }
+.menu__list { margin-block: auto; padding-block: var(--space-7); display: grid; gap: var(--space-2); }
+.menu__list a {
+  display: flex; align-items: baseline; gap: var(--space-4);
+  font-family: var(--font-display); font-weight: 600; font-size: clamp(2.5rem, 11vw, 4.5rem);
+  line-height: 1.05; letter-spacing: var(--track-heading);
+}
+.menu__list a span {
+  min-inline-size: 2ch;
+  font-family: var(--font-display); font-weight: 300; font-size: var(--text-small); letter-spacing: 0;
+  color: var(--color-muted); font-variant-numeric: tabular-nums;
+}
+.menu__list a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: .12em; }
+.menu__foot {
+  display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-4);
+  padding-block: var(--space-5) calc(var(--space-6) + env(safe-area-inset-bottom, 0px));
+  border-top: var(--line-hair) solid var(--color-border); font-size: var(--text-small);
+}
+.menu__tools { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+html:has(dialog[open]) { overflow: hidden; }
+
+/* Footer */
+.footer { position: relative; overflow: hidden; padding-top: var(--space-9); border-top: var(--line-hair) solid var(--color-border); }
+.footer__sign { font-family: var(--font-display); font-weight: 600; font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--track-display); }
+.footer__grid { margin-top: var(--space-8); row-gap: var(--space-6); font-size: var(--text-small); }
+.footer__grid h2 { margin-bottom: var(--space-3); }
+.footer__grid ul { display: grid; gap: var(--space-2); }
+.footer__contact a { overflow-wrap: anywhere; }
+.footer__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); }
+/* Giant wordmark cropped along the bottom edge. */
+.footer__word {
+  margin-top: var(--space-8);
+  block-size: calc(var(--word-size) * .62); overflow: hidden;
+  --word-size: calc((min(100vw, var(--page-max)) - 2 * var(--margin)) / 4.62);
+}
+.footer__word span {
+  display: block;
+  font-family: var(--font-display); font-weight: 600; font-size: var(--word-size);
+  line-height: .8; letter-spacing: -.05em; white-space: nowrap;
+  margin-left: -.04em; color: var(--color-text);
+  user-select: none;
+}
+
+/* Analytics consent (only when GA4 is configured). */
+.consent {
+  position: fixed; left: var(--space-4); right: var(--space-4); bottom: var(--space-4); z-index: var(--z-menu);
+  display: grid; gap: var(--space-4); max-inline-size: 30rem;
+  padding: var(--space-5); border: var(--line-hair) solid var(--color-border-strong);
+  font-size: var(--text-small);
+}
+.consent__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); }
+
+
+/* --------------------------------------------------------------------------
    10 · RESPONSIVE — 390 · 480 · 768 · 1024 · 1200 · 1440
    -------------------------------------------------------------------------- */
+@media (max-width: 479px) {
+  .nav__tools .toggle--theme { display: none; }
+}
 @media (min-width: 640px) {
   :root { --text-hero: clamp(3.5rem, calc((100vw - 2 * var(--margin)) / 8.35), 10.5rem); }
 }
 @media (min-width: 768px) {
   :root { --cols: 8; }
+  .footer__services { grid-column: 1 / 5; }
+  .footer__contact  { grid-column: 5 / 9; }
+  .footer__links    { grid-column: 1 / 5; }
+  .footer__tools    { grid-column: 5 / 9; align-self: end; }
 }
 @media (min-width: 1024px) {
   :root { --cols: 12; --text-body: 1.0625rem; --nav-h: 4.5rem; }
+  .nav__links { display: flex; }
+  .nav__cta { display: inline-flex; }
+  .menu-btn { display: none; }
+  .footer__services { grid-column: 1 / 4; }
+  .footer__contact  { grid-column: 4 / 7; }
+  .footer__links    { grid-column: 7 / 10; }
+  .footer__tools    { grid-column: 10 / -1; align-self: start; flex-direction: column; align-items: flex-start; }
 }
 @media (min-width: 1440px) {
   :root { --margin: max(4rem, (100vw - 1440px) / 2 + 4rem); }
