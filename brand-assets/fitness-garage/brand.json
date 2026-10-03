@@ -1,0 +1,16 @@
+{
+  "name": "Fitness Garage",
+  "logoSource": "https://www.fitness-garage.in/images/logo1.png",
+  "colors": {
+    "background": "#070707",
+    "text": "#f4f4f4",
+    "accent": "#f4f4f4"
+  },
+  "themeColor": "#070707",
+  "fonts": [
+    "Bebas Neue",
+    "Barlow",
+    "Barlow Condensed"
+  ],
+  "notes": "Header logo is /images/logo1.png (1280x465). No SVG (404). A hidden text fallback 'FITNESS GARAGE' (Bebas Neue, #f4f4f4, display:none) sits beside it. Footer uses the same PNG, no separate light version. The palette is monochrome: the main buttons ('FREE TRIAL', 'BOOK FREE TRIAL') are #f4f4f4 with #070707 text, so accent equals the text colour. Nav is transparent over the #070707 page. Headings: Bebas Neue; body: Barlow. Favicon: the only icon is the logo itself (/images/logo1.png, used for both icon and apple-touch-icon); /favicon.ico is 404. Original image files are NOT included in this package: the build workspace cannot reach this site directly and the browser channel cannot transfer binary files. Run fetch_assets.sh (in the brand-assets root) to download the originals listed in sources.txt into this folder unchanged.\nMISSING logo.png (https://www.fitness-garage.in/images/logo1.png): download failed on 2026-10-03 because the build environment network policy blocks www.fitness-garage.in (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING favicon.png (https://www.fitness-garage.in/images/logo1.png): download failed on 2026-10-03 because the build environment network policy blocks www.fitness-garage.in (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nSUPPLIED logo.png: provided by hand on 2026-10-03 and saved unchanged (see RECEIVED.txt). Overrides the MISSING line for this file only."
+}

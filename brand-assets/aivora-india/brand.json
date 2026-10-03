@@ -1,0 +1,15 @@
+{
+  "name": "Aivora India",
+  "logoSource": "https://www.aivoraindia.com/AI_Vero.PNG",
+  "colors": {
+    "background": "#175aa1",
+    "text": "#20334c",
+    "accent": "#0fa5f0"
+  },
+  "themeColor": null,
+  "fonts": [
+    "Space Grotesk",
+    "Inter"
+  ],
+  "notes": "Header logo is /AI_Vero.PNG (1280x853), followed by live text 'Aivora India' (Space Grotesk 700, #ffffff) and 'Corporate Solutions' (Inter, white at 70%). No SVG (404). Header background is a gradient, linear-gradient(135deg, #175aa1, #12467d); the page body is #ffffff with text #20334c. Logo text in the header is white, body text is #20334c. Accent is the 'View Products' button (#0fa5f0, white text). No light logo variant and no footer logo found. Headings: Space Grotesk; body: Inter. Favicon: the icon link points to AI_Vero.PNG (1280x853, the logo itself); /favicon.ico also exists (1280x853 per browser decode); no apple-touch-icon (404). Original image files are NOT included in this package: the build workspace cannot reach this site directly and the browser channel cannot transfer binary files. Run fetch_assets.sh (in the brand-assets root) to download the originals listed in sources.txt into this folder unchanged.\nMISSING logo.png (https://www.aivoraindia.com/AI_Vero.PNG): download failed on 2026-10-03 because the build environment network policy blocks www.aivoraindia.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING favicon.png (https://www.aivoraindia.com/AI_Vero.PNG): download failed on 2026-10-03 because the build environment network policy blocks www.aivoraindia.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nSUPPLIED logo.png: provided by hand on 2026-10-03 and saved unchanged (see RECEIVED.txt). Overrides the MISSING line for this file only."
+}

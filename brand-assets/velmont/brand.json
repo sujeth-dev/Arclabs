@@ -1,0 +1,17 @@
+{
+  "name": "Velmont Design Studio",
+  "logoSource": "https://www.velmontdesign.com/assets/logos/velmont-main.png",
+  "colors": {
+    "background": "#f4f0eb",
+    "text": "#1a1a1a",
+    "accent": "#ff4015"
+  },
+  "themeColor": "#f4f0eb",
+  "fonts": [
+    "Manrope",
+    "Inter",
+    "Cormorant Garamond",
+    "The Seasons"
+  ],
+  "notes": "Header logo is a <picture>: WebP source velmont-main.webp (4000x2000) with PNG fallback velmont-main.png (20001x10001, ~1 MB) - the PNG is the largest original. No SVG exists (velmont-main.svg returns 404). Footer uses a white version, velmont-white.png (20000x10000). Accent is the border colour of the outlined 'ENQUIRE' nav button (no filled buttons in the header). Headings: Manrope; body: Inter; Cormorant Garamond and The Seasons are also loaded. Favicon: favicon-192.png (192x192) is larger than apple-touch-icon.png (180x180), so the 192 version is used. Footer background #1a1a1a. Original image files are NOT included in this package: the build workspace cannot reach this site directly and the browser channel cannot transfer binary files. Run fetch_assets.sh (in the brand-assets root) to download the originals listed in sources.txt into this folder unchanged.\nMISSING logo.png (https://www.velmontdesign.com/assets/logos/velmont-main.png): download failed on 2026-10-03 because the build environment network policy blocks www.velmontdesign.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING logo-light.png (https://www.velmontdesign.com/assets/logos/velmont-white.png): download failed on 2026-10-03 because the build environment network policy blocks www.velmontdesign.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING favicon.png (https://www.velmontdesign.com/favicon-192.png): download failed on 2026-10-03 because the build environment network policy blocks www.velmontdesign.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nSUPPLIED logo.webp: provided by hand on 2026-10-03 and saved unchanged (see RECEIVED.txt). Overrides the MISSING line for this file only."
+}

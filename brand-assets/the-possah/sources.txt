@@ -1,0 +1,3 @@
+logo.png	https://thepossah.com/images/logo.png
+logo-wordmark.png	https://thepossah.com/images/name.png
+favicon.png	https://thepossah.com/icon.png

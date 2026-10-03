@@ -1,0 +1,16 @@
+{
+  "name": "The Possah",
+  "logoSource": "https://thepossah.com/images/logo.png",
+  "colors": {
+    "background": "#f4ecdf",
+    "text": "#1a1a1a",
+    "accent": "#1f3a2d"
+  },
+  "themeColor": null,
+  "fonts": [
+    "Playfair Display",
+    "Inter",
+    "JetBrains Mono"
+  ],
+  "notes": "Header logo is two PNGs side by side (served through the Next.js image optimiser; originals saved): an icon mark /images/logo.png (1024x1024) and a wordmark image /images/name.png (1536x1024, alt 'The Possah'). No SVG (requests for .svg return the HTML app shell). No separate light logo: the footer (background #1f3a2d) reuses the same two images with no filter. Accent is the filled 'SHOP THE COLLECTION' button (#1f3a2d bg, #f4ecdf text). Headings: Playfair Display; body: Inter; nav and small text: JetBrains Mono. Favicon: /icon.png (512x512) is the largest; apple-icon.png is 180x180. Original image files are NOT included in this package: the build workspace cannot reach this site directly and the browser channel cannot transfer binary files. Run fetch_assets.sh (in the brand-assets root) to download the originals listed in sources.txt into this folder unchanged.\nMISSING logo.png (https://thepossah.com/images/logo.png): download failed on 2026-10-03 because the build environment network policy blocks thepossah.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING logo-wordmark.png (https://thepossah.com/images/name.png): download failed on 2026-10-03 because the build environment network policy blocks thepossah.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING favicon.png (https://thepossah.com/icon.png): download failed on 2026-10-03 because the build environment network policy blocks thepossah.com (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nSUPPLIED logo-wordmark.avif: provided by hand on 2026-10-03 and saved unchanged (see RECEIVED.txt). Overrides the MISSING line for this file only."
+}

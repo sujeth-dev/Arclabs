@@ -1,0 +1,3 @@
+logo.png	https://www.velmontdesign.com/assets/logos/velmont-main.png
+logo-light.png	https://www.velmontdesign.com/assets/logos/velmont-white.png
+favicon.png	https://www.velmontdesign.com/favicon-192.png

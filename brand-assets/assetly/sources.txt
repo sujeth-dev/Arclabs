@@ -1,0 +1,2 @@
+logo.png	https://assetly.lease/brand/assetly-mark.png
+favicon.png	https://assetly.lease/icon.png

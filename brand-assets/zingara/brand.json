@@ -1,0 +1,16 @@
+{
+  "name": "Zingara",
+  "logoSource": "https://www.zingararestaurant.co.in/images/logo.webp",
+  "colors": {
+    "background": "#1c1a18",
+    "text": "#f5edd8",
+    "accent": "#c8332a"
+  },
+  "themeColor": null,
+  "fonts": [
+    "Cormorant Garamond",
+    "DM Sans",
+    "Kaushan Script"
+  ],
+  "notes": "Header logo is two WebP images: emblem /images/logo.webp (2608x1632, alt 'Zingara Logo') and wordmark /images/Zingara.webp (1536x1024). Only WebP originals exist (.svg and .png versions return 404), so they are kept as .webp rather than renamed or converted. Site is dark throughout; the footer (#151310) reuses the same images, so there is no separate light version. Nav bar is #1c1a18 at 88% opacity. Accent is the 'ORDER NOW' button (#c8332a, text #f5edd8); Swiggy (#fc8019) and Zomato (#e23744) buttons use those platforms' colours. Headings: Cormorant Garamond; body: DM Sans; Kaushan Script is used for a menu-section script title. The page title reads 'White Biryani in Horamavu, Bangalore | Zingara'. Favicon: favicon.png and apple-touch-icon.png are both 2608x1632 (non-square, same image as the emblem); /favicon.ico is 404. Original image files are NOT included in this package: the build workspace cannot reach this site directly and the browser channel cannot transfer binary files. Run fetch_assets.sh (in the brand-assets root) to download the originals listed in sources.txt into this folder unchanged.\nMISSING logo.webp (https://www.zingararestaurant.co.in/images/logo.webp): download failed on 2026-10-03 because the build environment network policy blocks www.zingararestaurant.co.in (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING logo-wordmark.webp (https://www.zingararestaurant.co.in/images/Zingara.webp): download failed on 2026-10-03 because the build environment network policy blocks www.zingararestaurant.co.in (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING favicon.png (https://www.zingararestaurant.co.in/apple-touch-icon.png): download failed on 2026-10-03 because the build environment network policy blocks www.zingararestaurant.co.in (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nSUPPLIED logo.webp: provided by hand on 2026-10-03 and saved unchanged (see RECEIVED.txt). Overrides the MISSING line for this file only."
+}

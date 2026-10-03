@@ -1,0 +1,2 @@
+logo.png	https://www.aivoraindia.com/AI_Vero.PNG
+favicon.png	https://www.aivoraindia.com/AI_Vero.PNG

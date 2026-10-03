@@ -1,0 +1,3 @@
+logo.webp	https://www.zingararestaurant.co.in/images/logo.webp
+logo-wordmark.webp	https://www.zingararestaurant.co.in/images/Zingara.webp
+favicon.png	https://www.zingararestaurant.co.in/apple-touch-icon.png

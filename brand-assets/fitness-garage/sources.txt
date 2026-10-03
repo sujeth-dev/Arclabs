@@ -1,0 +1,2 @@
+logo.png	https://www.fitness-garage.in/images/logo1.png
+favicon.png	https://www.fitness-garage.in/images/logo1.png

@@ -1,0 +1,9 @@
+Files supplied by hand on 2026-10-03 (uploaded in the build session; fetch_assets.sh could not reach the sites).
+Saved unchanged (no resize, conversion or recolour):
+  velmont/logo.webp              2000x1000 WebP  (header <picture> WebP source; PNG original not downloaded)
+  the-possah/logo-wordmark.avif  640x427 AVIF    (wordmark "THE POSSAH / HAUTE COUTURE"; icon mark logo.png not supplied)
+  zingara/logo.webp              1500x939 WebP   (Z emblem; wordmark Zingara.webp not supplied)
+  fitness-garage/logo.png        1280x465 PNG    (white lettering, transparent background)
+  assetly/logo.png               375x411 PNG     (composed brand card: "a." on #20241a-ish with "ACCESS · SCALE · GROW"; not the CSS mask PNG)
+  aivora-india/logo.png          1280x853 PNG    (AI Vora india logo)
+Still missing: velmont/logo-light.png, all favicon.png files, the-possah/logo.png, zingara/logo-wordmark.webp.

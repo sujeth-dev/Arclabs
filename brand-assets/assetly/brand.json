@@ -1,0 +1,16 @@
+{
+  "name": "assetly leasing",
+  "logoSource": "https://assetly.lease/brand/assetly-mark.png",
+  "colors": {
+    "background": "#f6f4ec",
+    "text": "#26261b",
+    "accent": "#25453a"
+  },
+  "themeColor": null,
+  "fonts": [
+    "DM Serif Display",
+    "DM Serif Text",
+    "Inter Tight"
+  ],
+  "notes": "Logo is a mark plus live text. The mark is not an <img>: /brand/assetly-mark.png (2048x1902) is used as a CSS mask on a span filled with #40402d. The original PNG is the mask shape and may not look like the on-screen colour. The wordmark 'assetly leasing' is HTML text in DM Serif Display, weight 400, #26261b (page title uses 'Assetly'). No SVG (404). Footer (#21241a) recolours the same mask to #e7e3d4 via CSS, so there is no separate light file. Header is transparent over the #f6f4ec page. Accent is the 'CONTACT' button (#25453a, text #e7e3d4). Headings: DM Serif Display; body: DM Serif Text; Inter Tight is also loaded. Favicon: /icon.png (512x512); apple-icon.png is 180x180. Original image files are NOT included in this package: the build workspace cannot reach this site directly and the browser channel cannot transfer binary files. Run fetch_assets.sh (in the brand-assets root) to download the originals listed in sources.txt into this folder unchanged.\nMISSING logo.png (https://assetly.lease/brand/assetly-mark.png): download failed on 2026-10-03 because the build environment network policy blocks assetly.lease (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nMISSING favicon.png (https://assetly.lease/icon.png): download failed on 2026-10-03 because the build environment network policy blocks assetly.lease (proxy returned 403, connection rejected). Run fetch_assets.sh from a machine with normal internet access.\nSUPPLIED logo.png: provided by hand on 2026-10-03 and saved unchanged (see RECEIVED.txt). Overrides the MISSING line for this file only."
+}
