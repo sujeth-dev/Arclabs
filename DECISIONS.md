@@ -16,3 +16,6 @@ Choices not covered by the plan, and why.
 | D10 | Possah's "Visit live site" links to thepossah.com although its status is "Ready for launch". | The URL was supplied in the media brief. Remove `liveUrl` in `data/content.js` if the store should not be linked before launch. |
 | D11 | Mini-demos are abstract diagrams (bars, blocks, a pin) with only the plan's words ("Add to cart", "Hi, I'd like to book…") plus "Button"/"Before"/"After" labels. | Demonstrates each service without inventing client content, prices or products. |
 | D12 | Redesigns has no Related work row. | The plan's "any project with a before/after" has no matching project yet (TODO T8). |
+| D13 | "B2B firms" opens Assetly (File 04); "New ventures still finding their shape" is not linked. | One link per phrase; Assetly is the first B2B file and Aivora is one Next away. No project is a new venture. |
+| D14 | Without a Formspree ID the form opens the visitor's email app with the enquiry filled in, and says so ("Your email app should open…"). | Showing "Thanks, we'll be in touch." when nothing was sent would be untrue. With an ID it shows the plan's success line. |
+| D15 | The technical ARC's dimension lines fade in while the span draws. | They use non-scaling strokes, which do not combine with `pathLength` dash drawing (noted in the brand system). |

@@ -11,7 +11,8 @@ const hv = new HtmlValidate({
     "void-style": "off",
     "doctype-style": "off",             // lowercase doctype is valid HTML
     "no-redundant-role": "off",         // role="list" restores list semantics in Safari when list-style is none
-    "prefer-native-element": ["error", { exclude: ["region"] }],
+    "prefer-native-element": ["error", { exclude: ["region", "list"] }],
+    "form-dup-name": ["error", { shared: ["checkbox"] }],  // the "need" checkbox group
   },
 });
 let errors = 0;

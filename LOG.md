@@ -77,3 +77,13 @@ Screenshots: `qa/04-lab/`.
 **Failed → fixed:** Redesigns "after" layer content sat left of the split → spread across the width · "Mix and match." overlapped the lead below 1024px → static there · combinations single-column on phones → two-up.
 
 Screenshots: `qa/05-elements/`.
+
+## 2026-10-03 — Step 6: Approach, Process, Contact
+
+**Built:** 04 Approach — philosophy lines (static) beside the mark drawn as a measured figure (u = node Ø: anchors 3.3u apart, rest 2.0u up, stroke 0.32u, dimension lines 1u / 3.3u / 2.0u, Design · Build · Grow labels); the span draws once in view (700ms), nodes pop, dimensions fade; studio copy; business types set very large, each opening its Lab file (Restaurants → Zingara, Interior companies → Velmont, Fashion labels → The Possah, Fitness studios → Fitness Garage, B2B firms → Assetly). 05 Process — five steps on one hairline with a node per step, the line draws once in view (700ms), vertical on < 1024px, margin note. 06 Contact (Ink) — heading + four lines + lead; email and phone set large as copy buttons (cursor tag "Copy"); WhatsApp us; margin note; form (Name · Business · Email · Phone · six chips · Budget · Message), honeypot `_gotcha`, Turnstile slot (loads only with a site key), inline validation with focus to the first error, Formspree POST → "Thanks, we'll be in touch." (mailto fallback when no form ID), `enquiry_sent`. Chips: two selected → a span joins them (400ms draw) and the plan's result word appears above; prefill via `?need=`.
+
+**Tested:** contact suite 15/15 (prefill, result words, keyboard chips, validation + focus, clipboard, WhatsApp, Formspree POST via stubbed config + endpoint, success state, event) · html-validate · shell · content · pages 5 × 4 widths.
+
+**Failed → fixed:** technical figure's "Build" label collided with the 2.0u dimension → dimension moved out; units no longer uppercased · on phones the chip connector crossed chips on the row between → chips now sit on an opaque ground above the line · html-validate flagged the shared checkbox name and `role="list"` on `<ol>` → both are intended; rules configured.
+
+Screenshots: `qa/06-approach-process-contact/`.

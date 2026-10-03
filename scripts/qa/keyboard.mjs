@@ -207,6 +207,55 @@ const suites = {
     check("no errors", !errors.length, errors.join(" | "));
     await ctx.close();
   },
+
+  async contact() {
+    console.log("contact");
+    let { page, ctx, errors } = await open("/?need=websites,lead-booking#contact");
+    check("prefill from ?need=", await page.evaluate(() => [...document.querySelectorAll('input[name="need"]:checked')].map((b) => b.value).join() === "websites,lead-booking"));
+    check("result word for the pair", (await page.locator("[data-chip-result]").textContent()) === "More enquiries");
+    check("connecting span drawn", ((await page.locator("[data-chip-link] path").getAttribute("d")) || "").startsWith("M"));
+    await page.locator('input[value="lead-booking"]').focus(); await page.keyboard.press("Space");
+    check("chips are keyboard checkboxes; one chip → no line", (await page.locator("[data-chip-result]").textContent()) === "" && !(await page.locator("[data-chip-link] path").getAttribute("d")));
+    await page.locator('input[value="custom-systems"]').focus(); await page.keyboard.press("Space");
+    await page.locator('input[value="websites"]').focus(); await page.keyboard.press("Space");
+    await page.locator('input[value="lead-booking"]').focus(); await page.keyboard.press("Space");
+    check("Cs + Lb → Automated follow-up", (await page.locator("[data-chip-result]").textContent()) === "Automated follow-up");
+    // validation
+    await page.locator('.form button[type="submit"]').click();
+    check("empty submit: name error shown + focused", await page.evaluate(() => !document.getElementById("f-name-err").hidden && document.activeElement.id === "f-name" && document.getElementById("f-name").getAttribute("aria-invalid") === "true"));
+    await page.fill("#f-name", "Test Person"); await page.fill("#f-email", "not-an-email");
+    await page.locator('.form button[type="submit"]').click();
+    check("bad email: error + focus", await page.evaluate(() => !document.getElementById("f-email-err").hidden && document.activeElement.id === "f-email"));
+    // copy
+    await ctx.grantPermissions(["clipboard-read", "clipboard-write"]);
+    await page.locator('.direct__item[data-copy="arclabs.tech@gmail.com"]').click();
+    check("email copies", (await page.evaluate(() => navigator.clipboard.readText())) === "arclabs.tech@gmail.com");
+    check("copy shows Copied", (await page.locator('.direct__item[data-copy="arclabs.tech@gmail.com"] [data-copy-label]').textContent()) === "Copied");
+    check("WhatsApp link", (await page.locator('a[href="https://wa.me/918088506783"]').count()) >= 1);
+    check("no errors", !errors.length, errors.join(" | "));
+    await ctx.close();
+
+    // Formspree path: stub config with an ID and the endpoint with 200.
+    ctx = await browser.newContext({ viewport: { width: 390, height: 844 } });
+    page = await ctx.newPage(); errors = watch(page, base);
+    let posted = null;
+    await page.route("**/js/config.js", async (route) => {
+      const res = await route.fetch(); const body = (await res.text()).replace('formspreeId: ""', 'formspreeId: "test123"');
+      route.fulfill({ response: res, body, headers: { ...res.headers(), "content-type": "text/javascript" } });
+    });
+    await page.route("https://formspree.io/**", (route) => { posted = route.request(); route.fulfill({ status: 200, contentType: "application/json", body: '{"ok":true}' }); });
+    await page.goto(base + "/#contact", { waitUntil: "networkidle" });
+    await page.evaluate(() => { window.__ev = []; document.addEventListener("arc:track", (e) => window.__ev.push(e.detail.name)); });
+    await page.fill("#f-name", "Test Person"); await page.fill("#f-email", "test@example.com"); await page.fill("#f-message", "Hello");
+    await page.locator('input[value="e-commerce"]').check({ force: true });
+    await page.locator('.form button[type="submit"]').click();
+    await page.waitForTimeout(500);
+    check("posts to Formspree", !!posted && posted.url().endsWith("/f/test123") && posted.method() === "POST");
+    check("success: Thanks, we'll be in touch.", await page.evaluate(() => !document.querySelector("[data-form-done]").hidden && document.activeElement.matches("[data-form-done]") && /Thanks, we’ll be in touch/.test(document.querySelector("[data-form-done]").textContent)));
+    check("enquiry_sent tracked", await page.evaluate(() => window.__ev.includes("enquiry_sent")));
+    check("no errors", !errors.length, errors.join(" | "));
+    await ctx.close();
+  },
 };
 
 for (const [name, fn] of Object.entries(suites)) {
