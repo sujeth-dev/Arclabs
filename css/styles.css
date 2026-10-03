@@ -630,7 +630,9 @@ html:has(dialog[open]) { overflow: hidden; }
   background: var(--color-node); flex: none;
 }
 .motion .client-strip__track { animation: strip 48s linear infinite; }
-.client-strip:hover .client-strip__track { animation-play-state: paused; }
+.client-strip:is(:hover, :focus-within) .client-strip__track { animation-play-state: paused; }
+.client-strip__list a { color: inherit; text-decoration: none; transition: color var(--duration-fast) var(--ease-standard); }
+.client-strip__list a:hover, .client-strip__list a:focus-visible { text-decoration: underline; text-decoration-thickness: 2px; text-underline-offset: .12em; }
 @keyframes strip { to { transform: translateX(-50%); } }
 /* Reduced motion: the strip stops and shows every name. */
 :root:not(.motion) .client-strip__track { inline-size: auto; padding-inline: var(--margin); }
@@ -657,10 +659,17 @@ html:has(dialog[open]) { overflow: hidden; }
 .lab-card .frame__video { opacity: 0; transition: opacity var(--duration-fast) var(--ease-standard); }
 .lab-card .frame__video.is-playing { opacity: 1; }
 
-/* The hand annotation on File 01: a phrase joined to the frame by a thin arc. */
-.annotation { position: absolute; right: 0; bottom: calc(100% - .25rem); display: flex; align-items: flex-end; justify-content: flex-end; gap: var(--space-1); font-size: var(--text-small); white-space: nowrap; }
-.annotation a { padding-bottom: 1.6rem; }
-.annotation svg { inline-size: 3.75rem; block-size: 2.5rem; flex: none; overflow: visible; color: var(--color-text); }
+/* The hand annotation on every live file: a phrase joined to the frame by a thin arc.
+   Alternates sides; on phones it sits under the card as a plain line. */
+.annotation { order: 2; margin-top: var(--space-3); font-size: var(--text-small); }
+.annotation svg { display: none; }
+@media (min-width: 768px) {
+  .annotation { order: 0; margin: 0; position: absolute; right: 0; bottom: calc(100% - .25rem); display: flex; align-items: flex-end; justify-content: flex-end; gap: var(--space-1); white-space: nowrap; }
+  .annotation--left { right: auto; left: 0; flex-direction: row-reverse; }
+  .annotation a { padding-bottom: 1.6rem; }
+  .annotation svg { display: block; inline-size: 3.75rem; block-size: 2.5rem; flex: none; overflow: visible; color: var(--color-text); }
+  .annotation--left svg { transform: scaleX(-1); }
+}
 
 .lab-preview__foot { display: flex; flex-wrap: wrap; align-items: center; justify-content: space-between; gap: var(--space-6); margin-top: clamp(var(--space-7), 6vw, var(--space-9)); }
 

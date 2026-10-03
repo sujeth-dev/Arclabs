@@ -76,7 +76,7 @@ export const projects = [
     line: "Access assets. Preserve capital. Keep growing.",
     sector: "Asset leasing · B2B",
     status: "Live", filter: "B2B",
-    liveUrl: null, // TODO(T2): Assetly URL
+    liveUrl: "https://assetly.lease",
     featured: null,
     hypothesis: "An asset-leasing company needed to explain a financial idea simply: get equipment without tying up capital.",
     formula: {
@@ -116,7 +116,7 @@ export const projects = [
     line: "Making everyday business workflows simpler.",
     sector: "Business solutions · B2B",
     status: "Live", filter: "B2B",
-    liveUrl: null, // TODO(T3): Aivora India URL
+    liveUrl: "https://www.aivoraindia.com",
     featured: null,
     hypothesis: "A business-solutions company needed to explain its offering clearly and make the next step easy.",
     formula: {
