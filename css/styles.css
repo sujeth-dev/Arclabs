@@ -187,6 +187,7 @@ button { font: inherit; color: inherit; background: none; border: 0; padding: 0;
 input, textarea, select { font: inherit; color: inherit; }
 ::selection { background: var(--color-selection); color: var(--color-selection-text); }
 
+[hidden] { display: none !important; }
 :focus-visible { outline: 2px solid var(--color-text); outline-offset: 3px; }
 .skip-link {
   position: fixed; left: var(--margin); top: var(--space-3); z-index: calc(var(--z-cursor) + 1);
@@ -526,20 +527,20 @@ html:has(dialog[open]) { overflow: hidden; }
 .footer__sign { font-family: var(--font-display); font-weight: 600; font-size: var(--text-display); line-height: var(--leading-display); letter-spacing: var(--track-display); }
 .footer__grid { margin-top: var(--space-8); row-gap: var(--space-6); font-size: var(--text-small); }
 .footer__grid h2 { margin-bottom: var(--space-3); }
-.footer__grid ul { display: grid; gap: var(--space-2); }
+.footer__grid ul { display: grid; align-content: start; gap: var(--space-2); }
 .footer__contact a { overflow-wrap: anywhere; }
 .footer__tools { display: flex; flex-wrap: wrap; align-items: center; gap: var(--space-2) var(--space-5); }
 /* Giant wordmark cropped along the bottom edge. */
 .footer__word {
   margin-top: var(--space-8);
   block-size: calc(var(--word-size) * .62); overflow: hidden;
-  --word-size: calc((min(100vw, var(--page-max)) - 2 * var(--margin)) / 4.62);
+  --word-size: calc((min(100vw, var(--page-max)) - 2 * var(--margin)) / 4.4);
 }
 .footer__word span {
   display: block;
   font-family: var(--font-display); font-weight: 600; font-size: var(--word-size);
   line-height: .8; letter-spacing: -.05em; white-space: nowrap;
-  margin-left: -.04em; color: var(--color-text);
+  margin-left: -.06em; color: var(--color-text);
   user-select: none;
 }
 
@@ -554,13 +555,56 @@ html:has(dialog[open]) { overflow: hidden; }
 
 
 /* --------------------------------------------------------------------------
+   09 · HOME
+   -------------------------------------------------------------------------- */
+
+/* 01 Hero */
+.hero { padding-block: clamp(var(--space-6), 6vw, var(--space-9)) var(--section-space); }
+.hero__title .line { display: block; white-space: nowrap; }
+.hero__body { margin-top: clamp(var(--space-7), 6vw, var(--space-9)); row-gap: var(--space-9); align-items: end; }
+.hero__lead { max-width: 34rem; }
+.hero__sub { margin-top: var(--space-4); max-width: 34rem; color: var(--color-muted); }
+.hero__actions { display: flex; flex-wrap: wrap; gap: var(--space-3); margin-top: var(--space-6); }
+
+/* The Lift figure: the signature diagram. */
+.lift { position: relative; color: var(--color-text); }
+.lift__stage { position: relative; margin-bottom: 2.75rem; }
+.lift__svg { inline-size: 100%; block-size: auto; overflow: visible; }
+.lift__grab { fill: transparent; touch-action: none; }
+.lift__tag {
+  position: absolute; display: inline-flex; align-items: baseline; gap: .6em;
+  font-size: var(--text-label); font-weight: 500; letter-spacing: var(--track-label); text-transform: uppercase;
+  color: var(--color-muted); white-space: nowrap; line-height: 1.2; pointer-events: none;
+}
+.lift__tag b { font-family: var(--font-display); font-weight: 300; font-size: var(--text-small); letter-spacing: 0; color: var(--color-text); }
+.lift__tag--a { left: 0; top: calc(100% + .9rem); }
+.lift__tag--b { right: 0; top: calc(100% + .9rem); }
+.lift__tag--c { left: calc(50% + 1.35rem); top: 16.42%; transform: translateY(-50%); color: var(--color-text); }
+.motion [data-hero-arc]:not(.is-live) [data-span] { stroke-dasharray: 1 1; stroke-dashoffset: 1; }
+.motion [data-hero-arc]:not(.is-live) :is([data-anchor], [data-rest], [data-lift-label]) { opacity: 0; }
+.lift.is-dragging .lift__tag--c { color: var(--color-text); }
+
+/* Stamp: a circular seal with the mark at the centre. Static. */
+.stamp {
+  position: absolute; right: 12%; top: calc(100% - 1.25rem);
+  inline-size: clamp(5.5rem, 9vw, 8rem); block-size: auto; overflow: visible;
+  color: var(--color-text); transform: rotate(-12deg);
+}
+.stamp__ring { fill: var(--color-bg); stroke: currentColor; stroke-width: 1; }
+.stamp__ring + .stamp__ring { fill: none; stroke: var(--color-border-strong); }
+.stamp__text { font-family: var(--font-body); font-size: 9.2px; font-weight: 500; letter-spacing: .1em; fill: currentColor; }
+.stamp use { color: var(--color-text); }
+
+
+/* --------------------------------------------------------------------------
    10 · RESPONSIVE — 390 · 480 · 768 · 1024 · 1200 · 1440
    -------------------------------------------------------------------------- */
 @media (max-width: 479px) {
   .nav__tools .toggle--theme { display: none; }
 }
 @media (min-width: 640px) {
-  :root { --text-hero: clamp(3.5rem, calc((100vw - 2 * var(--margin)) / 8.35), 10.5rem); }
+  :root { --text-hero: clamp(3.5rem, calc((min(100vw, var(--page-max)) - 2 * var(--margin)) / 8.7), 10.5rem); }
+  .hero__title .line { display: inline; }
 }
 @media (min-width: 768px) {
   :root { --cols: 8; }
@@ -574,6 +618,8 @@ html:has(dialog[open]) { overflow: hidden; }
   .nav__links { display: flex; }
   .nav__cta { display: inline-flex; }
   .menu-btn { display: none; }
+  .hero__lead-col { grid-column: 1 / 6; }
+  .hero__fig-col  { grid-column: 7 / -1; }
   .footer__services { grid-column: 1 / 4; }
   .footer__contact  { grid-column: 4 / 7; }
   .footer__links    { grid-column: 7 / 10; }

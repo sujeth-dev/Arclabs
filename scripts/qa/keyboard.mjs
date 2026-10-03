@@ -70,6 +70,35 @@ const suites = {
     check("/elements is Ink in Cream theme", (await page.evaluate(() => getComputedStyle(document.body).backgroundColor)) === "rgb(23, 24, 26)");
     await ctx.close();
   },
+
+  async hero() {
+    console.log("hero");
+    let { page, ctx, errors } = await open("/", { reduced: true });
+    const st = await page.evaluate(() => {
+      const span = document.querySelector("[data-hero-arc] [data-span]");
+      const rest = document.querySelector("[data-hero-arc] [data-rest]");
+      return { off: getComputedStyle(span).strokeDashoffset, op: getComputedStyle(rest).opacity };
+    });
+    check("reduced motion: hero ARC complete on first frame", (st.off === "0px" || st.off === "0") && st.op === "1", JSON.stringify(st));
+    await ctx.close();
+    ({ page, ctx, errors } = await open("/"));
+    await page.waitForTimeout(1600);
+    const d0 = await page.locator("[data-hero-arc] [data-span]").getAttribute("d");
+    check("rest span = prototype geometry", d0 === "M40 272 A 280 214 0 0 1 600 272", d0);
+    await page.evaluate(() => scrollTo(0, 200));
+    const b = await page.locator("[data-grab]").boundingBox();
+    await page.mouse.move(b.x + b.width / 2, b.y + b.height / 2);
+    await page.mouse.down();
+    await page.mouse.move(b.x - 100, b.y - 40, { steps: 6 });
+    const d1 = await page.locator("[data-hero-arc] [data-span]").getAttribute("d");
+    check("drag recomputes the span", d1 !== d0);
+    check("cursor tag reads Drag", (await page.locator(".cursor-tag.is-on").textContent()) === "Drag");
+    await page.mouse.up();
+    await page.waitForTimeout(1400);
+    check("springs back to rest", (await page.locator("[data-hero-arc] [data-span]").getAttribute("d")) === d0);
+    check("no errors", !errors.length, errors.join(" | "));
+    await ctx.close();
+  },
 };
 
 for (const [name, fn] of Object.entries(suites)) {

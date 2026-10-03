@@ -29,3 +29,17 @@ Dated entries: what was done, what was tested, what failed, the fix.
 - Token check matched class names (`.btn--ghost:`) → regex tightened. Twelve tokens are not yet used; they are consumed by later steps or removed before final QA.
 
 Screenshots: `qa/01-shell/`.
+
+## 2026-10-03 — Step 2: Home hero
+
+**Built:** H1 with node stops (one word per line < 640px, one line above, fitted to the content width); lead + sub line + buttons; Lift figure with labels; `js/home.js` hero: `ARC.signature` on load, Grow node drag via pointer capture with the span recomputed live (`spanPathTo`), spring back with an ease-out (no overshoot) to the exact prototype rest path; stamp with the mark at the centre under the figure's bottom corner. Pre-paint `motion` class so draw-in starts hidden (no flash), never set under reduced motion.
+
+**Tested:** hero suite 6/6 (reduced → complete first frame; rest path = prototype `M40 272 A 280 214 0 0 1 600 272`; drag changes the span; tag reads "Drag"; springs back; no errors) · pages 5 × 4 widths pass · html-validate · shell.
+
+**Failed → fixed:**
+- At 1440 the headline broke before a node stop (inline-block = break opportunity) → `nowrap` per word, fit ratio 8.35 → 8.7.
+- Stamp covered the Build anchor and label → moved below the figure's bottom corner.
+- A fix block from step 1 never ran (`grep -c` returned 0 and stopped the `&&` chain): `[hidden]` rule, footer list alignment, wordmark size → applied and verified.
+- Footer wordmark ignored page margins → aligned to `.wrap`.
+
+Screenshots: `qa/02-hero/`.

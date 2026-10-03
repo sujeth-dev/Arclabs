@@ -11,3 +11,4 @@ Choices not covered by the plan, and why.
 | D5 | Production origin is a placeholder (`https://arclabs.vercel.app`) in canonical/OG/sitemap; `scripts/set-domain.mjs` rewrites it. | No domain given; absolute URLs are required for OG and sitemap. |
 | D6 | The theme toggle is hidden on /elements. | The page is always Ink, so the toggle would change nothing visible. The choice is still remembered on other pages. |
 | D7 | Theme toggle is a pressed/unpressed "Ink" button with a two-node swatch. | Keeps the accessible name equal to the visible label (WCAG 2.5.3) while still showing state. |
+| D8 | The draggable Grow node is pointer-only (mouse, touch, pen) and hidden from assistive tech. | It is a decorative toy; the figure's meaning is in its caption. A focusable control that does nothing on activation would be noise for keyboard and screen-reader users. |

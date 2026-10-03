@@ -95,10 +95,10 @@ Every task: build → checks → fix → re-run → log → commit. Checks each 
 - [x] **1.9 Footer.** "Design. Build. Grow." large; services line; contact; links; giant cropped ARC LABS wordmark; no copyright line.
 
 ### Step 2 — Home hero
-- [ ] **2.1** H1 with node full stops, as large as the screen allows; one word per line on mobile; lead + buttons left, figure right.
-- [ ] **2.2** Hero ARC draws once on load (900ms), labels 01 Design · 02 Build · 03 Grow.
-- [ ] **2.3** Grow node draggable (pointer events + arrow keys); span recomputed live; springs back without overshoot; cursor tag "Drag".
-- [ ] **2.4** Stamp "ARC LABS · DESIGN · BUILD · GROW ·" with the mark at the centre, overlapping the figure's bottom corner.
+- [x] **2.1** H1 with node full stops, as large as the screen allows; one word per line on mobile; lead + buttons left, figure right.
+- [x] **2.2** Hero ARC draws once on load (900ms), labels 01 Design · 02 Build · 03 Grow.
+- [x] **2.3** Grow node draggable (pointer events: mouse, touch, pen); span recomputed live; springs back without overshoot; cursor tag "Drag".
+- [x] **2.4** Stamp "ARC LABS · DESIGN · BUILD · GROW ·" with the mark at the centre, overlapping the figure's bottom corner.
 
 ### Step 3 — Lab File dialog + Home Lab preview
 - [ ] **3.1** `data/content.js` with the six projects, exact plan copy.
