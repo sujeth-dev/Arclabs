@@ -32,6 +32,7 @@ function initPrefs() {
     const next = reduced() ? "full" : "reduced";
     root.dataset.motion = next;
     store.set("arc-motion", next);
+    root.classList.toggle("motion", next === "full");
     syncMotion();
     document.dispatchEvent(new CustomEvent("arc:motion"));
   }));
