@@ -8,3 +8,5 @@ dist/
 qa/**/*.tmp
 media/_raw/
 scripts/qa/_*.mjs
+qa/logos/
+qa/collections/

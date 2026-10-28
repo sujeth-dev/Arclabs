@@ -1119,3 +1119,73 @@ html:has(dialog[open]) { overflow: hidden; }
 :root[data-motion="reduced"] {
   --duration-medium: 1ms; --duration-open: 1ms; --duration-slow: 1ms; --duration-draw: 1ms;
 }
+/* Logo collection — client colour inside the ARC editorial frame. */
+.lab-jump { display:flex; gap:2rem; flex-wrap:wrap; margin-bottom:3rem; }
+#logos, #web-projects, .mark-card { scroll-margin-top:6rem; }
+.marks, .marks-preview { border-top:1px solid var(--color-border); }
+.marks-index { position:sticky; top:var(--nav-h); z-index:2; display:flex; justify-content:space-between; align-items:center; padding:1rem 0; margin:3rem 0 1.5rem; background:var(--color-bg); border-bottom:1px solid var(--color-border); }
+.marks-index > span:last-child { display:flex; align-items:center; gap:.6rem; }
+.marks-grid { display:grid; grid-template-columns:repeat(2,minmax(0,1fr)); gap:4rem 1.5rem; }
+.mark-card { margin:0; min-width:0; }
+.mark-card--wide { grid-column:1 / -1; }
+.mark-card__art { position:relative; display:flex; align-items:center; justify-content:center; width:100%; height:clamp(320px,39vw,560px); overflow:hidden; }
+.mark-card--wide .mark-card__art { height:clamp(380px,44vw,630px); }
+.mark-card__art img { display:block; width:100%; height:100%; object-fit:contain; }
+.mark-card__art--carlos img, .mark-card__art--recoil img { max-width:500px; max-height:500px; }
+.mark-card__art--cub-and-co img, .mark-card__art--smith-and-wesson img, .mark-card__art--sandune img { max-width:500px; max-height:500px; }
+.mark-card__expand { position:absolute; right:1rem; bottom:1rem; display:grid; place-items:center; width:2rem; height:2rem; background:var(--color-cream); color:var(--color-ink); border-radius:50%; opacity:0; transition:opacity 200ms; }
+.mark-card__art:hover .mark-card__expand, .mark-card__art:focus-visible .mark-card__expand { opacity:1; }
+.mark-card figcaption { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding:1rem 0; border-bottom:1px solid var(--color-border); font-size:var(--text-small); }
+.mark-card figcaption .label { color:var(--color-muted); }
+.marks-preview__grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:1.5rem; margin-top:3rem; }
+.marks-preview .mark-card__art { height:auto; aspect-ratio:1; }
+.mark-viewer-open { overflow:hidden; }
+.mark-viewer { background:var(--color-bg); color:var(--color-text); border:1px solid var(--color-border); padding:1.5rem; width:min(1100px,94vw); max-width:94vw; max-height:94dvh; margin:auto; }
+.mark-viewer::backdrop { background:rgb(0 0 0 / .88); }
+.mark-viewer__head, .mark-viewer__foot { display:flex; align-items:center; justify-content:space-between; gap:1rem; }
+.mark-viewer__head { padding-bottom:1.25rem; }
+.mark-viewer__head h2 { margin:0; }
+.mark-viewer__foot { padding-top:1.25rem; }
+.mark-viewer__stage { height:65dvh; display:flex; justify-content:center; align-items:center; }
+.mark-viewer__stage img { width:auto; height:auto; max-width:100%; max-height:100%; object-fit:contain; }
+@media (max-width:767px) {
+  .marks-grid, .marks-preview__grid { grid-template-columns:1fr; gap:2rem; }
+  .mark-card--wide { grid-column:auto; }
+  .mark-card__art, .mark-card--wide .mark-card__art { height:auto; aspect-ratio:1; }
+  .mark-card__expand { opacity:1; }
+  .marks-index { margin-top:2rem; }
+  .mark-viewer { padding:1rem; }
+  .mark-viewer__stage { height:58dvh; }
+  .mark-viewer__foot { gap:.5rem; }
+}
+@media (prefers-reduced-motion:reduce) { .mark-card__expand { transition:none; } }
+
+/* Lab is an index; each collection has its own room. */
+.collection-nav { display:flex; flex-wrap:wrap; gap:.5rem 2rem; border-bottom:1px solid var(--color-border); margin:3rem 0; }
+.collection-nav a { padding:.9rem 0; color:var(--color-muted); font-size:var(--text-small); border-bottom:1px solid transparent; }
+.collection-nav a:hover, .collection-nav a[aria-current="page"] { color:var(--color-text); border-bottom-color:var(--color-text); }
+.collection-top { padding-top:3rem; }
+.collection-top .collection-nav { margin:2rem 0 0; }
+.marks--page { border-top:0; padding-top:var(--space-8); }
+.lab-overview { padding-bottom:0; }
+.lab-overview .collection-nav { margin-bottom:0; }
+.collection-section { padding:var(--space-8) 0 var(--space-9); }
+.collection-section + .collection-section { border-top:1px solid var(--color-border); }
+.collection-heading { display:flex; align-items:end; justify-content:space-between; gap:2rem; margin-bottom:2rem; }
+.collection-heading h2 { margin:.75rem 0 0; }
+.collection-heading > a { flex-shrink:0; margin-bottom:.3rem; }
+.collection-preview-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:var(--gutter); }
+.collection-project { min-width:0; }
+.collection-project .brand-panel { position:relative; inset:auto; aspect-ratio:4/3; }
+.collection-project__caption { display:flex; align-items:center; justify-content:space-between; gap:1rem; padding-top:1rem; }
+.collection-project h3 { font-size:var(--text-body); margin:0; }
+.collection-project p { font-size:var(--text-small); margin:.4rem 0 0; }
+.collection-section .marks-preview__grid { margin-top:0; }
+.collection-section .mark-card__art { height:auto; aspect-ratio:4/3; }
+@media (max-width:767px) {
+  .collection-heading { align-items:start; flex-direction:column; gap:1.25rem; }
+  .collection-preview-grid { grid-template-columns:1fr; gap:2rem; }
+  .collection-section { padding:3rem 0; }
+  .collection-top { padding-top:2rem; }
+  .collection-nav { gap:.5rem 1.25rem; }
+}

@@ -5,6 +5,8 @@ import { serve } from "../serve.mjs";
 export const PAGES = [
   { name: "home", path: "/" },
   { name: "lab", path: "/lab/" },
+  { name: "websites", path: "/lab/websites/" },
+  { name: "logos", path: "/lab/logos/" },
   { name: "elements", path: "/elements/" },
   { name: "privacy", path: "/privacy/" },
   { name: "404", path: "/this-page-does-not-exist" },

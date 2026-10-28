@@ -1,5 +1,15 @@
 # ARC Labs — website
 
+## Repository workflow
+
+- Commit and push at completed, verified milestones; keep unrelated work in separate commits.
+- Before starting a new feature, review and checkpoint completed work already in the working tree.
+- Use concise, professional commit subjects describing the product change. Omit assistant/tool attribution, generated-by notices, promotional text, and unrelated commentary from commit messages and public copy.
+- Update `LOG.md` with the date, changes, validation results, and known limitations. Record actual results, not assumed passes.
+- Review staged changes before each commit. Keep credentials, machine-specific paths, temporary files, and generated preview captures out of new commits.
+- Push normally after successful checks. Do not force-push or rewrite shared history without an explicit request.
+
+
 Studio website for ARC Labs: Home, Lab (projects), Elements (services), Privacy and a 404.
 Plain HTML, CSS and vanilla JavaScript. **No framework, no build step** — the files in this
 repository are the site. `package.json` only holds dev tools (tests, media, share images);

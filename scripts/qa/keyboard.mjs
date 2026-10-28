@@ -147,7 +147,7 @@ const suites = {
 
   async filter() {
     console.log("filter");
-    const { page, ctx, errors } = await open("/lab/");
+    const { page, ctx, errors } = await open("/lab/websites/");
     await page.evaluate(() => { window.__ev = []; document.addEventListener("arc:track", (e) => window.__ev.push(e.detail)); });
     const b2b = page.locator('.filter__btn[data-filter="B2B"]');
     await b2b.focus(); await page.keyboard.press("Enter");
@@ -286,7 +286,7 @@ const suites = {
         route.fulfill({ response: res, body, headers: { ...res.headers(), "content-type": "text/javascript" } });
       });
       await page.route("https://www.googletagmanager.com/**", (r) => { gtagLoaded = true; r.fulfill({ status: 200, contentType: "text/javascript", body: "" }); });
-      await page.goto(base + "/lab/", { waitUntil: "networkidle" });
+      await page.goto(base + "/lab/websites/", { waitUntil: "networkidle" });
       check(`banner shown before consent (${choice})`, (await page.locator(".consent").count()) === 1);
       check("Cookie settings revealed in footer", await page.locator("[data-consent-open]").isVisible());
       await page.locator(`.consent [data-consent="${choice}"]`).click();

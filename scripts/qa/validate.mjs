@@ -1,6 +1,6 @@
 // HTML validation for every page (html-validate, recommended rules).
 import { HtmlValidate, formatterFactory } from "html-validate";
-const files = ["index.html", "lab/index.html", "elements/index.html", "404.html", "privacy/index.html"];
+const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "elements/index.html", "404.html", "privacy/index.html"];
 const hv = new HtmlValidate({
   extends: ["html-validate:recommended"],
   rules: {

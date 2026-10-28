@@ -2,6 +2,16 @@
 
 Dated entries: what was done, what was tested, what failed, the fix.
 
+## 2026-10-29 — Work collections and logo gallery
+
+- Added ten logo identities, with separate Brave Sheep and MONA Coffee artwork; excluded the studio mark from the collection.
+- Restructured Lab into a curated overview with dedicated Websites & Systems and Logos collections. Added collection navigation and preserved earlier project and logo bookmarks.
+- Added selected logos to Home, an accessible enlarged viewer, and restrained scroll reveals. Updated metadata, sitemap, and QA coverage for the collection routes.
+- Recorded the broader direction, with Brand Kits and Digital Growth & Strategy awaiting content review.
+- Validation: project checks passed; all three collection routes checked at 390, 768, and 1440 pixels without overflow; project filters, legacy links, and logo keyboard controls passed; accessibility scans reported no violations on the three collection pages.
+- Visual review caught an inherited absolute-positioning rule on overview brand panels; scoped positioning fixed it before the final checks.
+- Added repository workflow rules for focused commits, regular pushes, clear logs, and excluding generated preview captures.
+
 ## 2026-10-03 — Plan
 
 - Read `arc-labs-brand.zip` (README, styles.css, script.js, index.html, components/) and the FINAL PLAN.
