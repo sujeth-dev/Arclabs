@@ -1,6 +1,6 @@
 // Share-preview check: per-page meta for WhatsApp / LinkedIn / X.
 import { readFile } from "node:fs/promises";
-const pages = { "/": "index.html", "/lab/": "lab/index.html", "/lab/websites/": "lab/websites/index.html", "/lab/logos/": "lab/logos/index.html", "/elements/": "elements/index.html", "/privacy/": "privacy/index.html", "/404": "404.html" };
+const pages = { "/": "index.html", "/lab/": "lab/index.html", "/lab/websites/": "lab/websites/index.html", "/lab/logos/": "lab/logos/index.html", "/lab/digital-growth/": "lab/digital-growth/index.html", "/elements/": "elements/index.html", "/privacy/": "privacy/index.html", "/404": "404.html" };
 const site = (await readFile("js/config.js", "utf8")).match(/siteUrl: "([^"]+)"/)[1];
 const meta = (html, key) => (html.match(new RegExp(`<meta (?:property|name)="${key}" content="([^"]*)"`)) || [])[1];
 let bad = 0; const titles = new Set(), descs = new Set();

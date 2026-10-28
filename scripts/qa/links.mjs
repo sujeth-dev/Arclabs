@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { start } from "./lib.mjs";
 import { projects, elements } from "../../data/content.js";
 
-const files = { "/": "index.html", "/lab/": "lab/index.html", "/lab/websites/": "lab/websites/index.html", "/lab/logos/": "lab/logos/index.html", "/elements/": "elements/index.html", "/privacy/": "privacy/index.html", "/404": "404.html" };
+const files = { "/": "index.html", "/lab/": "lab/index.html", "/lab/websites/": "lab/websites/index.html", "/lab/logos/": "lab/logos/index.html", "/lab/digital-growth/": "lab/digital-growth/index.html", "/elements/": "elements/index.html", "/privacy/": "privacy/index.html", "/404": "404.html" };
 const { browser, base, stop } = await start(4388);
 const ids = {}; const internal = new Map(); const external = new Set();
 for (const [path, f] of Object.entries(files)) {

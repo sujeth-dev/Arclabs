@@ -183,3 +183,22 @@ Tested:
 - /elements: Ink switch shown; defaults to Ink, can switch to Cream (D24). axe 0 violations in both.
 - check ✓ · keyboard/behaviour 104/104 · axe 0.
 
+
+## 2026-10-29 — Logos, Lab collections, NUANSE (backfill)
+
+Logged after the fact; details are in the commits. Ten logo identities added (`/lab/logos/`). Lab split into an overview and collection pages (`/lab/websites/`, `/lab/logos/`) with old bookmarks kept. NUANSE Studio added as File 07. Pushed as `01e6ac4` and `65992db`.
+
+## 2026-10-29 — Digital Growth & Strategy collection
+
+**Built:** `/lab/digital-growth/`, in four parts with copy agreed in review: Brands we work with (Iconic Bengaluru, Svojas, The Shallot Kitchen), Mass campaigns, SEO, Going online.
+- Brand work: profile captures for Iconic Bengaluru and The Shallot Kitchen (`assets/growth/`); three live Svojas posts (Instagram's official embed) and the live svojasshop.in in a frame. Both load only when scrolled near. The work turns from greyscale to colour as it reaches the reader.
+- Mass campaigns: choosing Creators, Colleges, On the ground or Collaborations sends one launch card out to that channel's pages (decorative panel, `aria-hidden`; the text carries the content).
+- SEO: the search field types "biryani near JP Nagar" once; Maps / website / across the web; how it runs.
+- Going online: six steps; the rule fills and headings brighten as the reader passes them.
+- Lab overview gets a third collection; collection nav, sitemap, QA page lists and privacy (Instagram and store embeds) updated. `js/growth.js` respects Reduce motion.
+
+**Tested:** `npm run check` passes (8 pages) · 1440 / 768 / 390: no console errors, no horizontal overflow, embeds and store render · axe 0 violations at load and after scrolling (third-party frames excluded).
+
+**Failed → fixed:** svojasshop.in returned 403 in the test browser — CloudFront blocks the headless user agent; with a normal one it serves 200 inside the frame · axe flagged dimmed steps and faded visuals → steps now change heading colour only, visuals change saturation only · `sed` turned `lab/index.html` to LF and the shell check reported drift → line endings normalised · campaign panel cramped on phones → stacks vertically there.
+
+**Not verified:** Instagram profile pages cannot be embedded (`X-Frame-Options: DENY`), hence the captures. No results or metrics are shown yet; they will sit beside each brand once analytics are supplied.

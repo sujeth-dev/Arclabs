@@ -154,7 +154,7 @@ The combined Lab page became too long after adding the logo gallery. Lab now ser
 | Websites & Systems | `/lab/websites/` | Seven projects, sector filters, and project viewers implemented |
 | Logos | `/lab/logos/` | Ten identities and enlarged viewer implemented |
 | Brand Kits | `/lab/brand-kits/` | Planned; awaiting review of work |
-| Digital Growth & Strategy | `/lab/digital-growth/` | Planned; awaiting review of work and scope |
+| Digital Growth & Strategy | `/lab/digital-growth/` | Built locally: three brands, mass campaigns, SEO, going online |
 
 **Digital Growth & Strategy** is the agreed collection name, replacing the earlier proposed Marketing collection. It can cover campaigns, social media, search visibility, lead generation, and strategy as relevant work is reviewed. Earlier references to marketing describe possible services, not the collection's final name.
 

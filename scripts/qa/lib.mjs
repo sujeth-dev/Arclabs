@@ -7,6 +7,7 @@ export const PAGES = [
   { name: "lab", path: "/lab/" },
   { name: "websites", path: "/lab/websites/" },
   { name: "logos", path: "/lab/logos/" },
+  { name: "growth", path: "/lab/digital-growth/" },
   { name: "elements", path: "/elements/" },
   { name: "privacy", path: "/privacy/" },
   { name: "404", path: "/this-page-does-not-exist" },
