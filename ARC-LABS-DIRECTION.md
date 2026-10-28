@@ -32,7 +32,7 @@ The current combinations connect services to outcomes such as more enquiries, ge
 
 ### Existing work
 
-The portfolio contains Velmont Design, The Possah, Zingara, Assetly, Fitness Garage, and Aivora India. Project content describes the business problem, context, solution, work involved, and result or launch status.
+The portfolio contains Velmont Design, The Possah, Zingara, Assetly, Fitness Garage, Aivora India, and NUANSE Studio. Project content describes the business problem, context, solution, work involved, and result or launch status.
 
 The current source uses client logos on client-coloured panels. Those logos appearing on the site do not, by themselves, establish that ARC Labs designed them. Any future logo or branding portfolio entries need confirmed authorship and scope.
 
@@ -151,7 +151,7 @@ The combined Lab page became too long after adding the logo gallery. Lab now ser
 | Collection | Route | Status |
 | --- | --- | --- |
 | All work | `/lab/` | Compact overview implemented |
-| Websites & Systems | `/lab/websites/` | Six projects, sector filters, and project viewers implemented |
+| Websites & Systems | `/lab/websites/` | Seven projects, sector filters, and project viewers implemented |
 | Logos | `/lab/logos/` | Ten identities and enlarged viewer implemented |
 | Brand Kits | `/lab/brand-kits/` | Planned; awaiting review of work |
 | Digital Growth & Strategy | `/lab/digital-growth/` | Planned; awaiting review of work and scope |

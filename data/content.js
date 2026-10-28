@@ -130,6 +130,26 @@ export const projects = [
     screens: { desktop: [] }, video: null, poster: null,
     brand: { bg: "linear-gradient(135deg, #175AA1, #12467D)", logo: "/assets/clients/aivora-india.webp", width: 914, height: 262, style: "--bp-w:58%" },
   },
+  {
+    file: "07", slug: "nuanse", order: 7,
+    name: "NUANSE Studio",
+    line: "A considered presence for a studio built on detail.",
+    sector: "Brand studio · B2B",
+    status: "Live", filter: "B2B",
+    liveUrl: "https://thenuanse.com/",
+    featured: null,
+    hypothesis: "A Bangalore brand studio with work across strategy, identity, websites, content, film and performance needed a clear place to bring its disciplines together.",
+    formula: {
+      problem: "A broad creative offering",
+      context: "founders looking for the right studio",
+      solution: "a work-led website that connects the studio's approach and services to a straightforward audit enquiry.",
+    },
+    protocol: [],
+    insideTheLab: "Editorial storytelling, selected projects, service navigation, and an eight-question brand audit flow.",
+    result: "Live at thenuanse.com.",
+    screens: { desktop: [] }, video: null, poster: null,
+    brand: { bg: "#F5F1E8", logo: "/assets/clients/nuanse.png", width: 128, height: 184, style: "--bp-w:128px;--bp-h:48%" },
+  },
 ];
 
 export const elements = [

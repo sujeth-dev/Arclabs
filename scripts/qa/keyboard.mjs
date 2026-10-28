@@ -153,13 +153,13 @@ const suites = {
     await b2b.focus(); await page.keyboard.press("Enter");
     await page.waitForTimeout(500);
     const vis = await page.evaluate(() => [...document.querySelectorAll(".lab-card")].filter((c) => !c.hidden).map((c) => c.dataset.file));
-    check("B2B shows Assetly + Aivora", vis.join() === "assetly,aivora-india", vis.join());
+    check("B2B shows Assetly, Aivora and NUANSE", vis.join() === "assetly,aivora-india,nuanse", vis.join());
     check("aria-pressed follows", (await b2b.getAttribute("aria-pressed")) === "true" && (await page.locator('.filter__btn[data-filter="All"]').getAttribute("aria-pressed")) === "false");
-    check("result announced", (await page.locator("[data-filter-status]").textContent()) === "2 files in B2B");
+    check("result announced", (await page.locator("[data-filter-status]").textContent()) === "3 files in B2B");
     check("filter_used tracked", await page.evaluate(() => window.__ev.some((e) => e.name === "filter_used" && e.params.filter === "B2B")));
     await page.locator('.filter__btn[data-filter="All"]').click();
     await page.waitForTimeout(500);
-    check("All restores six", (await page.locator(".lab-card:not([hidden])").count()) === 6);
+    check("All restores seven", (await page.locator(".lab-card:not([hidden])").count()) === 7);
     await page.goto(base + "/lab/#file-aivora-india", { waitUntil: "networkidle" });
     check("/lab/#file-aivora-india opens on load", await page.evaluate(() => document.getElementById("lab-file").open && document.getElementById("lab-file-title").textContent === "Aivora India"));
     check("Aivora India links to its live site", (await page.locator('#lab-file a.viewer__visit[href^="https://www.aivoraindia.com"]').count()) === 1);

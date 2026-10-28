@@ -2,6 +2,15 @@
 
 Dated entries: what was done, what was tested, what failed, the fix.
 
+## 2026-10-29 — NUANSE Studio portfolio addition
+
+- Added NUANSE Studio as File 07 in Websites & Systems, using the existing card, project-detail, and live-site link format.
+- Used the supplied copper monogram unchanged on a warm cream panel, respecting its original 128 × 184 dimensions.
+- Added the studio to the Home and website-collection client strips and the B2B filter. Kept the curated overview selections unchanged.
+- Project copy reflects the publicly visible studio website: editorial presentation, selected work, services, and the brand audit flow. No performance claims added.
+- Validation: live site returned HTTP 200; project checks passed with 22 matching content blocks; no overflow at 390 or 1440 pixels; direct project links and viewer controls worked; page and viewer accessibility scans returned no violations; no browser runtime errors.
+- Previous collection work was committed and pushed before this addition. Generated preview captures remain untracked.
+
 ## 2026-10-29 — Work collections and logo gallery
 
 - Added ten logo identities, with separate Brave Sheep and MONA Coffee artwork; excluded the studio mark from the collection.
