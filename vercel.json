@@ -5,6 +5,10 @@
   "buildCommand": "echo 'Static site: no build step'",
   "outputDirectory": ".",
   "trailingSlash": true,
+  "redirects": [
+    { "source": "/:path*", "has": [{ "type": "host", "value": "www.arclabs.live" }], "destination": "https://arclabs.live/:path*", "permanent": true },
+    { "source": "/:path*", "has": [{ "type": "host", "value": "arclabs.vercel.app" }], "destination": "https://arclabs.live/:path*", "permanent": true }
+  ],
   "headers": [
     {
       "source": "/(.*)",

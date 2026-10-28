@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://arclabs.vercel.app/sitemap.xml
+Sitemap: https://arclabs.live/sitemap.xml

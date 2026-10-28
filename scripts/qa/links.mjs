@@ -14,7 +14,7 @@ for (const [path, f] of Object.entries(files)) {
     for (const raw of m[1].split(",").map((s) => s.trim().split(" ")[0])) {
       if (m[0].startsWith("content=") && !/^(https?:|\/)/.test(raw)) continue;  // meta values, not links
       if (!raw || raw.startsWith("mailto:") || raw.startsWith("tel:") || raw.startsWith("data:")) continue;
-      if (/^https?:/.test(raw)) { if (!raw.includes("arclabs.vercel.app")) external.add(raw); continue; }
+      if (/^https?:/.test(raw)) { if (!raw.includes("arclabs.live")) external.add(raw); continue; }
       if (raw.startsWith("/") || raw.startsWith("#")) internal.set(raw.startsWith("#") ? path + raw : raw, path);
     }
   }
