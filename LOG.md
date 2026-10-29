@@ -2,6 +2,17 @@
 
 Dated entries: what was done, what was tested, what failed, the fix.
 
+## 2026-10-29 — Internal technical SEO and AI search audit
+
+- Audited official OpenAI, Anthropic, Perplexity, Google and Microsoft search/crawler guidance. Kept all changes internal: page bodies, rendering head code, CSS, runtime JavaScript, media and navigation are unchanged.
+- Made search/retrieval crawler access explicit without changing training access. Added permanent index.html normalization, including the old Elements HTML endpoint, with equivalent local preview handling and preserved enquiry queries.
+- Connected Organization, WebSite, pages, breadcrumbs, service catalogs and all nineteen Capabilities with stable entity IDs. Matched service descriptions to existing source data; removed unsupported legal/language claims and speculative entity aliases. Kept existing accurate page titles/descriptions and the eight-page sitemap; added social image MIME and alternative metadata.
+- Added an idempotent development-only schema generator and repeatable search audit. Recorded platform decisions, absence of a clear llms.txt benefit, and external account/log-verification follow-ups in SEARCH-AUDIT.md. No new dependencies, hidden text, AI-only pages or runtime work.
+- Validation: npm check passes; 95 keyboard checks pass; axe reports zero violations in both themes and interactive states; 275 internal references resolve; JS remains below budget. The existing Svojas external store still returns 403 to the link checker's request; no internal link fails.
+- Search audit passes on all eight canonical pages, including eight simulated crawler identities, static text, metadata agreement, XML, entity reference resolution, service anchors, redirects, noindex 404s and generator idempotence. Theme persistence/logo audit also passes.
+- Compared against 765edd4: bodies and rendering assets match exactly; all 32 full-page baseline/new screenshot pairs are pixel-identical (eight pages × two widths × two themes; deterministic no-JS/reduced-motion captures).
+- Mobile Lighthouse: Home 99 performance; Services and Growth 100 performance. All three score 100 accessibility, best practices and SEO; CLS/TBT are zero. LCP is 1.9s Home, 1.5s Services and 1.5s Growth. No regression against acceptance thresholds. No external indexing/account action was submitted.
+
 ## 2026-10-29 — NUANSE Studio portfolio addition
 
 - Added NUANSE Studio as File 07 in Websites & Systems, using the existing card, project-detail, and live-site link format.

@@ -34,8 +34,11 @@ async function resolve(urlPath) {
 export function serve(port = PORT) {
   const server = createServer(async (req, res) => {
     const url = new URL(req.url, "http://x");
-    if (/^\/elements\/?$/.test(url.pathname)) {
+    if (/^\/elements(?:\/index\.html|\/)?$/.test(url.pathname)) {
       res.writeHead(308, { Location: "/services/" + url.search }); return res.end();
+    }
+    if (url.pathname.endsWith('/index.html')) {
+      res.writeHead(308, { Location: url.pathname.slice(0, -10) + url.search }); return res.end();
     }
     const r = await resolve(url.pathname);
     if (r?.redirect) { res.writeHead(301, { Location: r.redirect + url.search }); return res.end(); }

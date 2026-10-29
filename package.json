@@ -12,6 +12,8 @@
     "qa:lh": "node scripts/qa/lighthouse.mjs",
     "qa:links": "node scripts/qa/links.mjs",
     "qa:js": "node scripts/qa/js-budget.mjs",
+    "qa:search": "node scripts/qa/search.mjs",
+    "seo": "node scripts/seo.mjs",
     "og": "node scripts/og.mjs",
     "media:capture": "node scripts/media/capture.mjs",
     "media:process": "node scripts/media/process.mjs"

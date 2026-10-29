@@ -1,3 +1,17 @@
+# Search indexing and user-directed retrieval. All public content and rendering
+# assets remain crawlable. Training-crawler policy is unchanged (wildcard below).
+User-agent: OAI-SearchBot
+User-agent: ChatGPT-User
+User-agent: Claude-SearchBot
+User-agent: Claude-User
+User-agent: PerplexityBot
+User-agent: Perplexity-User
+User-agent: Googlebot
+User-agent: Bingbot
+Allow: /
+
+# Google-Extended is a policy token for Gemini training/grounding, not an HTTP
+# crawler. Its existing access remains allowed through this wildcard group.
 User-agent: *
 Allow: /
 

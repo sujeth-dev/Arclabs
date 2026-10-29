@@ -122,6 +122,10 @@ Alt text is generated as "<Project> homepage, desktop". The Lab file shows deskt
 
 ## Share images and icons
 
+Search metadata and JSON-LD maintenance is documented in [SEARCH-AUDIT.md](SEARCH-AUDIT.md).
+Run `npm run seo` after editing page metadata or service data, then `npm run qa:search`.
+The generator changes only JSON-LD and social image metadata; it adds no runtime code.
+
 ```bash
 npm run og     # assets/og/*.png (1200×630), favicon.ico, apple-touch-icon.png, assets/icons/*
 ```
