@@ -10,3 +10,5 @@ media/_raw/
 scripts/qa/_*.mjs
 qa/logos/
 qa/collections/
+
+qa/brand-kits/

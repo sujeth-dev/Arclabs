@@ -1,0 +1,2 @@
+# Supplied client artwork and fonts stay byte-identical on every platform.
+assets/brand-kits/cub-and-co/** -text

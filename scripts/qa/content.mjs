@@ -1,7 +1,7 @@
 // Text written into the HTML must match data/content.js (names, lines, sectors, stamps).
 import { readFile } from "node:fs/promises";
 import { projects, elements } from "../../data/content.js";
-const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "lab/digital-growth/index.html", "elements/index.html"];
+const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "lab/digital-growth/index.html", "lab/brand-kits/index.html", "elements/index.html"];
 const dec = (s) => s.replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"');
 let bad = 0, seen = 0;
 for (const f of files) {

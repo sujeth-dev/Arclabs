@@ -153,9 +153,11 @@ The combined Lab page became too long after adding the logo gallery. Lab now ser
 | All work | `/lab/` | Compact overview implemented |
 | Websites & Systems | `/lab/websites/` | Seven projects, sector filters, and project viewers implemented |
 | Logos | `/lab/logos/` | Ten identities and enlarged viewer implemented |
-| Brand Kits | `/lab/brand-kits/` | Planned; awaiting review of work |
+| Brand Kits | `/lab/brand-kits/` | Implemented: Cub & Co and SanDune identity systems |
 | Digital Growth & Strategy | `/lab/digital-growth/` | Built locally: three brands, mass campaigns, SEO, going online |
 
 **Digital Growth & Strategy** is the agreed collection name, replacing the earlier proposed Marketing collection. It can cover campaigns, social media, search visibility, lead generation, and strategy as relevant work is reviewed. Earlier references to marketing describe possible services, not the collection's final name.
 
-The main navigation retains Lab. A smaller collection navigation connects All work, Websites & Systems, and Logos. Unready collections are not published as empty pages. Home links to the dedicated collections; older project bookmarks remain functional, and older logo bookmarks redirect to the new gallery. Shared brand styling is preserved. Nothing has been deployed.
+The main navigation retains Lab. A smaller collection navigation connects All work, Websites & Systems, Logos, Brand Kits, and Digital Growth & Strategy. Unready collections are not published as empty pages. Home links to the dedicated collections; older project bookmarks remain functional, and older logo bookmarks redirect to the new gallery. Shared brand styling is preserved. Nothing has been deployed.
+
+Brand Kits presents two supplied identity systems as distinct chapters: approved Cub & Co vectors and deferred specimen fonts; SanDune board crops and a clearly labelled store concept. The closing link is `/#contact`; the Elements service list is unchanged. Smith & Wesson remains in Logos.

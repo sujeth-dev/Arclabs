@@ -172,3 +172,11 @@ After the first deploy:
    `…/lighthouse.mjs`, `…/links.mjs`.
 4. Paste the URL into the LinkedIn Post Inspector, the X card validator and a WhatsApp chat
    to confirm the share previews.
+
+## Brand Kits media and QA
+
+`/lab/brand-kits/` presents Cub & Co and SanDune. Cub & Co SVGs and fonts in `assets/brand-kits/cub-and-co/` are supplied originals; do not recolour or redraw them. Only approved colourway files are used. The display fonts load as the chapter approaches.
+
+SanDune images are responsive AVIF/WebP crops from the approved 2x PNG captures of the supplied identity/store HTML. Keep those captures outside the repo. Regenerate with `node scripts/media/brand-kits.mjs <capture-directory>`. The desktop store capture retains the hero, categories and new season; its prices and policies are placeholders.
+
+Run `node scripts/qa/brand-kits.mjs` for the colourway keyboard/drag controls, progress rail, image budget, store preview, both themes, axe, system and site reduced motion, and no-JavaScript rendering. Screenshots go to ignored `qa/brand-kits/` (override with `BRAND_QA_DIR`).
