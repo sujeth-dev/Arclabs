@@ -183,3 +183,9 @@ After the first deploy:
 SanDune images are responsive AVIF/WebP crops from the approved 2x PNG captures of the supplied identity/store HTML. Keep those captures outside the repo. Regenerate with `node scripts/media/brand-kits.mjs <capture-directory>`. The desktop store capture retains the hero, categories and new season; its prices and policies are placeholders.
 
 Run `node scripts/qa/brand-kits.mjs` for the colourway keyboard/drag controls, progress rail, image budget, store preview, both themes, axe, system and site reduced motion, and no-JavaScript rendering. Screenshots go to ignored `qa/brand-kits/` (override with `BRAND_QA_DIR`).
+
+## Theme and search identity
+
+Theme choice is stored locally as `arc-theme` and applied by the shared pre-paint snippet on all pages. Ink is the first-visit default. The motion choice remains page-local. Keep the snippet identical when adding pages.
+
+`npm run og` regenerates the opaque 96px PNG favicon, the 16/32/48/96px ICO, the square opaque SVG favicon, and the 512px structured-data logo. The ARC path remains unchanged. `node scripts/qa/theme-seo.mjs` checks persistence, storage failures, search identity assets and sitemap coverage. Add `--live` to audit the deployed SEO assets and page URLs. Google Search Console submission requires account access; local validation is not an indexing request.

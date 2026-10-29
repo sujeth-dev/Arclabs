@@ -2,16 +2,33 @@
   "id": "/",
   "name": "ARC Labs",
   "short_name": "ARC Labs",
-  "description": "ARC Labs is a Bengaluru studio that designs and builds websites and digital systems for businesses that are ready to be taken seriously online.",
+  "description": "ARC Labs is a Bengaluru studio for branding, websites, search, campaigns and custom systems. Design, technology and growth around your business.",
   "lang": "en-IN",
-  "categories": ["business", "design", "productivity"],
+  "categories": [
+    "business",
+    "design",
+    "productivity"
+  ],
   "start_url": "/",
   "display": "browser",
   "background_color": "#17181A",
   "theme_color": "#17181A",
   "icons": [
-    { "src": "/assets/icons/icon-192.png", "sizes": "192x192", "type": "image/png" },
-    { "src": "/assets/icons/icon-512.png", "sizes": "512x512", "type": "image/png" },
-    { "src": "/assets/icons/icon-maskable-512.png", "sizes": "512x512", "type": "image/png", "purpose": "maskable" }
+    {
+      "src": "/assets/icons/icon-192.png",
+      "sizes": "192x192",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-512.png",
+      "sizes": "512x512",
+      "type": "image/png"
+    },
+    {
+      "src": "/assets/icons/icon-maskable-512.png",
+      "sizes": "512x512",
+      "type": "image/png",
+      "purpose": "maskable"
+    }
   ]
 }

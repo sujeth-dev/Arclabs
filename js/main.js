@@ -1,18 +1,18 @@
 /* ==========================================================================
    main.js — every page: theme, reduced motion, nav, menu, cursor, copy, consent.
    ========================================================================== */
-import { reduced, ease } from "./arc.js";
+import { reduced, ease, store } from "./arc.js";
 import { initAnalytics } from "./analytics.js";
 
 const root = document.documentElement;
 
 /* ---------- theme + motion preferences ----------------------------------- */
-// Every load starts in Ink with motion on. The switches change the current
-// page only; nothing is saved, so a refresh returns to the defaults.
+// Ink is the first-visit default. Theme persists; motion stays page-local.
 function initPrefs() {
   const themeBtns = document.querySelectorAll("[data-theme-toggle]");
   const syncTheme = () => {
     const ink = root.dataset.theme === "dark";
+    document.querySelector('meta[name="theme-color"]')?.setAttribute("content", ink ? "#17181A" : "#F1EEE5");
     themeBtns.forEach((b) => {
       b.setAttribute("aria-pressed", String(ink));
       const l = b.querySelector("[data-theme-label]");
@@ -22,9 +22,21 @@ function initPrefs() {
   themeBtns.forEach((b) => b.addEventListener("click", () => {
     const next = root.dataset.theme === "dark" ? "light" : "dark";
     root.dataset.theme = next;
+    store.set("arc-theme", next);
     syncTheme();
   }));
   syncTheme();
+  addEventListener('pageshow', event => {
+    if (!event.persisted) return;
+    const saved = store.get('arc-theme');
+    root.dataset.theme = saved === 'light' ? 'light' : 'dark';
+    syncTheme();
+  });
+  addEventListener('storage', event => {
+    if (event.key !== 'arc-theme' && event.key !== null) return;
+    root.dataset.theme = event.newValue === 'light' ? 'light' : 'dark';
+    syncTheme();
+  });
 
   const motionBtns = document.querySelectorAll("[data-motion-toggle]");
   const syncMotion = () => motionBtns.forEach((b) => b.setAttribute("aria-pressed", String(reduced())));

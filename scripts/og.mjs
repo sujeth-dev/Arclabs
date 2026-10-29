@@ -62,9 +62,12 @@ await shoot(icon(512), 512, "assets/icons/icon-512.png");
 await shoot(icon(512, { bg: INK, fg: CREAM, pad: 0.28 }), 512, "assets/icons/icon-maskable-512.png");
 const p16 = await shoot(icon(16, { pad: 0.06 }), 16, "assets/icons/icon-16.png");
 const p32 = await shoot(icon(32, { pad: 0.08 }), 32, "assets/icons/icon-32.png");
+const p48 = await shoot(icon(48, { pad: 0.12 }), 48, "assets/icons/icon-48.png");
+const p96 = await shoot(icon(96, { pad: 0.15 }), 96, "favicon-96.png");
+await writeFile("favicon.svg", `<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 256 256"><rect width="256" height="256" fill="${CREAM}"/><svg x="40" y="66" width="176" height="124" viewBox="6 6 194 136" overflow="visible"><path fill="${INK}" d="${d}"/></svg></svg>`);
 
-// favicon.ico: an ICO container holding the two PNGs.
-const pngs = [[16, p16], [32, p32]];
+// favicon.ico: an ICO container holding all four PNGs.
+const pngs = [[16, p16], [32, p32], [48, p48], [96, p96]];
 const head = Buffer.alloc(6 + 16 * pngs.length);
 head.writeUInt16LE(0, 0); head.writeUInt16LE(1, 2); head.writeUInt16LE(pngs.length, 4);
 let offset = head.length;

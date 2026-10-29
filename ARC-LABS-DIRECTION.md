@@ -54,7 +54,7 @@ Historical project-specific process descriptions remain unchanged. The existing 
 
 ## Brand and writing baseline
 
-- Ink `#17181A`, warm Cream `#F1EEE5`, muted neutrals and subtle borders. Ink is the default; theme controls affect the current page only.
+- Ink `#17181A`, warm Cream `#F1EEE5`, muted neutrals and subtle borders. Ink is the first-visit default; the chosen theme persists between pages and visits. Motion controls remain page-local.
 - Inter Display for prominent headings and Inter for body text. Strong alignment, thin rules and generous space.
 - Keep the ARC mark, three nodes, arc geometry and full stops unchanged.
 - Client identities keep their own colours inside the ARC presentation.

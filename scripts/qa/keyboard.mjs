@@ -38,7 +38,7 @@ const suites = {
     const bg = await page.evaluate(() => getComputedStyle(document.body).backgroundColor);
     check("Cream background", bg === "rgb(241, 238, 229)", bg);
     await page.reload();
-    check("refresh returns to Ink (nothing saved)", await page.evaluate(() => document.documentElement.dataset.theme === "dark" && localStorage.length === 0));
+    check("refresh keeps the chosen Cream theme", await page.evaluate(() => document.documentElement.dataset.theme === "light" && localStorage.getItem("arc-theme") === "light"));
     // Motion toggle
     const motion = page.locator(".footer [data-motion-toggle]");
     await motion.focus(); await page.keyboard.press("Space");

@@ -61,7 +61,7 @@ export async function overflow(page) {
   });
 }
 
-// The site saves no settings: every load is Ink with motion on. To test Cream
+// Fresh profiles start in Ink; a chosen theme persists. To test Cream
 // or reduced motion, re-apply the wanted state right after the head script
 // runs (before first paint), then stop watching so the page's switches work.
 export async function forcePrefs(ctx, { theme, motion } = {}) {
