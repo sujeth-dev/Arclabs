@@ -190,6 +190,8 @@ Run `node scripts/qa/brand-kits.mjs` for the colourway keyboard/drag controls, p
 
 ## Theme and search identity
 
+Search targeting, IndexNow automation, favicon follow-up and account-dependent measurement are documented in [SEARCH-STRATEGY.md](SEARCH-STRATEGY.md). Run `npm run seo` after editing `scripts/search-config.mjs`, `npm run qa:indexnow` for notification safeguards, and `npm run qa:search -- --live` after deployment. IndexNow dry run: `npm run indexnow -- --since=<previous-production-sha>`; add `--submit` only for the matching production deployment. The main-branch workflow automates this and retains a receipt; the weekly/manual workflow audits production without resubmitting unchanged pages.
+
 Theme choice is stored locally as `arc-theme` and applied by the shared pre-paint snippet on all pages. Ink is the first-visit default. The motion choice remains page-local. Keep the snippet identical when adding pages.
 
 `npm run og` regenerates the opaque 96px PNG favicon, the 16/32/48/96px ICO, the square opaque SVG favicon, and the 512px structured-data logo. The ARC path remains unchanged. `node scripts/qa/theme-seo.mjs` checks persistence, storage failures, search identity assets and sitemap coverage. Add `--live` to audit the deployed SEO assets and page URLs. Google Search Console submission requires account access; local validation is not an indexing request.

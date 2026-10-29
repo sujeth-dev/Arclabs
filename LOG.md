@@ -2,6 +2,14 @@
 
 Dated entries: what was done, what was tested, what failed, the fix.
 
+## 2026-10-29 ? Search targeting and production discovery
+
+- Added maintained, page-specific titles and descriptions for brand, Bengaluru/Bangalore websites, branding and marketing searches. Kept the Growth project description branch-specific. Regenerated Open Graph, Twitter and JSON-LD together; page bodies, assets, CSS, navigation and runtime JavaScript are unchanged.
+- Added a public IndexNow verification key, dependency-free dry-run/submission script, production matching safeguards and three passing tests. Main pushes notify only after changed pages match production; weekly/manual audits check live search configuration. Added workflow receipts and documented account-dependent indexing, analytics, profile and Brave Search follow-ups in SEARCH-STRATEGY.md.
+- Verified the updated www redirect returns 308, including inner pages and favicon. Existing favicon files remain valid; no artwork replacement or unstable cache-busting URL was added. The sitemap already contains the eight canonical URLs with accurate release dates and remains unchanged.
+- Validation: static/shared-shell/content checks pass; the metadata/schema/crawler audit and all 32 deterministic screenshot comparisons pass with no pixel differences. Keyboard: 95 passed. Axe: zero violations. Internal links: 275 checked, none broken. Runtime JavaScript remains within budget. Mobile Lighthouse: Home, Services and Growth each score 99 performance and 100 accessibility, best practices and SEO; CLS/TBT remain zero. IndexNow acceptance and live deployment are checked after pushing; Search Console/Bing account submissions and real crawler-log verification require access.
+
+
 ## 2026-10-29 ? Collaborative pages portfolio grouping
 
 - Moved Iconic Bengaluru and The Shallot Kitchen after Svojas and its social posts under Collaborative pages. Revised their copy and labels to describe content collaborations only; retained existing media, external links and project anchors.

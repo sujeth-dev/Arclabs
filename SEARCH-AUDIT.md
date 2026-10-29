@@ -34,6 +34,8 @@ Visible content, body markup, CSS, runtime JavaScript, assets and navigation rem
 
 ## External access and follow-up
 
+Update 2026-10-29: the next phase is implemented in [SEARCH-STRATEGY.md](SEARCH-STRATEGY.md). Page metadata now has a maintained query focus; IndexNow notification and weekly production checks are configured. The live www redirect now returns 308. The original audit below records the state before these updates; account-dependent work remains outstanding.
+
 - Google Search Console: submit/confirm the sitemap, inspect Home and Services, check Google's selected canonical and fetched HTML, then request recrawl for changed pages. Run Google's Rich Results Test and review actual enhancement eligibility; local schema validation does not certify rich-result eligibility.
 - Bing Webmaster Tools: submit/confirm the sitemap, use URL Inspection and review indexing/Copilot reporting where available. IndexNow is optional for later publishing automation; no speculative API key, dependency or submission mechanism was added.
 - Vercel/hosting logs and firewall settings: confirm genuine crawler requests using current official verification guidance and check for challenges/403/429 responses. Test requests from this environment do not substitute for this. The existing www host currently redirects to the canonical host with 307 before application routing; inspect the hosting-domain setting if a permanent host redirect is desired. HTTPS and application path redirects already use permanent redirects.

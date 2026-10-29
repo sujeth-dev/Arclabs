@@ -3,6 +3,7 @@
 import {readFile, writeFile} from 'node:fs/promises';
 import {config, contact} from '../js/config.js';
 import {elements, serviceElements} from '../data/content.js';
+import {metadata} from './search-config.mjs';
 
 export const pages = [
   {path:'/', file:'index.html', name:'Home'},
@@ -66,6 +67,13 @@ export async function updateSEO() {
   for(const page of pages){
     const original=await readFile(page.file,'utf8');
     let html=original;
+    const encode=s=>s.replace(/&/g,'&amp;').replace(/"/g,'&quot;').replace(/</g,'&lt;');
+    const entry=metadata[page.path];
+    if(entry?.title){
+      html=html.replace(/<title>[^<]+<\/title>/,`<title>${encode(entry.title)}</title>`);
+      for(const key of ['og:title','twitter:title']) html=html.replace(new RegExp(`(<meta (?:name|property)="${key}" content=")[^"]*`),`$1${encode(entry.title)}`);
+    }
+    if(entry?.description) for(const key of ['description','og:description','twitter:description']) html=html.replace(new RegExp(`(<meta (?:name|property)="${key}" content=")[^"]*`),`$1${encode(entry.description)}`);
     const imageAlt=html.match(/<meta property="og:image:alt" content="([^"]*)">/)[1];
     if(!html.includes('property="og:image:type"')) html=html.replace(/(<meta property="og:image:height"[^>]*>)/,'$1\n<meta property="og:image:type" content="image/png">');
     if(!html.includes('name="twitter:image:alt"')) html=html.replace(/(<meta name="twitter:image"[^>]*>)/,`$1\n<meta name="twitter:image:alt" content="${imageAlt}">`);

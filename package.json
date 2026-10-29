@@ -16,7 +16,9 @@
     "seo": "node scripts/seo.mjs",
     "og": "node scripts/og.mjs",
     "media:capture": "node scripts/media/capture.mjs",
-    "media:process": "node scripts/media/process.mjs"
+    "media:process": "node scripts/media/process.mjs",
+    "indexnow": "node scripts/indexnow.mjs",
+    "qa:indexnow": "node --test scripts/qa/indexnow.test.mjs"
   },
   "devDependencies": {
     "@axe-core/playwright": "^4.13.0",
