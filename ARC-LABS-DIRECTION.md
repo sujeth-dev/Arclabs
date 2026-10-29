@@ -63,7 +63,7 @@ Historical project-specific process descriptions remain unchanged. The existing 
 
 ## Digital Growth presentation
 
-The four existing subjects remain open editorial chapters. Each brand has a clear opening and prominent media. Svojas's store and three social posts form separate sequences, and every post remains available at every width.
+The four existing subjects remain open editorial chapters. Each brand has a clear opening and prominent media. Svojas's store and three social posts form separate sequences, and every post remains available at every width. Iconic Bengaluru and The Shallot Kitchen follow Svojas under Collaborative pages, with copy limited to content collaboration. They are excluded from the Lab overview previews.
 
 Campaign explanations remain visible, with numbered rows and an optional distribution demonstration. SEO separates the introduction, search illustration, areas of work and ongoing process. Going online keeps six well-spaced steps and a desktop-only sticky introduction where space permits.
 

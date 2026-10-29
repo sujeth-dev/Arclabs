@@ -2,6 +2,13 @@
 
 Dated entries: what was done, what was tested, what failed, the fix.
 
+## 2026-10-29 ? Collaborative pages portfolio grouping
+
+- Moved Iconic Bengaluru and The Shallot Kitchen after Svojas and its social posts under Collaborative pages. Revised their copy and labels to describe content collaborations only; retained existing media, external links and project anchors.
+- Removed both preview tiles from the Lab overview; Svojas remains. Home had no direct listing for either project. Updated Growth social descriptions and generated schema to match the collaboration relationship.
+- Updated direction notes. Delivered on update/collaborative-pages separately from main; local Brand Kits plan files remain untouched.
+- Validation: static/content/shared-shell checks and search audit pass; 273 internal references resolve. Growth checks pass at 390, 768, 1024 and 1440px in Ink and Cream, with zero axe violations, working controls, blocked embeds and no-JavaScript reading. Focused Lab/Growth checks confirm ordering, removed tiles and no overflow at all eight width/theme combinations; reviewed desktop and phone captures.
+
 ## 2026-10-29 — Internal technical SEO and AI search audit
 
 - Audited official OpenAI, Anthropic, Perplexity, Google and Microsoft search/crawler guidance. Kept all changes internal: page bodies, rendering head code, CSS, runtime JavaScript, media and navigation are unchanged.
