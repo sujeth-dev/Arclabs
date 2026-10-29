@@ -167,60 +167,29 @@ const suites = {
     await ctx.close();
   },
 
-  async elements() {
-    console.log("elements");
-    let { page, ctx, errors } = await open("/elements/");
-    await page.evaluate(() => { window.__ev = []; document.addEventListener("arc:track", (e) => window.__ev.push(e.detail)); });
-    const ws = page.locator("#websites-btn"), ec = page.locator("#e-commerce-btn");
-    await ws.focus(); await page.keyboard.press("Enter");
-    await page.waitForTimeout(600);
-    check("Enter expands the row", (await ws.getAttribute("aria-expanded")) === "true" && await page.evaluate(() => !document.getElementById("websites-panel").hidden));
-    check("region labelled by its button", (await page.getAttribute("#websites-panel", "role")) === "region" && (await page.getAttribute("#websites-panel", "aria-labelledby")) === "websites-btn");
-    check("cursor tag → Close", (await ws.getAttribute("data-cursor-tag")) === "Close");
-    check("element_opened tracked", await page.evaluate(() => window.__ev.some((e) => e.name === "element_opened" && e.params.element === "websites")));
-    check("demo played", await page.evaluate(() => document.querySelector("#websites-panel .demo").classList.contains("is-done")));
-    for (const slug of ["websites", "e-commerce", "lead-booking", "digital-presence", "custom-systems", "redesigns"]) {
-      await page.evaluate((sl) => { const b = document.getElementById(`${sl}-btn`); if (b.getAttribute("aria-expanded") !== "true") b.click(); }, slug);
-      await page.waitForTimeout(2600);
-      const parts = await page.evaluate((sl) => [...document.querySelectorAll(`#${sl}-panel .demo .demo__stage *, #${sl}-panel .demo .demo__layer *`)]
-        .filter((el) => { const r = el.getBoundingClientRect(); const cs = getComputedStyle(el); return r.width > 2 && r.height > 2 && cs.opacity !== "0" && cs.visibility !== "hidden"; }).length, slug);
-      check(`demo shows content: ${slug}`, parts >= 2, `${parts} visible parts`);
-    }
-    await page.evaluate(() => { const b = document.getElementById("websites-btn"); if (b.getAttribute("aria-expanded") !== "true") b.click(); });
-    await page.waitForTimeout(600);
-    check("Start this project prefills Contact", (await page.locator('#websites-panel a.btn').getAttribute("href")) === "/?need=websites#contact");
-    await ec.focus(); await page.keyboard.press("Space");
+  async services() {
+    console.log('services');
+    const { page, ctx, errors } = await open('/services/');
+    check('four Elements, nineteen individual Capabilities', await page.locator('[data-service-element]').count() === 4 && await page.locator('[data-capability]').count() === 19);
+    const ws = page.locator('#websites summary');
+    await ws.focus(); await page.keyboard.press('Enter');
+    check('Enter opens native capability details', await page.locator('#websites').evaluate(el => el.open));
     await page.waitForTimeout(700);
-    check("one row open at a time", (await ws.getAttribute("aria-expanded")) === "false" && await page.evaluate(() => document.getElementById("websites-panel").hidden));
-    const add = page.locator("#e-commerce-panel [data-add]");
-    await page.waitForTimeout(400);
-    const before = Number(await page.locator("#e-commerce-panel [data-count]").textContent());
-    await add.focus(); await page.keyboard.press("Enter");
-    check("Add to cart ticks the counter (keyboard)", Number(await page.locator("#e-commerce-panel [data-count]").textContent()) === before + 1);
-    await ec.click(); await page.waitForTimeout(600);
-    check("click again collapses", (await ec.getAttribute("aria-expanded")) === "false");
-    await page.locator("#redesigns-btn").click(); await page.waitForTimeout(1500);
-    const range = page.locator("#redesigns-panel .demo__range");
-    await range.focus(); await page.keyboard.press("ArrowRight"); await page.keyboard.press("ArrowRight");
-    check("before/after slider is keyboard operable", (await page.evaluate(() => document.querySelector("#redesigns-panel .demo").style.getPropertyValue("--split"))) === "52%");
-    await page.locator('#redesigns-panel a[href="#lead-booking"]').click(); await page.waitForTimeout(700);
-    check("Works well with opens that row", (await page.locator("#lead-booking-btn").getAttribute("aria-expanded")) === "true");
-    await page.locator('#lead-booking-panel [data-open-file="fitness-garage"]').click(); await page.waitForTimeout(800);
-    check("Related work opens the Lab file", await page.evaluate(() => document.getElementById("lab-file").open && document.getElementById("lab-file-title").textContent === "Fitness Garage"));
-    check("no errors", !errors.length, errors.join(" | "));
-    await ctx.close();
-
-    ({ page, ctx, errors } = await open("/elements/#custom-systems", { reduced: true }));
-    check("#custom-systems opens on load", (await page.locator("#custom-systems-btn").getAttribute("aria-expanded")) === "true");
-    check("reduced: no height animation", await page.evaluate(() => document.getElementById("custom-systems-panel").getAnimations().length === 0));
-    await ctx.close();
-
-    ({ page, ctx, errors } = await open("/"));
-    const mini = page.locator('.el-mini[href="/elements/#digital-presence"]');
-    check("Home rows link to /elements/#slug", (await mini.count()) === 1);
-    await mini.click(); await page.waitForLoadState("networkidle"); await page.waitForTimeout(600);
-    check("…and arrive with that row open", (await page.locator("#digital-presence-btn").getAttribute("aria-expanded")) === "true");
-    check("no errors", !errors.length, errors.join(" | "));
+    check('existing demonstration preserved', await page.locator('#websites .demo').count() === 1);
+    await ws.focus(); await page.keyboard.press('Space');
+    check('Space closes capability details', !(await page.locator('#websites').evaluate(el => el.open)));
+    for (const slug of ['e-commerce','lead-booking','digital-presence','custom-systems','redesigns']) {
+      await page.locator('#'+slug+' summary').click(); await page.waitForTimeout(1500);
+      check('existing demo: '+slug, await page.locator('#'+slug+' .demo').count() === 1);
+    }
+    const before = Number(await page.locator('#e-commerce [data-count]').textContent());
+    await page.locator('#e-commerce [data-add]').focus(); await page.keyboard.press('Enter');
+    check('cart is keyboard operable', Number(await page.locator('#e-commerce [data-count]').textContent()) === before + 1);
+    await page.locator('#redesigns .demo__range').focus(); await page.keyboard.press('ArrowRight');
+    check('comparison is keyboard operable', await page.locator('#redesigns .demo__range').inputValue() === '51');
+    await page.goto(base+'/elements/#custom-systems', {waitUntil:'networkidle'});
+    check('legacy bookmark redirects and opens capability', page.url().endsWith('/services/#custom-systems') && await page.locator('#custom-systems').evaluate(el => el.open));
+    check('no errors', !errors.length, errors.join(' | '));
     await ctx.close();
   },
 
@@ -228,14 +197,11 @@ const suites = {
     console.log("contact");
     let { page, ctx, errors } = await open("/?need=websites,lead-booking#contact");
     check("prefill from ?need=", await page.evaluate(() => [...document.querySelectorAll('input[name="need"]:checked')].map((b) => b.value).join() === "websites,lead-booking"));
-    check("result word for the pair", (await page.locator("[data-chip-result]").textContent()) === "More enquiries");
-    check("connecting span drawn", ((await page.locator("[data-chip-link] path").getAttribute("d")) || "").startsWith("M"));
-    await page.locator('input[value="lead-booking"]').focus(); await page.keyboard.press("Space");
-    check("chips are keyboard checkboxes; one chip → no line", (await page.locator("[data-chip-result]").textContent()) === "" && !(await page.locator("[data-chip-link] path").getAttribute("d")));
-    await page.locator('input[value="custom-systems"]').focus(); await page.keyboard.press("Space");
-    await page.locator('input[value="websites"]').focus(); await page.keyboard.press("Space");
-    await page.locator('input[value="lead-booking"]').focus(); await page.keyboard.press("Space");
-    check("Cs + Lb → Automated follow-up", (await page.locator("[data-chip-result]").textContent()) === "Automated follow-up");
+    check('prefilled capability groups open', await page.locator('.contact-needs__group[open]').count() === 2);
+    await page.locator('input[value="lead-booking"]').focus(); await page.keyboard.press('Space');
+    check('capabilities are keyboard checkboxes', !(await page.locator('input[value="lead-booking"]').isChecked()));
+    await page.selectOption('#f-element', 'get-found');
+    check('Element choice does not add capabilities', await page.locator('input[name="need"]:checked').count() === 1);
     // validation
     await page.locator('.form button[type="submit"]').click();
     check("empty submit: name error shown + focused", await page.evaluate(() => !document.getElementById("f-name-err").hidden && document.activeElement.id === "f-name" && document.getElementById("f-name").getAttribute("aria-invalid") === "true"));
@@ -262,7 +228,9 @@ const suites = {
     await page.goto(base + "/#contact", { waitUntil: "networkidle" });
     await page.evaluate(() => { window.__ev = []; document.addEventListener("arc:track", (e) => window.__ev.push(e.detail.name)); });
     await page.fill("#f-name", "Test Person"); await page.fill("#f-email", "test@example.com"); await page.fill("#f-message", "Hello");
-    await page.locator('input[value="e-commerce"]').check({ force: true });
+    await page.locator('.contact-needs__group').first().locator('summary').click();
+    await page.locator('input[value="e-commerce"]').check();
+    await page.selectOption('#f-element', 'establish-your-presence');
     await page.locator('.form button[type="submit"]').click();
     await page.waitForTimeout(500);
     check("posts to Formspree", !!posted && posted.url().endsWith("/f/test123") && posted.method() === "POST");

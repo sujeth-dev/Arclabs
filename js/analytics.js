@@ -8,7 +8,7 @@ const KEY = "arc-consent";
 const { provider, ga4Id, plausibleDomain } = config.analytics;
 const PLAUSIBLE_NAMES = {
   enquiry_sent: "Enquiry Sent", file_opened: "File Opened",
-  element_opened: "Element Opened", filter_used: "Filter Used",
+  capability_opened: "Capability Opened", element_opened: "Element Opened", filter_used: "Filter Used",
 };
 let loaded = false;
 

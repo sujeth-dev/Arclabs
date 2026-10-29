@@ -1,7 +1,7 @@
 // Shared markup must not drift: nav, menu and footer are identical on every page
 // (apart from aria-current), and the mark is byte-identical to assets/logo-mark.svg.
 import { readFile } from "node:fs/promises";
-const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "lab/digital-growth/index.html", "lab/brand-kits/index.html", "elements/index.html", "404.html", "privacy/index.html"];
+const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "lab/digital-growth/index.html", "lab/brand-kits/index.html", "services/index.html", "404.html", "privacy/index.html"];
 const grab = (html, re) => (html.match(re) || [""])[0].replace(/ aria-current="page"/g, "");
 const parts = { nav: /<header class="nav">[\s\S]*?<\/dialog>/, footer: /<footer class="footer">[\s\S]*?<\/footer>/, mark: /<symbol id="arc-mark"[\s\S]*?<\/symbol>/ };
 const ref = await readFile(files[0], "utf8");

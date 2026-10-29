@@ -1,5 +1,5 @@
 /* ==========================================================================
-   ARC Labs — content. Copy is verbatim from the FINAL PLAN.
+   ARC Labs — content. Project facts are preserved; service copy follows the brochure direction.
    Lab cards, Element names and lines are also written into the HTML (so they
    are indexable without JS); scripts/qa/content.mjs checks the two agree.
 
@@ -197,7 +197,7 @@ export const elements = [
   {
     number: "05", symbol: "Cs", slug: "custom-systems", order: 5,
     name: "Custom Systems",
-    line: "Dashboards, portals, internal tools and automation, built around how your business actually runs.",
+    line: "Custom applications, portals, internal tools and automation, built around how your business runs.",
     demo: "bars",
     solves: "Work runs on spreadsheets, messages and repeated manual steps.",
     includes: ["dashboards", "client portals", "internal tools", "integrations", "automation"],
@@ -234,7 +234,338 @@ export function resultFor(a, b) {
   return null;
 }
 
-export const process = ["Understand", "Structure", "Design", "Build", "Launch"];
+export const process = ["Understand", "Strategize", "Create & Build", "Improve & Grow"];
 
 export const bySlug = (list, slug) => list.find((x) => x.slug === slug);
 export const domain = (url) => url ? new URL(url).hostname.replace(/^www\./, "") : "";
+
+// Individual capabilities keep the six established slugs for old links and enquiries.
+elements.push(...[
+  {
+    "number": "07",
+    "symbol": "",
+    "slug": "branding-design",
+    "order": 7,
+    "name": "Branding & Design",
+    "line": "A distinctive identity, from your logo to the places people meet your business.",
+    "solves": "Your business needs a clear, consistent identity.",
+    "includes": [
+      "identity direction",
+      "logo and visual system",
+      "brand applications"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": [
+      "/lab/logos/",
+      "/lab/brand-kits/"
+    ]
+  },
+  {
+    "number": "08",
+    "symbol": "",
+    "slug": "seo",
+    "order": 8,
+    "name": "SEO",
+    "line": "Search work that helps the right people discover your business.",
+    "solves": "Customers are searching, but your business is difficult to find.",
+    "includes": [
+      "search and site review",
+      "useful page content",
+      "ongoing measurement"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": [
+      "/lab/digital-growth/#seo"
+    ]
+  },
+  {
+    "number": "09",
+    "symbol": "",
+    "slug": "google-maps-local",
+    "order": 9,
+    "name": "Google Maps & Local",
+    "line": "Help nearby customers find the right location and the next step.",
+    "solves": "Local customers need accurate information about your business.",
+    "includes": [
+      "Google Business Profile",
+      "location information",
+      "local search foundations"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": [
+      "/lab/digital-growth/#seo"
+    ]
+  },
+  {
+    "number": "10",
+    "symbol": "",
+    "slug": "ai-search",
+    "order": 10,
+    "name": "AI Search",
+    "line": "Make your business information clear for search experiences that use AI.",
+    "solves": "Your information needs to be understandable beyond a traditional search listing.",
+    "includes": [
+      "clear business information",
+      "useful structured content",
+      "search visibility review"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "11",
+    "symbol": "",
+    "slug": "content",
+    "order": 11,
+    "name": "Content",
+    "line": "Useful words and visuals shaped around what your audience needs to know.",
+    "solves": "People need a reason to understand, trust and remember your business.",
+    "includes": [
+      "content direction",
+      "website and social content",
+      "editorial planning"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": [
+      "/lab/digital-growth/#brands"
+    ]
+  },
+  {
+    "number": "12",
+    "symbol": "",
+    "slug": "social-media",
+    "order": 12,
+    "name": "Social Media",
+    "line": "A considered presence, with content and a rhythm that fit your business.",
+    "solves": "Your social pages need a clear purpose and consistent direction.",
+    "includes": [
+      "social direction",
+      "content planning",
+      "publishing and review"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": [
+      "/lab/digital-growth/#brands"
+    ]
+  },
+  {
+    "number": "13",
+    "symbol": "",
+    "slug": "paid-ads",
+    "order": 13,
+    "name": "Paid Ads",
+    "line": "Campaigns built around a clear audience, offer and next step.",
+    "solves": "You need to reach people beyond your existing audience.",
+    "includes": [
+      "campaign planning",
+      "creative and landing-page direction",
+      "performance review"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "14",
+    "symbol": "",
+    "slug": "lead-generation",
+    "order": 14,
+    "name": "Lead Generation",
+    "line": "Connect the right audience with a clear reason to get in touch.",
+    "solves": "Attention needs a clearer path to an enquiry.",
+    "includes": [
+      "audience and offer",
+      "campaign enquiry paths",
+      "lead handover"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "15",
+    "symbol": "",
+    "slug": "art-film",
+    "order": 15,
+    "name": "Art & Film",
+    "line": "Images and films that give your business a recognisable point of view.",
+    "solves": "Your story needs visual work that feels like your business.",
+    "includes": [
+      "creative direction",
+      "visual storytelling",
+      "campaign and social assets"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "16",
+    "symbol": "",
+    "slug": "conversion",
+    "order": 16,
+    "name": "Conversion",
+    "line": "Make the path from interest to action easier to follow.",
+    "solves": "People reach your site but struggle to take the next step.",
+    "includes": [
+      "journey review",
+      "page and form improvements",
+      "measurement"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "17",
+    "symbol": "",
+    "slug": "crm",
+    "order": 17,
+    "name": "CRM",
+    "line": "Keep enquiries, customer information and follow-up connected.",
+    "solves": "Customer conversations are scattered across tools and messages.",
+    "includes": [
+      "customer workflow planning",
+      "CRM setup and connections",
+      "follow-up processes"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "18",
+    "symbol": "",
+    "slug": "loyalty-retention",
+    "order": 18,
+    "name": "Loyalty & Retention",
+    "line": "Give customers a reason to return and a useful way to stay in touch.",
+    "solves": "The relationship ends too soon after the first purchase.",
+    "includes": [
+      "customer journeys",
+      "return-visit communications",
+      "retention programme planning"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  },
+  {
+    "number": "19",
+    "symbol": "",
+    "slug": "analytics",
+    "order": 19,
+    "name": "Analytics",
+    "line": "Understand what people do and use that evidence to decide what comes next.",
+    "solves": "You need a clearer view of what is working.",
+    "includes": [
+      "measurement planning",
+      "analytics setup",
+      "reporting and review"
+    ],
+    "worksWellWith": [],
+    "relatedWork": [],
+    "work": []
+  }
+]);
+
+export const serviceElements = [
+  {
+    "slug": "establish-your-presence",
+    "name": "Establish your presence",
+    "line": "A credible, distinctive identity.",
+    "need": "Starting something new, or ready for a clearer first impression?",
+    "description": "Bring the way your business looks and the way it works online into one considered presence.",
+    "capabilities": [
+      "branding-design",
+      "websites",
+      "e-commerce",
+      "redesigns"
+    ],
+    "work": [
+      {
+        "name": "Logo identities",
+        "url": "/lab/logos/"
+      },
+      {
+        "name": "Brand Kits",
+        "url": "/lab/brand-kits/"
+      },
+      {
+        "name": "Websites & Systems",
+        "url": "/lab/websites/"
+      }
+    ]
+  },
+  {
+    "slug": "get-found",
+    "name": "Get found",
+    "line": "Be easy to discover.",
+    "need": "A good business should be easier to find.",
+    "description": "Connect useful content, search foundations and accurate local information around the people looking for you.",
+    "capabilities": [
+      "seo",
+      "google-maps-local",
+      "ai-search",
+      "content",
+      "digital-presence"
+    ],
+    "work": [
+      {
+        "name": "Our search approach",
+        "url": "/lab/digital-growth/#seo"
+      }
+    ]
+  },
+  {
+    "slug": "reach-the-right-people",
+    "name": "Reach the right people",
+    "line": "Connect with your audience.",
+    "need": "Ready to reach beyond the people who already know you?",
+    "description": "Give your message a clear audience and a reason to travel, through social content, campaigns and creative work.",
+    "capabilities": [
+      "social-media",
+      "paid-ads",
+      "lead-generation",
+      "art-film"
+    ],
+    "work": [
+      {
+        "name": "Brand work",
+        "url": "/lab/digital-growth/#brands"
+      },
+      {
+        "name": "Mass campaigns",
+        "url": "/lab/digital-growth/#campaigns"
+      }
+    ]
+  },
+  {
+    "slug": "convert-and-grow",
+    "name": "Convert & grow",
+    "line": "Turn attention into customers.",
+    "need": "People are interested. Make the next step easier.",
+    "description": "Join the customer journey, enquiries and follow-up, then use what you learn to improve the experience.",
+    "capabilities": [
+      "conversion",
+      "crm",
+      "loyalty-retention",
+      "analytics",
+      "lead-booking"
+    ],
+    "work": [
+      {
+        "name": "Fitness Garage / trial enquiries",
+        "url": "/lab/websites/#file-fitness-garage"
+      }
+    ]
+  }
+];
+
+export const capabilityGroups = [...serviceElements.map(({ slug, name, capabilities }) => ({ slug, name, capabilities })), { slug: "custom", name: "Custom applications & automation", capabilities: ["custom-systems"] }];

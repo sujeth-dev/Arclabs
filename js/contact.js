@@ -1,57 +1,32 @@
 /* ==========================================================================
-   contact.js — Home 06: service chips, the connecting span, prefill,
+   contact.js — Home 06: grouped capability selections, prefill,
    validation, Formspree (+ honeypot, optional Turnstile), success state.
    ========================================================================== */
 import { config, contact } from "./config.js";
-import { resultFor, elements } from "../data/content.js";
-import { draw, ms, onceInView } from "./arc.js";
+import { elements, serviceElements } from "../data/content.js";
+import { onceInView } from "./arc.js";
 import { track } from "./analytics.js";
 
 const form = document.querySelector("[data-contact-form]");
 
-/* ---------- chips: two selected → a span joins them, the result appears --- */
-function initChips() {
-  const set = form.querySelector("[data-chips]");
-  const svg = form.querySelector("[data-chip-link]");
-  const path = svg.querySelector("path");
-  const out = form.querySelector("[data-chip-result]");
-  const boxes = [...set.querySelectorAll('input[name="need"]')];
-  let lastPair = "";
-
-  const update = (animate = true) => {
-    const on = boxes.filter((b) => b.checked);
-    if (on.length !== 2) {
-      path.setAttribute("d", ""); out.textContent = ""; lastPair = "";
-      return;
-    }
-    const sr = set.getBoundingClientRect();
-    const [a, b] = on.map((x) => x.nextElementSibling.getBoundingClientRect())
-      .sort((p, q) => (p.top - q.top) || (p.left - q.left));
-    // A span from the top centre of one chip to the other: it always rises.
-    const x0 = a.left + a.width / 2 - sr.left, y0 = a.top - sr.top;
-    const x1 = b.left + b.width / 2 - sr.left, y1 = b.top - sr.top;
-    const top = Math.min(y0, y1) - Math.max(18, Math.min(30, Math.abs(x1 - x0) * 0.25));
-    const [l, r] = x0 <= x1 ? [[x0, y0], [x1, y1]] : [[x1, y1], [x0, y0]];
-    const mid = (l[0] + r[0]) / 2;
-    path.setAttribute("d", `M${l[0]} ${l[1]} C ${l[0]} ${top} ${l[0]} ${top} ${mid} ${top} S ${r[0]} ${r[1]} ${r[0]} ${r[1]}`);
-    svg.setAttribute("viewBox", `0 0 ${sr.width} ${sr.height}`);
-    const key = on.map((x) => x.value).sort().join("+");
-    const word = resultFor(on[0].value, on[1].value);
-    out.textContent = word || "";
-    if (animate && key !== lastPair) draw(path, { duration: ms("--duration-medium", 400) });
-    else { path.style.strokeDasharray = "1 1"; path.style.strokeDashoffset = "0"; }
-    lastPair = key;
-  };
-  boxes.forEach((b) => b.addEventListener("change", () => update(true)));
-  new ResizeObserver(() => update(false)).observe(set);
-
-  // Prefill from ?need=a,b (Start this project, combinations).
-  const need = new URLSearchParams(location.search).get("need");
-  if (need) {
-    const wanted = need.split(",").filter((s) => elements.some((e) => e.slug === s));
-    boxes.forEach((b) => { b.checked = wanted.includes(b.value); });
-    requestAnimationFrame(() => update(false));
-  }
+/* Individual capability selections are independent of Element interest. */
+function initNeeds() {
+  const boxes = [...form.querySelectorAll('input[name="need"]')];
+  const groups = [...form.querySelectorAll('.contact-needs__group')];
+  const update = () => groups.forEach(group => {
+    const n = group.querySelectorAll('input:checked').length;
+    group.querySelector('[data-need-count]').textContent = n ? n + ' selected' : 'Choose';
+  });
+  const params = new URLSearchParams(location.search);
+  const wanted = (params.get('need') || '').split(',').filter(s => elements.some(e => e.slug === s));
+  boxes.forEach(box => {
+    box.checked = wanted.includes(box.value);
+    if (box.checked) box.closest('details').open = true;
+    box.addEventListener('change', update);
+  });
+  const direction = params.get('element');
+  if (serviceElements.some(e => e.slug === direction)) form.elements.element.value = direction;
+  update();
 }
 
 /* ---------- validation ---------------------------------------------------- */
@@ -99,7 +74,8 @@ function mailtoHref(data) {
   const lines = [
     "Hi ARC Labs,", "", "I'd like to talk about a project.", "",
     `Name: ${v("name")}`, `Business: ${v("business")}`, `Email: ${v("email")}`, `Phone: ${v("phone")}`,
-    `What I need: ${needs}`, `Budget: ${v("budget")}`,
+    `Element: ${serviceElements.find(e => e.slug === v("element"))?.name || "Not sure yet"}`,
+    `Capabilities: ${needs}`, `Budget: ${v("budget")}`,
     ...(v("message") ? ["", v("message")] : []),
     "", "Thanks,",
   ];
@@ -126,11 +102,13 @@ function initSubmit() {
     status.textContent = "";
     if (!validate()) return;
     const data = new FormData(form);
+    data.set("element_name", serviceElements.find(e => e.slug === data.get("element"))?.name || "");
+    data.set("capabilities", data.getAll("need").map(slug => elements.find(e => e.slug === slug)?.name).filter(Boolean).join(", "));
     if (data.get("_gotcha")) { done(); return; }   // honeypot: quietly drop bots
     if (!config.formspreeId) {
       mailtoFallback(data);
       status.textContent = "Your email app should open with your message ready to send.";
-      track("enquiry_sent", { method: "email", needs: data.getAll("need").join(",") });
+      track("enquiry_sent", { method: "email", needs: data.getAll("need").join(","), element: data.get("element") || "" });
       return;
     }
     btn.disabled = true;
@@ -140,7 +118,7 @@ function initSubmit() {
         method: "POST", body: data, headers: { Accept: "application/json" },
       });
       if (!res.ok) throw new Error(String(res.status));
-      track("enquiry_sent", { method: "form", needs: data.getAll("need").join(",") });
+      track("enquiry_sent", { method: "form", needs: data.getAll("need").join(","), element: data.get("element") || "" });
       done();
     } catch {
       status.textContent = `That didn't send. Please try again, or email ${contact.email}.`;
@@ -157,7 +135,8 @@ function initSubmit() {
 }
 
 if (form) {
-  initChips();
+  form.noValidate = true;
+  initNeeds();
   initTurnstile();
   initSubmit();
   initDirectEmail();

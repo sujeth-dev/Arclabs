@@ -11,7 +11,7 @@ const suffix = (ink ? "-ink" : "") + (reducedMotion ? "-reduced" : "");
 const dir = `qa/${task}`;
 await mkdir(dir, { recursive: true });
 
-const { browser, base, stop } = await start();
+const { browser, base, stop } = await start(Number(process.env.QA_PORT || 4399));
 const results = [];
 let failed = 0;
 for (const w of widths) {

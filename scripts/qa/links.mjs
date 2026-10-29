@@ -4,7 +4,7 @@ import { readFile } from "node:fs/promises";
 import { start } from "./lib.mjs";
 import { projects, elements } from "../../data/content.js";
 
-const files = { "/": "index.html", "/lab/": "lab/index.html", "/lab/websites/": "lab/websites/index.html", "/lab/logos/": "lab/logos/index.html", "/lab/digital-growth/": "lab/digital-growth/index.html", "/lab/brand-kits/": "lab/brand-kits/index.html", "/elements/": "elements/index.html", "/privacy/": "privacy/index.html", "/404": "404.html" };
+const files = { "/": "index.html", "/lab/": "lab/index.html", "/lab/websites/": "lab/websites/index.html", "/lab/logos/": "lab/logos/index.html", "/lab/digital-growth/": "lab/digital-growth/index.html", "/lab/brand-kits/": "lab/brand-kits/index.html", "/services/": "services/index.html", "/privacy/": "privacy/index.html", "/404": "404.html" };
 const { browser, base, stop } = await start(4388);
 const ids = {}; const internal = new Map(); const external = new Set();
 for (const [path, f] of Object.entries(files)) {
@@ -21,7 +21,7 @@ for (const [path, f] of Object.entries(files)) {
 }
 // Links built by JS from data/content.js
 for (const p of projects) { internal.set(`/lab/#file-${p.slug}`, "data"); if (p.liveUrl) external.add(p.liveUrl); }
-for (const e of elements) internal.set(`/elements/#${e.slug}`, "data");
+for (const e of elements) internal.set(`/services/#${e.slug}`, "data");
 external.add("https://wa.me/918088506783");
 
 let bad = 0;

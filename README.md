@@ -10,7 +10,7 @@
 - Push normally after successful checks. Do not force-push or rewrite shared history without an explicit request.
 
 
-Studio website for ARC Labs: Home, Lab (projects), Elements (services), Privacy and a 404.
+Studio website for ARC Labs: Home, Lab (work collections), Services (Elements and Capabilities), Privacy and a 404.
 Plain HTML, CSS and vanilla JavaScript. **No framework, no build step** — the files in this
 repository are the site. `package.json` only holds dev tools (tests, media, share images);
 none of it is deployed.
@@ -19,17 +19,18 @@ Built from the FINAL PLAN and the ARC Labs brand system (`arc-labs-brand.zip`): 
 components, ARC geometry and motion engine are ported from it unchanged.
 
 ```
-index.html  lab/index.html  elements/index.html  privacy/index.html  404.html
+index.html  lab/index.html  services/index.html  privacy/index.html  404.html
 css/styles.css          one stylesheet (brand tokens → base → components → pages)
 js/config.js            site URL, Formspree, Turnstile, analytics
 js/arc.js               ARC motion engine (spanPath, restCenter, draw, pop, hop, signature…)
 js/main.js              every page: theme, reduced motion, nav, menu, cursor, copy, 404 node
 js/home.js              hero ARC + drag, Approach figure, Process line
 js/lab.js               Lab cards, filter, Lab File dialog
-js/elements.js          Element rows, mini-demos
-js/contact.js           contact form, chips, prefill
+js/services.js          native capability details, deep links
+js/elements.js          existing service mini-demos
+js/contact.js           contact form, grouped selections, prefill
 js/analytics.js         GA4 (after consent) or Plausible
-data/content.js         all project and element content
+data/content.js         project facts, Capabilities, serviceElements and capabilityGroups
 assets/                 fonts, mark, cursors, icons, OG images
 media/<slug>/           client screenshots and recordings
 ```
@@ -48,8 +49,8 @@ npm install          # Playwright, axe, Lighthouse, sharp, html-validate (dev on
 npm run serve        # http://localhost:4321  (any static server works)
 ```
 
-The dev server serves folders as `/lab/`, `/elements/` and falls back to `404.html`, the
-same as Vercel. You can also open the folder with any static server; ES modules need
+The dev server serves folders as `/lab/`, `/services/` and falls back to `404.html`, the
+same as Vercel. `/elements/` permanently redirects to `/services/`, preserving query strings and browser fragments. You can also open the folder with any static server; ES modules need
 `http://`, not `file://`.
 
 ## Configuration — `js/config.js`
@@ -62,7 +63,7 @@ same as Vercel. You can also open the folder with any static server; ES modules 
 | `analytics.provider` | `"ga4"` (consent banner first) or `"plausible"` (cookieless, no banner) | — |
 | `analytics.ga4Id` / `plausibleDomain` | Turns analytics on | No tracking, no banner |
 
-Events sent: `enquiry_sent`, `file_opened`, `element_opened`, `filter_used`.
+Events sent: `enquiry_sent`, `file_opened`, `capability_opened`, `filter_used`.
 
 ## Adding a project (Lab file)
 
@@ -78,21 +79,19 @@ Events sent: `enquiry_sent`, `file_opened`, `element_opened`, `filter_used`.
 4. Run `npm run check` — `scripts/qa/content.mjs` fails if the HTML and `data/content.js`
    disagree.
 
-Links: `/lab/#file-<slug>` opens the file directly (also works on Home and /elements).
+Links: `/lab/#file-<slug>` opens the file directly (also works on Home). Services links to the dedicated work collection.
 
-## Adding an element (service)
+## Maintaining Services
 
-1. Add an object to `elements` in `data/content.js`: `number`, `symbol`, `slug`, `name`,
-   `line`, `demo` (one of `frame`, `cart`, `bubble`, `pin`, `bars`, `slider`, or add a new
-   one in `DEMOS` in `js/elements.js`), `solves`, `includes[]`, `worksWellWith[{with, result}]`,
-   `relatedWork[]` (project slugs), `order`.
-2. Copy an `<article class="el-row">` block in `elements/index.html` and a
-   `<li data-element>` row in the Home Elements list; change slug, number, symbol, name, line.
-3. Add a chip to the contact form in `index.html` (`<label class="chip">`).
-4. For a new pairing in the combinations strip, add to `combinations` in `data/content.js`
-   and copy a `<li>` in `elements/index.html`.
+Elements are the four flexible offerings in `serviceElements`. Individual services remain in the `elements` export (a legacy internal name) and are grouped by `capabilityGroups`. Keep the six original service slugs stable.
 
-Links: `/elements/#<slug>` opens that row; `/?need=a,b#contact` pre-selects chips.
+1. Update the source data in `data/content.js`: name, line, problem, possible work, optional demonstration and supported work links.
+2. Keep the static native details and Element sections in `services/index.html` aligned. Update the Home preview when an Element changes. Add capability choices to the appropriate Contact disclosure, and update service structured data.
+3. Run `npm run check` and `node scripts/qa/services.mjs`. The checks compare static Capabilities, Elements, process and contact choices to the source data.
+
+`/services/#<capability-slug>` opens its native details. Old `/elements/#<slug>` bookmarks still work. `/?need=a,b#contact` preselects individual capabilities; `/?element=get-found#contact` selects only the Element. The two parameters can be combined. Unknown values are ignored. Email and Formspree include both choices; the form adds human-readable names alongside stable slugs.
+
+The four Elements use the brochure headings and describe possible combinations, not fixed inclusions. Individual capabilities remain available separately. Lab shows completed work and explanatory approaches; do not invent project results for new services.
 
 ## Replacing media
 
@@ -135,12 +134,16 @@ npm run check                     # html-validate · shared nav/footer identical
 node scripts/qa/pages.mjs <name>  # every page at 390/768/1024/1440: console errors, overflow,
                                   #   screenshots → qa/<name>/   (--all-widths --ink --reduced)
 node scripts/qa/keyboard.mjs      # keyboard + behaviour suites (shell, hero, dialog, filter,
-                                  #   elements, contact, analytics)
+                                  #   services, contact, analytics)
 node scripts/qa/a11y.mjs          # axe on every page, Cream + Ink, dialog and rows open
-node scripts/qa/lighthouse.mjs    # Lighthouse mobile on /, /lab/, /elements/
+node scripts/qa/lighthouse.mjs    # Lighthouse mobile on /, /lab/, /services/; optional path arguments
 node scripts/qa/links.mjs         # internal links + anchors; external links (needs network)
+node scripts/qa/growth.mjs        # Growth interactions, fallbacks, motion and visual captures
+node scripts/qa/services.mjs      # Services, legacy routes, independent selections and mocked submission
 node scripts/qa/js-budget.mjs     # gzipped JS per page (budget 60KB)
 ```
+
+Lighthouse accepts explicit paths, for example `node scripts/qa/lighthouse.mjs / /services/ /lab/digital-growth/`. Set `QA_OUTPUT=qa/services` to keep its reports out of tracked baseline files. Page checks accept `QA_PORT` for independent parallel runs.
 
 Point the browser checks at a deployed URL with `QA_BASE=https://… node scripts/qa/…`.
 

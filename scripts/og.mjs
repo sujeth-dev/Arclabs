@@ -35,10 +35,10 @@ h1{position:absolute;left:76px;bottom:150px;font:600 122px/.92 D;letter-spacing:
 <div class="top">${mark(CREAM)}<span>ARC Labs</span></div>
 ${label ? `<div class="label">${label}</div>` : ""}
 <h1>Design<span class="stop">.</span> Build<span class="stop">.</span> Grow<span class="stop">.</span></h1>
-<div class="foot"><span>Websites · E-commerce · Digital Presence · Custom Systems</span><span>hello@arclabs.live</span></div>
+<div class="foot"><span>Branding · Websites · Digital Growth · Custom Systems</span><span>hello@arclabs.live</span></div>
 </body></html>`;
 
-for (const [name, label] of [["home", ""], ["lab", "Lab"], ["elements", "Elements"]]) {
+for (const [name, label] of [["home", ""], ["lab", "Lab"], ["services", "Services"]]) {
   await page.setViewportSize({ width: 1200, height: 630 });
   await page.setContent(og(label), { waitUntil: "networkidle" });
   await page.evaluate(() => document.fonts.ready);

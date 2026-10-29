@@ -34,6 +34,9 @@ async function resolve(urlPath) {
 export function serve(port = PORT) {
   const server = createServer(async (req, res) => {
     const url = new URL(req.url, "http://x");
+    if (/^\/elements\/?$/.test(url.pathname)) {
+      res.writeHead(308, { Location: "/services/" + url.search }); return res.end();
+    }
     const r = await resolve(url.pathname);
     if (r?.redirect) { res.writeHead(301, { Location: r.redirect + url.search }); return res.end(); }
     const file = r?.file || join(ROOT, "404.html");

@@ -158,12 +158,11 @@ function initHint(fig) {
   const hint = fig.querySelector("[data-drag-hint]");
   if (!hint) return;
   hint.hidden = false;
-  if (!reduced()) hint.animate([{ opacity: 0 }, { opacity: 1 }], { duration: 400, delay: 2600, easing: ease.standard(), fill: "backwards" });
 }
 function hideHint(fig) {
   const hint = fig.querySelector("[data-drag-hint]");
   if (!hint || hint.hidden) return;
-  hint.classList.add("is-gone");
+  hint.hidden = true;
 }
 
 /* ---------- 04 · Approach: the website plan draws once in view ---------- */

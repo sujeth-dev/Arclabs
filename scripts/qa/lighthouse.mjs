@@ -1,4 +1,4 @@
-// Lighthouse (mobile, default throttling) on /, /lab/, /elements/.
+// Lighthouse (mobile, default throttling) on /, /lab/, /services/.
 import { mkdir, writeFile } from "node:fs/promises";
 import lighthouse from "lighthouse";
 import { launch } from "chrome-launcher";
@@ -13,7 +13,7 @@ const output = process.env.QA_OUTPUT || "qa/final";
 await mkdir(output, { recursive: true });
 const paths = process.argv.slice(2);
 let fail = 0;
-for (const path of (paths.length ? paths : ["/", "/lab/", "/elements/"])) {
+for (const path of (paths.length ? paths : ["/", "/lab/", "/services/"])) {
   const { lhr } = await lighthouse(base + path, { port: chrome.port, output: "json", logLevel: "error" });
   const s = Object.fromEntries(Object.entries(lhr.categories).map(([k, v]) => [k, v.score === null ? null : Math.round(v.score * 100)]));
   const a = lhr.audits;
@@ -22,6 +22,7 @@ for (const path of (paths.length ? paths : ["/", "/lab/", "/elements/"])) {
   if (low) fail++;
   console.log(`${low ? "FAIL" : "ok  "} ${JSON.stringify(row)}`);
   for (const [k, v] of Object.entries(lhr.audits)) if (v.score !== null && v.score < 0.9 && v.scoreDisplayMode === "binary" && ["accessibility", "seo", "best-practices"].some((c) => lhr.categories[c].auditRefs.some((r) => r.id === k && r.weight > 0))) console.log(`       ✗ ${k}: ${v.title}`);
+  if (a["color-contrast"]?.score === 0) console.log(JSON.stringify(a["color-contrast"].details?.items?.map(item => item.node), null, 2));
   await writeFile(`${output}/lighthouse${path.replace(/\//g, "_") || "_"}.json`, JSON.stringify({ ...row, audits: Object.fromEntries(Object.entries(a).filter(([, v]) => v.score !== null && v.score < 0.9).map(([k, v]) => [k, v.displayValue || v.score])) }, null, 2));
 }
 await chrome.kill();

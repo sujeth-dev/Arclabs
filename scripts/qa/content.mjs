@@ -1,7 +1,7 @@
 // Text written into the HTML must match data/content.js (names, lines, sectors, stamps).
 import { readFile } from "node:fs/promises";
-import { projects, elements } from "../../data/content.js";
-const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "lab/digital-growth/index.html", "lab/brand-kits/index.html", "elements/index.html"];
+import { projects, elements, serviceElements } from "../../data/content.js";
+const files = ["index.html", "lab/index.html", "lab/websites/index.html", "lab/logos/index.html", "lab/digital-growth/index.html", "lab/brand-kits/index.html", "services/index.html"];
 const dec = (s) => s.replace(/&amp;/g, "&").replace(/&#x27;|&#39;/g, "'").replace(/&quot;/g, '"');
 let bad = 0, seen = 0;
 for (const f of files) {
@@ -19,6 +19,18 @@ for (const f of files) {
     const t = dec(m[0]);
     for (const w of [`>${e.name}<`, `>${e.line}<`, `>${e.symbol}<`]) if (!t.includes(w)) { console.log(`MISMATCH ${f} ${e.slug}: ${w}`); bad++; }
   }
+  for (const m of html.matchAll(/data-capability="([\w-]+)"[\s\S]*?<\/details>/g)) {
+    seen++;
+    const e = elements.find(e => e.slug === m[1]);
+    const t = dec(m[0]);
+    for (const value of [e?.name, e?.line, e?.solves, ...(e?.includes || [])]) if (!value || !t.includes(value)) { console.log('MISMATCH capability ' + m[1] + ': ' + value); bad++; }
+  }
+  for (const m of html.matchAll(/data-service-element="([\w-]+)"[\s\S]*?<\/(?:article|a)>/g)) {
+    seen++;
+    const e = serviceElements.find(e => e.slug === m[1]);
+    if (!e || !dec(m[0]).includes(e.name) || !dec(m[0]).includes(e.line)) { console.log('MISMATCH Element ' + m[1]); bad++; }
+  }
+
 }
 console.log(bad ? `${bad} mismatches` : `content: ${seen} blocks match data/content.js`);
 process.exit(bad ? 1 : 0);

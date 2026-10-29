@@ -8,7 +8,7 @@ const { browser, base, stop } = await start(4390);
 const states = [
   ...PAGES.map((p) => ({ name: p.name, path: p.path })),
   { name: "home+dialog", path: "/#file-velmont", wait: 900 },
-  { name: "elements+row", path: "/elements/#redesigns", wait: 1600 },
+  { name: "services+row", path: "/services/#redesigns", wait: 1600 },
   { name: "home+form-errors", path: "/#contact", act: async (page) => { await page.locator('.form button[type="submit"]').click(); } },
   { name: "lab+menu (390)", path: "/lab/", width: 390, act: async (page) => { await page.locator("[data-menu-open]").click(); } },
 ];
