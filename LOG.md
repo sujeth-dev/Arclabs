@@ -214,3 +214,7 @@ Logged after the fact; details are in the commits. Ten logo identities added (`/
 **Failed → fixed:** fractional SVG viewBox dimensions converted to integer HTML dimensions; copied structured data replaced with Brand Kits metadata; fixed chapter labels inheriting theme colours and made the store viewport keyboard-focusable. Stray diff characters in the first CSS draft prevented mobile rules from applying; removed, then checked all widths. Final visual pass split dense SanDune boards into individual crops and removed long production notes from marketing panels. OS reduced motion is handled locally as well as the site toggle. The no-JavaScript QA case now avoids in-page timers, which do not run with JavaScript disabled. An initial Lighthouse run returned no timing data; an isolated rerun completed with no warnings or audit errors.
 
 **External check:** Svojas store still returns 403 to the link checker; the existing normal-user-agent embed handling remains unchanged. Other external links returned 200.
+
+## 2026-10-29 ? Brand Kits closing summaries
+
+Removed the closing statement and kit inventory from both Cub & Co and SanDune, along with their unused summary styles. Validation: `npm run check` passes.
