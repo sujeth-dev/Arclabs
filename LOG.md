@@ -215,6 +215,12 @@ Logged after the fact; details are in the commits. Ten logo identities added (`/
 
 **External check:** Svojas store still returns 403 to the link checker; the existing normal-user-agent embed handling remains unchanged. Other external links returned 200.
 
-## 2026-10-29 ? Brand Kits closing summaries
+## 2026-10-29 - Brand Kits closing summaries
 
 Removed the closing statement and kit inventory from both Cub & Co and SanDune, along with their unused summary styles. Validation: `npm run check` passes.
+
+## 2026-10-29 - Growth editorial presentation
+
+Rebuilt Digital Growth as open editorial chapters: section index, separate brand openings and Svojas social sequence, numbered campaign rows, spacious SEO areas and ongoing process, and a six-step launch sequence. All three social posts remain available at every width. Copy is shorter and search claims are qualified. Search typing finishes once; local motion respects OS and site preferences. Existing media, links and brand facts retained.
+
+Validation: static/content/shell checks pass; keyboard 107/107; axe zero violations; 236 internal links resolve; Growth JavaScript 9.7 KB gzip. Growth-specific checks pass in both themes at 390/768/1024/1440, including blocked embeds, keyboard controls, completed search, OS reduced motion and no-JavaScript content. Live embeds checked at all four widths. Mobile Lighthouse: Performance 99, Accessibility/Best Practices/SEO 100, LCP 1.7 s, CLS 0. The initial page run reported a third-party report-only CSP diagnostic; the QA watcher now excludes that exact browser warning, and live Growth retests pass.

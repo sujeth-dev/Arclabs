@@ -161,3 +161,7 @@ The combined Lab page became too long after adding the logo gallery. Lab now ser
 The main navigation retains Lab. A smaller collection navigation connects All work, Websites & Systems, Logos, Brand Kits, and Digital Growth & Strategy. Unready collections are not published as empty pages. Home links to the dedicated collections; older project bookmarks remain functional, and older logo bookmarks redirect to the new gallery. Shared brand styling is preserved. Nothing has been deployed.
 
 Brand Kits presents two supplied identity systems as distinct chapters: approved Cub & Co vectors and deferred specimen fonts; SanDune board crops and a clearly labelled store concept. The closing link is `/#contact`; the Elements service list is unchanged. Smith & Wesson remains in Logos.
+
+### Growth editorial revision ? 29 October 2026
+
+Digital Growth now uses open editorial chapters, readable body text, generous responsive spacing and a separate Svojas social sequence. Campaign explanations remain visible; motion only supports the reading order and respects OS and site preferences. The next stage will align the site with the brochure through Services, with four flexible Elements and individual Capabilities. Lab remains the portfolio.

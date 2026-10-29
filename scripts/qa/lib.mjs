@@ -26,7 +26,7 @@ export async function start(port = 4399) {
 // Collects console errors, page errors and failed same-origin requests.
 export function watch(page, base) {
   const errors = [];
-  page.on("console", (m) => { if (m.type() === "error" && !m.text().startsWith("Failed to load resource")) errors.push(`console: ${m.text()}`); });
+  page.on("console", (m) => { if (m.type() === "error" && !m.text().startsWith("Failed to load resource") && !m.text().includes("The Content Security Policy directive 'upgrade-insecure-requests' is ignored when delivered in a report-only policy.")) errors.push(`console: ${m.text()}`); });
   page.on("pageerror", (e) => errors.push(`pageerror: ${e.message}`));
   page.on("response", (r) => {
     const u = r.url();
