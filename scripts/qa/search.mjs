@@ -6,6 +6,7 @@ import {execFileSync} from 'node:child_process';
 import {pages,graphFor,updateSEO} from '../seo.mjs';
 import {elements,serviceElements} from '../../data/content.js';
 import {config,contact} from '../../js/config.js';
+import {metadata,indexNowKey} from '../search-config.mjs';
 import {start,forcePrefs} from './lib.mjs';
 
 const live=process.argv.includes('--live'), baseline=process.argv.find(a=>a.startsWith('--baseline='))?.split('=')[1];
@@ -38,6 +39,8 @@ try{
     assert(html.includes(`<link rel="canonical" href="${url}">`));
     for(const lang of ['en-IN','x-default'])assert(html.includes(`hreflang="${lang}" href="${url}"`));
     const title=decode(html.match(/<title>([^<]+)<\/title>/)[1]), description=meta(html,'description');
+    if(metadata[page.path]?.title)assert.equal(title,metadata[page.path].title);
+    if(metadata[page.path]?.description)assert.equal(description,metadata[page.path].description);
     assert(title&&description);assert(!titles.has(title));assert(!descriptions.has(description));titles.add(title);descriptions.add(description);
     assert.equal(meta(html,'og:title'),title);assert.equal(meta(html,'twitter:title'),title);
     assert.equal(meta(html,'og:description'),description);assert.equal(meta(html,'twitter:description'),description);
@@ -78,6 +81,16 @@ try{
     const r=await fetch(base+path+'?need=websites',{redirect:'manual'});assert([301,308].includes(r.status),path);assert.equal(new URL(r.headers.get('location'),base).href,base+destination+'?need=websites');
   }
   const missing=await fetch(base+'/search-audit-missing/',{redirect:'follow'});assert.equal(missing.status,404);assert((await missing.text()).includes('content="noindex'));
+  assert.equal((await(await get('/'+indexNowKey+'.txt')).text()).trim(),indexNowKey);
+  const iconResponse=await get('/favicon-96.png','Googlebot-Image');
+  assert(iconResponse.headers.get('content-type').startsWith('image/png'));
+  const icon=Buffer.from(await iconResponse.arrayBuffer());
+  assert.equal(icon.subarray(1,4).toString(),'PNG');assert.equal(icon.readUInt32BE(16),96);assert.equal(icon.readUInt32BE(20),96);
+  if(live)for(const path of ['/','/services/?need=websites','/favicon.ico']){
+    const r=await fetch('https://www.arclabs.live'+path,{redirect:'manual',signal:AbortSignal.timeout(20000)});
+    assert([301,308].includes(r.status),'www must permanently redirect: '+path);
+    assert.equal(new URL(r.headers.get('location'),'https://www.arclabs.live').href,base+path);
+  }
   if(!live){
     const page=await env.browser.newPage();assert.equal(await page.evaluate(xml=>new DOMParser().parseFromString(xml,'application/xml').querySelectorAll('parsererror').length,xml),0);await page.close();
     const before=await Promise.all(pages.map(p=>readFile(p.file,'utf8')));await updateSEO();assert.deepEqual(await Promise.all(pages.map(p=>readFile(p.file,'utf8'))),before,'SEO generator must be idempotent');
@@ -86,7 +99,7 @@ try{
       for(const p of pages){
         const old=rawAt(baseline,p.file),current=(await readFile(p.file,'utf8')).replace(/\r\n/g,'\n');
         assert.equal(current.slice(current.indexOf('<body')),old.slice(old.indexOf('<body')),'Visible body changed: '+p.file);
-        const strip=h=>h.split('</head>')[0].replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,'').replace(/<meta (?:property="og:image:type"|name="twitter:image:alt")[^>]*>\n/g,'');
+        const strip=h=>h.split('</head>')[0].replace(/<script type="application\/ld\+json">[\s\S]*?<\/script>/g,'').replace(/<title>[^<]*<\/title>/g,'').replace(/<meta (?:name|property)="(?:description|og:title|og:description|twitter:title|twitter:description|og:image:type|twitter:image:alt)"[^>]*>\n/g,'');
         assert.equal(strip(current),strip(old),'Rendering head changed: '+p.file);
       }
       for(const width of [390,1440])for(const theme of ['dark','light']){
